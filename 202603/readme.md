@@ -2,6 +2,7 @@
   
 ### 文章列表  
 ----  
+##### 20260325_01.md   [《AI论文解读 | TradingAgents: Multi-Agents LLM Financial Trading Framework》](20260325_01.md)  
 ##### 20260324_06.md   [《如何用 Codex 写 SKILL》](20260324_06.md)  
 ##### 20260324_05.md   [《苹果股价又要飙升了, oMLX 跑本地大模型可打破内存限制》](20260324_05.md)  
 ##### 20260324_04.md   [《PostgreSQL 里的 fast-path lock 分析》](20260324_04.md)  
