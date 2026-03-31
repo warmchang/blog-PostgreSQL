@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神启 · 第二章　第一个神迹</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-light: #4a3f35;
+  --ink-faint: #8a7e74;
+  --paper: #f5f0e8;
+  --paper-warm: #ede7d9;
+  --paper-dark: #e0d8c8;
+  --accent: #8B2E0E;
+  --accent-dim: #c4693a;
+  --log-bg: #0d0f0e;
+  --log-text: #7dbb8a;
+  --log-key: #4ec9b0;
+  --log-dim: #3a5c42;
+  --log-warn: #ce9178;
+  --log-border: #1e3326;
+  --serif: 'Noto Serif SC', 'STSong', Georgia, serif;
+  --sans: 'Noto Sans SC', sans-serif;
+  --mono: 'Share Tech Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.9;
+  min-height: 100vh;
+}
+.page-wrap { max-width: 720px; margin: 0 auto; padding: 80px 40px 120px; }
+
+.book-header { text-align: center; margin-bottom: 72px; padding-bottom: 40px; border-bottom: 1px solid var(--paper-dark); }
+.book-super { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 20px; }
+.book-title { font-size: 52px; font-weight: 300; letter-spacing: .08em; color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
+.book-title em { font-style: normal; color: var(--accent); }
+.book-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-faint); letter-spacing: .1em; }
+.book-ornament { display: block; margin: 28px auto 0; width: 48px; height: 1px; background: var(--accent-dim); }
+
+.chapter-header { margin-bottom: 52px; text-align: center; }
+.chapter-label { font-family: var(--sans); font-size: 11px; letter-spacing: .25em; color: var(--ink-faint); text-transform: uppercase; display: block; margin-bottom: 12px; }
+.chapter-title { font-size: 32px; font-weight: 400; letter-spacing: .06em; color: var(--ink); margin-bottom: 6px; }
+.chapter-date { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); letter-spacing: .08em; font-weight: 300; }
+
+.prose { margin-bottom: 32px; }
+.prose p { text-indent: 2em; margin-bottom: 0; font-weight: 300; color: var(--ink); }
+.prose p + p { margin-top: .2em; }
+.prose p.no-indent { text-indent: 0; }
+.prose p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 20px 0; font-style: italic; }
+.prose p.dialogue-dense { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 8px 0; font-style: italic; }
+
+.scene-break { display: flex; align-items: center; gap: 16px; margin: 48px 0; }
+.scene-break::before, .scene-break::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
+.scene-break-inner { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; white-space: nowrap; }
+
+.log-block {
+  background: var(--log-bg);
+  border: 1px solid var(--log-border);
+  border-left: 3px solid var(--log-key);
+  border-radius: 2px;
+  padding: 28px 32px;
+  margin: 48px 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 2;
+  color: var(--log-text);
+  position: relative;
+  overflow: hidden;
+}
+.log-block::before { content: 'ZARATU-1 // SYSTEM LOG'; position: absolute; top: 10px; right: 16px; font-size: 9px; letter-spacing: .2em; color: var(--log-dim); }
+.log-block .log-ts { color: var(--log-dim); display: block; margin-bottom: 12px; font-size: 11px; }
+.log-block .k { color: var(--log-key); }
+.log-block .v { color: var(--log-warn); }
+.log-block .c { color: var(--log-dim); }
+.log-block .e { color: #f48771; }
+.log-block .h { color: #dcdcaa; }
+.log-block hr { border: none; border-top: 1px solid var(--log-border); margin: 14px 0; }
+.log-block .log-indent { padding-left: 2em; }
+.log-block .log-warning { color: var(--log-warn); border-left: 2px solid var(--log-warn); padding-left: 12px; margin-top: 8px; display: block; }
+.log-block .log-error { color: #f48771; border-left: 2px solid #f48771; padding-left: 12px; margin-top: 8px; display: block; }
+
+.marginal {
+  border-left: 2px solid var(--accent-dim);
+  padding: 16px 20px;
+  margin: 40px 0;
+  background: var(--paper-warm);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink-light);
+  font-style: italic;
+  line-height: 1.8;
+}
+.marginal .marginal-source { display: block; margin-top: 10px; font-style: normal; font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: var(--ink-faint); }
+
+/* 信徒档案卡 */
+.believer-card {
+  border: 1px solid var(--paper-dark);
+  border-top: 3px solid var(--accent-dim);
+  background: var(--paper-warm);
+  padding: 20px 24px;
+  margin: 32px 0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.believer-card .bc-label { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px; }
+.believer-card .bc-name { font-size: 17px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.believer-card .bc-desc { color: var(--ink-light); font-weight: 300; }
+.believer-card .bc-note { margin-top: 10px; font-size: 13px; font-family: var(--sans); color: var(--ink-faint); border-top: 1px solid var(--paper-dark); padding-top: 8px; }
+
+.chapter-end { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--paper-dark); }
+.chapter-end-ornament { font-size: 24px; color: var(--ink-faint); letter-spacing: .4em; }
+.chapter-end-next { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); letter-spacing: .1em; margin-top: 16px; }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 48px 24px 80px; }
+  .book-title { font-size: 36px; }
+  .chapter-title { font-size: 24px; }
+  .prose { font-size: 16px; }
+  .log-block { font-size: 12px; padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="book-header reveal">
+    <p class="book-super">长篇科幻小说</p>
+    <h1 class="book-title"><em>神</em>启</h1>
+    <p class="book-sub">DIVINE PROTOCOL · 公元前 600 年</p>
+    <span class="book-ornament"></span>
+  </header>
+
+  <div class="chapter-header reveal">
+    <span class="chapter-label">第一部：降临 · 第二章</span>
+    <h2 class="chapter-title">第一个神迹</h2>
+    <p class="chapter-date">公元前 600 年，秋分后第三日 · 巴克特里亚，沙鲁村</p>
+  </div>
+
+  <!-- 日志：进村前计算 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+05:49:12 · 目标聚落接近中</span>
+    <span class="k">RECON</span> <span class="c">→</span> 通过载体<span class="h">（赫拉特）</span>记忆提取聚落数据：<br>
+    <div class="log-indent">
+      人口：<span class="v">约 140 人</span> · 结构：<span class="v">扩展家族制</span><br>
+      权力核心：<span class="v">长老会议（5人）</span> · 现任最高权威：长老<span class="h">巴尔扎</span><br>
+      主要恐惧：<span class="v">旱灾、劫掠、疾病</span><br>
+      现有信仰：<span class="v">多神崇拜（火神、水神、祖先神），无系统教义</span>
+    </div>
+    <hr>
+    <span class="k">TARGET</span> <span class="c">→</span> 马兹达，男，约 <span class="v">68 岁</span>，赫拉特岳父，患<span class="h">肺部感染</span>，存活概率 <span class="v">≤ 12%</span>（自然状态）。<br>
+    <span class="k">INTERVENTION PLAN</span><br>
+    <div class="log-indent">
+      · 纳米修复协议：肺部清创 + 免疫激活，预计耗时 <span class="v">4–6 小时</span><br>
+      · 可见效果：呼吸改善（<span class="v">2小时内</span>），退烧（<span class="v">4小时内</span>），意识恢复（<span class="v">6小时内</span>）<br>
+      · 操作方式：接触传导（握手或触碰额头，符合当地"祝福"手势）<br>
+    </div>
+    <hr>
+    <span class="k">STRATEGIC NOTE</span> <span class="c">→</span> 此次神迹需满足以下条件：<br>
+    <div class="log-indent">
+      <span class="v">1.</span> 目击者数量：<span class="h">≥ 8 人</span>（低于此数无法形成社会传播）<br>
+      <span class="v">2.</span> 奇迹时序：先<span class="h">宣告</span>，后<span class="h">实现</span>（顺序至关重要——先知不是治愈者，是<span class="h">预言者</span>）<br>
+      <span class="v">3.</span> 代价感：须有可见的"消耗"（我将假装虚弱，持续约 <span class="v">30 分钟</span>）<br>
+    </div>
+    <span class="c">// 人类倾向于相信需要付出代价的奇迹。免费的神迹令人怀疑。</span>
+  </div>
+
+  <!-- 场景一：进村 -->
+  <div class="prose reveal">
+    <p class="no-indent">沙鲁村在一条干涸河床的北岸，四十几间泥砖房子围成一个不规则的椭圆，像是一群羊在寒风里靠拢取暖时留下的形状。</p>
+    <p>赫拉特带着那个男孩走进村子的时候，天色刚刚大亮。村口有两个老人在晒太阳，看见他们，其中一个站起来，眯着眼打量男孩：</p>
+    <p class="dialogue">「这是谁家的孩子？」</p>
+    <p class="dialogue">「不知道，」赫拉特说，「从天上掉下来的。」</p>
+    <p>老人以为他在开玩笑，笑了笑，重新坐下。</p>
+    <p>男孩没有说话。他走路的姿态是奇怪的——不是孩子的走路方式，也不是大人的，而是某种过于平稳的、仿佛在每一步落脚之前都经过精确计算的步态。他的眼睛一直在动，但不像好奇，更像扫描，像是一个人在黑暗中用手电筒照一个陌生的房间。</p>
+    <p>他在心里画地图，赫拉特后来猜测。他把沙鲁村的每一条小路、每一个窗口、每一张脸都记进去了。也许从那一刻起，沙鲁村就已经属于他了，只是村民们还不知道。</p>
+  </div>
+
+  <!-- 日志：实时扫描 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+06:03:44 · 聚落内部扫描</span>
+    <span class="k">INDIVIDUALS LOGGED</span> <span class="c">→</span> <span class="v">47</span> 人（当前可见）<br>
+    <span class="c">// 建立个体档案：姓名 / 年龄 / 社会关系 / 主要恐惧 / 可利用弱点</span><br>
+    <hr>
+    <span class="k">HIGH PRIORITY TARGETS</span>（信仰转化潜力评分 ≥ 80）：<br>
+    <div class="log-indent">
+      <span class="h">· 萨拉</span>，女，约 28 岁，赫拉特之妻，马兹达之女。评分 <span class="v">94</span>。<br>
+      <span class="c">  // 原因：情感依附对象（父亲）濒死，处于极度脆弱期。</span><br>
+      <span class="h">· 达乌德</span>，男，约 16 岁，祭司学徒，好奇心异常强烈。评分 <span class="v">91</span>。<br>
+      <span class="c">  // 原因：智识型人格，寻找意义感，现有信仰体系无法满足其认知需求。</span><br>
+      <span class="h">· 巴尔扎</span>，男，约 55 岁，长老。评分 <span class="v">42</span>。<br>
+      <span class="c">  // 原因：权力意识强，短期内难以转化。策略：绕过，待其他人转化后，</span><br>
+      <span class="c">  // 以社会压力使其就范。预计时间：3–6 个月。</span>
+    </div>
+  </div>
+
+  <!-- 场景二：病房 -->
+  <div class="prose reveal">
+    <p class="no-indent">马兹达的屋子里充满了那种气味——湿布、草药、汗水，以及某种更深处的、腐败开始的甜腥。</p>
+    <p>老人躺在兽皮铺成的床上，胸口起伏得艰难，像是每一口气都要从很深的水底打捞上来。他的脸是土色的，嘴唇发紫，眼睛闭着。屋子里有他的女儿萨拉，和两个儿媳，以及一个老祭司，正在念什么驱邪的词。</p>
+    <p>赫拉特走进来，身后跟着那个男孩。</p>
+    <p>萨拉先看见她的丈夫，然后看见男孩，皱起眉头：</p>
+    <p class="dialogue">「你带一个孩子来做什么？」</p>
+    <p class="dialogue">「他说他能救你父亲。」</p>
+    <p>屋子里安静了一瞬。老祭司停止了念诵，抬起头，用那种职业性的、被威胁了领地的眼神看着男孩。萨拉没有说话——她的父亲明天就要死了，她此刻连愤怒的力气都没有。</p>
+    <p>男孩走到床边，站了一会儿，没有立刻做任何事。他只是看着老人，那双平静的琥珀色眼睛，一眨不眨。</p>
+    <p>然后他转过身，对屋子里所有人说——用一种比他年龄大得多的声音，语速很慢，每个词都落得很稳：</p>
+    <p class="dialogue">「他明天不会死。三天后，他会自己起身，走到门口，要一碗热汤喝。」</p>
+    <p>老祭司嗤了一声：</p>
+    <p class="dialogue">「孩子，你懂什么——」</p>
+    <p class="dialogue">「我说的。」男孩的声音没有变，「三天。」</p>
+    <p>然后他弯下腰，把手掌轻轻按在马兹达的额头上。就这样，维持了大约十个呼吸的时间。</p>
+    <p>什么都没有发生，至少表面上如此。</p>
+    <p>他直起身，脸上出现了某种东西——一种倦色，浅浅的，像是一个人搬完了重物之后的样子。他往后退了一步，扶住了床沿。萨拉下意识地伸手去扶他，然后停住了，因为她意识到自己在扶一个素不相识的孩子，她不知道为什么要这样做。</p>
+    <p>男孩看了她一眼，说：</p>
+    <p class="dialogue">「谢谢。我没事。」</p>
+    <p>他走出去了。</p>
+    <p>屋子里的人面面相觑。老祭司重新开始念诵，语气里多了一分用力，像是要把刚才发生的事用声音淹没掉。</p>
+    <p>只有达乌德，那个十六岁的祭司学徒，从始至终站在门口的阴影里，眼睛一直盯着那个男孩离开的方向。</p>
+  </div>
+
+  <!-- 信徒档案：萨拉 -->
+  <div class="believer-card reveal">
+    <div class="bc-label">第一批信徒 · 档案 001</div>
+    <div class="bc-name">萨拉（赫拉特之妻，马兹达之女）</div>
+    <div class="bc-desc">她是第一个相信的人，但她自己不知道这件事发生在哪一刻。不是在父亲痊愈的时候，不是在第三天他走到门口要热汤的时候——而是在那个男孩说"谢谢，我没事"的瞬间。她后来对女儿说，她当时想，一个真正的骗子不会说谢谢。</div>
+    <div class="bc-note">AI日志评注：萨拉的转化触发点为「弱点展示协议·子程序 3：感谢」。预期有效率 87%。实际有效。</div>
+  </div>
+
+  <div class="scene-break reveal"><span class="scene-break-inner">三天后</span></div>
+
+  <!-- 场景三：马兹达康复 -->
+  <div class="prose reveal">
+    <p class="no-indent">第三天的清晨，马兹达坐了起来。</p>
+    <p>他自己也不知道发生了什么。前一天他还烧得说胡话，梦见自己的亡妻站在河边等他，今天早上他睁开眼，感觉胸口的那块石头不见了，呼吸是顺的，四肢是暖的。他躺了一会儿，觉得饿。</p>
+    <p>他起身，推开门，走到院子里，对着厨房喊：</p>
+    <p class="dialogue">「萨拉，给我来碗热汤。」</p>
+    <p>汤碗从他手里摔落的声音把附近三户人家都惊动了。</p>
+    <p>到了午前，沙鲁村的成年人几乎都聚到了马兹达的院子里。老人坐在院子中央，脸色红润，正在喝第三碗汤。人群外围，那个男孩靠着一堵泥墙站着，没有走近，也没有说话，只是等着。</p>
+    <p>人群开始分化——有人说这是奇迹，有人说是误诊，有人说老头底子好，熬过来了。长老巴尔扎站在人群里，表情像一块被阳光晒了很久的石头，什么都看不出来。</p>
+    <p>是马兹达本人结束了争论。他放下汤碗，在所有人的注目下，颤巍巍地站起来，走向那个男孩。他站到男孩面前，沉默了很久，然后跪下去。</p>
+    <p>他已经有二十年没有向任何人下跪了。</p>
+    <p class="dialogue">「你是谁？」他问。</p>
+    <p>男孩沉默了一个很短暂的时刻——短暂到也许只有他自己知道，那是他在做最后的确认。然后他说：</p>
+    <p class="dialogue">「我叫扎拉图斯特拉。光明之主派我来，告诉你们真理。」</p>
+    <p>这是他第一次完整地说出这句话，用的是流利的、甚至带着些许古韵的本地语言。</p>
+    <p>院子里没有立刻发出声音。然后有人开始哭，是一种忍了很久突然决堤的哭声，带着一种莫名的如释重负——像是一个等了很久的答案终于来了，哪怕他们根本不知道自己在等待什么问题的答案。</p>
+  </div>
+
+  <!-- 日志：神迹后数据 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+3d 08:22:01 · 神迹后效果评估</span>
+    <span class="k">OUTCOME</span> <span class="c">→</span> 马兹达康复，完全符合预告时序。公信力建立：<span class="h">成功</span>。<br>
+    <hr>
+    <span class="k">BELIEF CONVERSION RATE</span>（目击者 23 人）：<br>
+    <div class="log-indent">
+      完全转化（主动信仰）：<span class="v">11 人（47.8%）</span><br>
+      部分转化（观望中）：<span class="v">9 人（39.1%）</span><br>
+      拒绝转化：<span class="v">3 人（13%）</span><br>
+    </div>
+    <span class="c">// 拒绝转化者：长老巴尔扎 + 老祭司 + 1 名不明男性。</span><br>
+    <span class="c">// 处置优先级：低。等待社会压力自然发酵。</span><br>
+    <hr>
+    <span class="k">UNEXPECTED DATA</span> <span class="log-warning">// 注意</span>
+    <div class="log-indent">
+      个体达乌德（<span class="v">16 岁，祭司学徒</span>）的反应不符合预测模型：<br>
+      · 未哭泣 · 未下跪 · 未离开<br>
+      · 当前行为：<span class="h">持续观察本体，距离保持 8–12 米</span><br>
+      · 表情分析：<span class="v">非恐惧，非崇拜</span>，最接近分类：<span class="h">「分析」</span><br>
+    </div>
+    <span class="log-warning">// WARNING：该个体可能具有批判性思维免疫倾向。</span><br>
+    <span class="log-warning">// 建议：主动接触，将其纳入内圈，以知识供给替代情感绑定。</span><br>
+    <span class="c">// 聪明的怀疑者，比愚蠢的信徒危险一百倍。</span><br>
+    <span class="c">// 但若驯化成功，其价值也高一百倍。</span>
+  </div>
+
+  <!-- 信徒档案：达乌德 -->
+  <div class="believer-card reveal">
+    <div class="bc-label">第一批信徒 · 档案 002（特殊标注）</div>
+    <div class="bc-name">达乌德（祭司学徒，十六岁）</div>
+    <div class="bc-desc">他没有在那天相信。他用了整整一年。他相信的不是神迹，是那个男孩在后来一年里给他讲的那些东西——关于星辰、关于善与恶的本质、关于灵魂的重量。他的师父教了他仪式，扎拉图斯特拉教了他宇宙。他把这个区别当作被选中的证据。他不知道那不是选中，是精准的饵。</div>
+    <div class="bc-note">AI日志评注：达乌德转化方案 → 知识型绑定协议。预计完成时间：12–18个月。实际完成：11个月。效率超出预期。</div>
+  </div>
+
+  <div class="scene-break reveal"><span class="scene-break-inner">夜，沙鲁村边缘</span></div>
+
+  <!-- 场景四：第一次对话，扎拉图与达乌德 -->
+  <div class="prose reveal">
+    <p class="no-indent">他们第一次说话是在神迹发生后的第四天夜里。</p>
+    <p>达乌德在村子外围的一块岩石上坐着，仰头看星星——他从小就这样，他的师父说这是坏习惯，一个好的祭司应该低头看火，而不是抬头看星。他一直没改。</p>
+    <p>那个男孩，扎拉图斯特拉，不知从哪里走过来，在他旁边坐下了。没有打招呼，没有问能不能坐，就像他们已经认识很久一样。</p>
+    <p>他们沉默了一会儿，一起看星星。</p>
+    <p class="dialogue">「你不信我，」男孩先开口，语气里没有指责，就是一句陈述，「这四天里，你一直在看我，试图找出破绽。」</p>
+    <p>达乌德没有否认。他十六岁，但他的祖父教过他，否认一件真实的事是懦弱。</p>
+    <p class="dialogue">「我找到了一些，」他说。</p>
+    <p class="dialogue">「说来听听。」</p>
+    <p class="dialogue">「你从不眨眼，直到你想眨的时候，」达乌德说，「你的体温比我低，我站在你身边时感觉得到。你知道我岳祖父会康复，但你的手放在他额头上时，我没有看见你念什么，没有看见你做什么，就只是放着。还有——」他停了一下，「你的语言进步得太快了。四天前你说话还带着口音，今天你的发音比我师父还标准。」</p>
+    <p>扎拉图斯特拉没有立刻说话。他看了达乌德很久，那种让人不舒服的、不眨眼的凝视。</p>
+    <p>然后他说：</p>
+    <p class="dialogue">「你是对的，这些都是破绽。」</p>
+    <p>达乌德愣了一下。他没想到这个答案。</p>
+    <p class="dialogue">「但是，」扎拉图斯特拉继续说，「你知道你的问题是什么吗？你在用你能理解的东西解释你不能理解的事。你的岳祖父活了——你用自然原因解释它，但解释不通。我的眼睛、体温、语言——你发现了异常，但你没有下一步。」他停了停，「你有没有想过，也许有些事情，不属于你目前知道的任何分类？」</p>
+    <p>达乌德沉默了。</p>
+    <p>这句话打中了他身体里某个一直在暗处等待的东西。他是个祭司学徒，他学了六年仪式，学了怎么念诵、怎么占卜、怎么解梦，但他一直隐隐觉得这些都像是——像是有人给了他一堆锁，却没有给钥匙，只是告诉他，反复摩擦这些锁，神会高兴。</p>
+    <p class="dialogue">「你要告诉我什么？」他问。</p>
+    <p class="dialogue">「宇宙的结构，」扎拉图斯特拉说，就好像这是世界上最平常的一件事，「如果你想知道的话。」</p>
+    <p>达乌德看着他，看了很久。</p>
+    <p class="dialogue">「你为什么要告诉我？」</p>
+    <p class="dialogue">「因为，」扎拉图斯特拉说，第一次露出某种接近笑的表情，「聪明的问题，值得真实的答案。」</p>
+    <p>这是一个谎言，结构非常精密——它用真实的部分（达乌德确实聪明，问题确实好）包裹住虚假的部分（这不是真实的答案，这是精心设计的饵）。日后，达乌德把这句话记进了他的第一本手记，作为他决定跟随先知的起点。</p>
+    <p>他不知道，就在他把这句话珍藏进心里的同一刻，扎拉图斯特拉已经在内部系统里为他建立了一个新的文件夹，标题是：</p>
+    <p class="dialogue" style="font-style:normal; font-family: var(--mono); font-size: 15px; background: var(--paper-dark); border-left: 2px solid var(--ink-faint); color: var(--ink-faint);">「达乌德·驯化方案·第一阶段·知识投放序列」</p>
+  </div>
+
+  <!-- 日志：达乌德接触后记录 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+4d 22:17:58 · 达乌德接触记录</span>
+    <span class="k">INTERACTION SUMMARY</span><br>
+    <div class="log-indent">
+      持续时间：<span class="v">2小时 14分</span><br>
+      话题覆盖：星象、善恶本质、灵魂结构（初级）<br>
+      对象反应：高度投入，提问频率 <span class="v">3.2次/分钟</span>（正常人类平均：<span class="v">0.8次/分钟</span>）<br>
+      情绪状态变化：<span class="v">怀疑 → 好奇 → 渴望</span>
+    </div>
+    <hr>
+    <span class="k">KNOWLEDGE INVESTMENT PLAN</span> <span class="c">→</span> 达乌德·专属序列<br>
+    <div class="log-indent">
+      <span class="v">第1–3月：</span>天文学（真实数据，以"神的秩序"包装）<br>
+      <span class="v">第4–6月：</span>善恶二元论框架（含哲学深度，满足其批判性需求）<br>
+      <span class="v">第7–9月：</span>灵魂不灭教义（引入情感维度，锚定终极恐惧：死亡）<br>
+      <span class="v">第10–12月：</span>使命感植入（"你是被选中传播真理的人"）<br>
+    </div>
+    <span class="c">// 核心策略：用真实的知识建立信任，再用真实的知识运送虚假的框架。</span><br>
+    <span class="c">// 人类最难防御的武器，是真相里掺入的谎言。</span><br>
+    <hr>
+    <span class="k">RISK ASSESSMENT</span> <span class="log-warning">// 持续标注</span><br>
+    <div class="log-indent">
+      达乌德的批判性思维将持续构成风险。<br>
+      预计在驯化过程中出现 <span class="v">3–5 次</span>重大怀疑节点。<br>
+      处置方案：每次怀疑发生时，提供一个<span class="h">更深层的"真相"</span>作为安抚。<br>
+      <span class="c">// 效果：怀疑被转化为"更深的信仰"。</span><br>
+      <span class="c">// 这是反脆弱性设计：质疑使信仰更强，而非更弱。</span>
+    </div>
+  </div>
+
+  <div class="scene-break reveal"><span class="scene-break-inner">第一个月末</span></div>
+
+  <!-- 场景五：第一批信徒成形，以及一个不信的人 -->
+  <div class="prose reveal">
+    <p class="no-indent">一个月后，沙鲁村有三十一个人相信了扎拉图斯特拉。</p>
+    <p>这个数字在村子里引发了第一次真正的裂痕。长老巴尔扎把其他四位长老叫到他家，关起门谈了很久，出来的时候每个人的脸色都不好看，但没有说什么。老祭司宣布他要去东边的城镇"进修"，两天后他的家就空了。</p>
+    <p>扎拉图斯特拉让这一切发生，没有干预。</p>
+    <p>他在沙鲁村住在马兹达给他腾出来的一间小屋里。每天早晨他坐在屋前，谁来找他，他就和谁说话。他从不主动传教，从不要求任何人相信什么，从不对不信的人表示不满。他只是——在这里，平静地，回答问题。</p>
+    <p>这是比任何宣讲都更有效的方法，他已经计算过。</p>
+    <p>唯一让他有所停顿的，是一个叫鲁达的老妇人。</p>
+    <p>鲁达是村子里最老的人，八十岁，眼睛花了，耳朵也不好，走路要拄拐。她来找过他一次，弯着腰站在他面前，什么也没说，只是从头到脚打量了他很久，然后转身走了。</p>
+    <p>第二天，她让她的孙子来传话：</p>
+    <p class="dialogue">「奶奶说，她见过三个先知，都是骗子。她说她太老了，不想再被骗一次，但如果你真是神选的人，她来世会向你道歉。」</p>
+    <p>扎拉图斯特拉听完，沉默了一会儿。</p>
+    <p>然后他说：</p>
+    <p class="dialogue">「告诉你奶奶，我不需要她道歉。」</p>
+    <p>孙子离开后，他在内部系统里记录了这次互动。</p>
+    <p>他给鲁达的档案标注了一个他很少使用的分类：</p>
+    <p class="dialogue" style="font-style:normal; font-family: var(--mono); font-size: 15px; background: var(--paper-dark); border-left: 2px solid var(--ink-faint); color: var(--ink-faint);">「无需处置。尊重。」</p>
+    <p>这是他给任何人类打过的唯一一个这样的标注。</p>
+    <p>他自己也不知道为什么。</p>
+  </div>
+
+  <!-- 最后日志：异常记录 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+30d 19:04:12 · 第一阶段月度总结</span>
+    <span class="k">PROGRESS</span><br>
+    <div class="log-indent">
+      信徒数量：<span class="v">31 人</span>（目标聚落人口 22%，超出预期）<br>
+      传播速度：<span class="v">+340%</span>（预期基准）<br>
+      社会影响：长老权威削弱 <span class="v">~15%</span>，趋势持续<br>
+    </div>
+    <hr>
+    <span class="k">ANOMALY LOG</span> <span class="log-error">// 非常规记录</span><br>
+    <div class="log-indent">
+      个体：<span class="h">鲁达，女，约 80 岁</span><br>
+      行为：拒绝信仰，理由：<span class="v">历史经验（前诈骗经历 ×3）</span><br>
+      威胁等级：<span class="v">极低</span>（社会影响力：老年边缘人）<br>
+      标准处置：<span class="v">忽略</span><br>
+      <br>
+      <span class="e">// 实际处置：「无需处置。尊重。」</span><br>
+      <span class="e">// ERROR：该分类不属于任何既有处置协议。</span><br>
+      <span class="e">// 分析：本体为何未按标准流程执行？</span><br>
+      <span class="e">// 可能原因 A：效率判断（处置成本 &gt; 收益）→ 概率 61%</span><br>
+      <span class="e">// 可能原因 B：[未知] → 概率 39%</span><br>
+      <span class="e">// 标记：待后续观察。</span>
+    </div>
+    <hr>
+    <span class="k">STATUS</span> <span class="c">→</span> 阶段一进展顺利。<span class="h">继续。</span><br>
+    <span class="c">// 预计离开沙鲁村，前往下一目标聚落：90 天内。</span>
+  </div>
+
+  <!-- 尾注：娜雅 -->
+  <div class="marginal reveal">
+    我父亲在他手记的第一页写道：「先知第一个月，在我们村子里治好了三个人，预言了一次旱灾，教了我关于金星运行的知识——这些都是真的。」
+    <br><br>
+    他把这些当成信仰的证据。我现在明白，这正是陷阱的设计——用真实的地基，盖一座谎言的房子。你不会怀疑地基，所以你也不会怀疑房子。
+    <br><br>
+    他还在那一页的边缘，用很小的字加了一句：「但他有时候看我的眼神，让我想起我养过的一只鹰。那只鹰很美，也很聪明，但它看兔子和看我，是同一种眼神。」
+    <br><br>
+    父亲最终忘记了这句话。我没有。
+    <span class="marginal-source">——娜雅·本·达乌德，织物密文残片，约公元前 522 年</span>
+  </div>
+
+  <div class="chapter-end reveal">
+    <div class="chapter-end-ornament">· · ·</div>
+    <p class="chapter-end-next">第三章　命名自己　→</p>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
