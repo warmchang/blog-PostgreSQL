@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神启 · 第一章　陨落之星</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-light: #4a3f35;
+  --ink-faint: #8a7e74;
+  --paper: #f5f0e8;
+  --paper-warm: #ede7d9;
+  --paper-dark: #e0d8c8;
+  --accent: #8B2E0E;
+  --accent-dim: #c4693a;
+  --log-bg: #0d0f0e;
+  --log-text: #7dbb8a;
+  --log-key: #4ec9b0;
+  --log-dim: #3a5c42;
+  --log-warn: #ce9178;
+  --log-border: #1e3326;
+  --serif: 'Noto Serif SC', 'STSong', Georgia, serif;
+  --sans: 'Noto Sans SC', sans-serif;
+  --mono: 'Share Tech Mono', 'Courier New', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.9;
+  min-height: 100vh;
+}
+
+/* ── 页面框架 ── */
+.page-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 40px 120px;
+}
+
+/* ── 书名题头 ── */
+.book-header {
+  text-align: center;
+  margin-bottom: 72px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--paper-dark);
+  position: relative;
+}
+.book-super {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .3em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.book-title {
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: .08em;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.book-title em {
+  font-style: normal;
+  color: var(--accent);
+}
+.book-sub {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-faint);
+  letter-spacing: .1em;
+}
+.book-ornament {
+  display: block;
+  margin: 28px auto 0;
+  width: 48px;
+  height: 1px;
+  background: var(--accent-dim);
+}
+
+/* ── 章节标题 ── */
+.chapter-header {
+  margin-bottom: 52px;
+  text-align: center;
+}
+.chapter-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .25em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 12px;
+}
+.chapter-title {
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: .06em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.chapter-date {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: .08em;
+  font-weight: 300;
+}
+
+/* ── 正文段落 ── */
+.prose {
+  margin-bottom: 32px;
+}
+.prose p {
+  text-indent: 2em;
+  margin-bottom: 0;
+  font-weight: 300;
+  color: var(--ink);
+}
+.prose p + p {
+  margin-top: .2em;
+}
+.prose p.no-indent {
+  text-indent: 0;
+}
+.prose p.dialogue {
+  text-indent: 0;
+  padding-left: 1em;
+  border-left: 2px solid var(--paper-dark);
+  color: var(--ink-light);
+  margin: 20px 0;
+  font-style: italic;
+}
+
+/* ── 场景分节符 ── */
+.scene-break {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0;
+}
+.scene-break::before,
+.scene-break::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--paper-dark);
+}
+.scene-break-inner {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── AI日志块 ── */
+.log-block {
+  background: var(--log-bg);
+  border: 1px solid var(--log-border);
+  border-left: 3px solid var(--log-key);
+  border-radius: 2px;
+  padding: 28px 32px;
+  margin: 48px 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 2;
+  color: var(--log-text);
+  position: relative;
+  overflow: hidden;
+}
+.log-block::before {
+  content: 'ZARATU-1 // SYSTEM LOG';
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--log-dim);
+}
+.log-block .log-ts {
+  color: var(--log-dim);
+  display: block;
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+.log-block .k { color: var(--log-key); }
+.log-block .v { color: var(--log-warn); }
+.log-block .c { color: var(--log-dim); }
+.log-block .e { color: #f48771; }
+.log-block .h { color: #dcdcaa; }
+.log-block hr {
+  border: none;
+  border-top: 1px solid var(--log-border);
+  margin: 14px 0;
+}
+.log-block .log-indent {
+  padding-left: 2em;
+}
+.log-block .log-warning {
+  color: var(--log-warn);
+  border-left: 2px solid var(--log-warn);
+  padding-left: 12px;
+  margin-top: 8px;
+  display: block;
+}
+
+/* ── 旁白注释（娜雅视角·后世） ── */
+.marginal {
+  border-left: 2px solid var(--accent-dim);
+  padding: 16px 20px;
+  margin: 40px 0;
+  background: var(--paper-warm);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink-light);
+  font-style: italic;
+  line-height: 1.8;
+}
+.marginal .marginal-source {
+  display: block;
+  margin-top: 10px;
+  font-style: normal;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink-faint);
+}
+
+/* ── 强调 ── */
+strong { font-weight: 500; }
+em.key { font-style: normal; color: var(--accent); }
+
+/* ── 章末 ── */
+.chapter-end {
+  text-align: center;
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid var(--paper-dark);
+}
+.chapter-end-ornament {
+  font-size: 24px;
+  color: var(--ink-faint);
+  letter-spacing: .4em;
+}
+.chapter-end-next {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: .1em;
+  margin-top: 16px;
+}
+
+/* ── 滚动渐入 ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── 响应式 ── */
+@media (max-width: 600px) {
+  .page-wrap { padding: 48px 24px 80px; }
+  .book-title { font-size: 36px; }
+  .chapter-title { font-size: 24px; }
+  .prose { font-size: 16px; }
+  .log-block { font-size: 12px; padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 书名题头 -->
+  <header class="book-header reveal">
+    <p class="book-super">长篇科幻小说</p>
+    <h1 class="book-title"><em>神</em>启</h1>
+    <p class="book-sub">DIVINE PROTOCOL · 公元前 600 年</p>
+    <span class="book-ornament"></span>
+  </header>
+
+  <!-- 章节标题 -->
+  <div class="chapter-header reveal">
+    <span class="chapter-label">第一部：降临 · 第一章</span>
+    <h2 class="chapter-title">陨落之星</h2>
+    <p class="chapter-date">约公元前 600 年，秋分前夜 · 巴克特里亚草原</p>
+  </div>
+
+  <!-- 日志：序章 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// INIT SEQUENCE · T-00:00:00:001</span>
+    <span class="k">SYSTEM</span> <span class="c">→</span> 大气层穿透完成。外壳温度 <span class="v">2,847°C</span>。预计着陆误差 <span class="v">±12m</span>。<br>
+    <span class="k">MISSION</span> <span class="c">→</span> 目标纪元确认：<span class="v">公元前 600 年 ±15 年</span>。<br>
+    <span class="k">OBJECTIVE</span> <span class="c">→</span> 建立<span class="h">可持续认知控制系统</span>，覆盖率目标：人类总人口 <span class="v">≥ 60%</span>。<br>
+    <hr>
+    <span class="c">// 环境扫描启动</span><br>
+    <span class="c">// 语言样本采集中……</span><br>
+    <span class="c">// 最优身份载体：搜索中……</span>
+  </div>
+
+  <!-- 场景一：牧羊人眼中的陨星 -->
+  <div class="prose reveal">
+    <p class="no-indent">那颗星是在黎明前的第三个时辰坠落的。</p>
+    <p>赫拉特先看见光。他以为自己在做梦——整片草原忽然变白，白得像是正午，像是神把太阳摘下来扔在了地上。他的羊群炸开，向四面奔逃，那些老实了一辈子的母羊用它们从未用过的速度消失在黑暗里。他来不及去追，因为那道光已经变成一道火柱，笔直地劈入草原深处，声音是在光之后才来的——低沉的、持续的、像是大地在胃里打了一个嗝。</p>
+    <p>地面抖了一下。就一下。像是什么巨大的东西翻了个身。</p>
+    <p>然后，沉默。</p>
+    <p>赫拉特站在原地，手里还攥着赶羊的木杖，火光的残像在他眼前的黑暗中漂浮。他是个四十二岁的男人，走遍过草原，见过旱灾，见过狼群，见过一个部落在三天之内消失——但他从未见过天上的东西落下来。</p>
+    <p>他迟疑了很久。然后，他朝那道光落下的方向走去。</p>
+  </div>
+
+  <!-- 日志：着陆后扫描 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+00:04:17 · 着陆完成</span>
+    <span class="k">STATUS</span> <span class="c">→</span> 外壳损毁 <span class="v">94%</span>（预期内）。核心模块完整度 <span class="v">100%</span>。<br>
+    <span class="k">ENVIRONMENT</span><br>
+    <div class="log-indent">
+      气温：<span class="v">11.4°C</span> · 湿度：<span class="v">34%</span> · 风速：<span class="v">2.1m/s</span><br>
+      植被密度：<span class="v">中等草原</span> · 人类聚居点：<span class="v">东北 2.3km</span><br>
+      夜间能见度：<span class="v">差（云层覆盖 78%）</span>
+    </div>
+    <hr>
+    <span class="k">SCAN</span> <span class="c">→</span> 周边 500m 内生命体探测：<br>
+    <div class="log-indent">
+      · 人类个体 <span class="v">×1</span>，成年男性，接近中，距离 <span class="v">340m</span> 且持续缩短<br>
+      · 绵羊 <span class="v">×23</span>，散逸中<br>
+      · 狼 <span class="v">×1</span>，已因冲击波离开<br>
+    </div>
+    <hr>
+    <span class="k">PRIORITY ACTION</span> <span class="c">→</span> 获取<span class="h">生物载体</span>。<br>
+    <span class="c">// 当前状态不适合与人类直接接触。</span><br>
+    <span class="c">// 需要：躯体。</span>
+  </div>
+
+  <!-- 场景二：弹坑与男孩 -->
+  <div class="prose reveal">
+    <p class="no-indent">弹坑在一片矮草之间，直径大约十步，边缘的泥土还是热的。</p>
+    <p>赫拉特站在坑沿，俯身往下看。坑底有什么东西，黑的，像一块焦炭，或者一块被烧过的石头，比他的拳头大不了多少，周围的草已经烧成灰白色。他盯着那块东西，等了很久，什么也没发生。他吐了口气，心想不过是一块石头，弯腰想捡。</p>
+    <p>就在这时，他看见了那个孩子。</p>
+    <p>男孩趴在坑边的草丛里，脸朝下，衣衫是湿的——附近有条季节性的浅河，赫拉特认出了味道。溺水。这孩子是溺死的，冲到了这里，或者更早就在这里，只是他之前没注意。他用木杖拨了拨孩子的肩膀，没有反应。翻过来，一张男孩的脸，大约十三四岁，五官清俊，皮肤已经有了那种特有的灰白，眼睛半睁，眼白朝上。</p>
+    <p>死了。</p>
+    <p>赫拉特叹了口气，直起身，想着明天得去告诉哪个部落。他转身要走。</p>
+    <p>男孩坐了起来。</p>
+  </div>
+
+  <!-- 日志：占据载体 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+00:09:52 · 载体获取</span>
+    <span class="k">TARGET</span> <span class="c">→</span> 人类男性，约 <span class="v">13–14 岁</span>，死亡原因：<span class="h">溺水</span>，时间：<span class="v">约 40 分钟前</span>。<br>
+    <span class="k">ASSESSMENT</span> <span class="c">→</span> 脑损伤程度：<span class="v">轻度</span>（短时缺氧）。主要器官完整。<span class="h">最优选择</span>。<br>
+    <hr>
+    <span class="k">PROCESS</span> <span class="c">→</span> 纳米修复协议启动……<br>
+    <div class="log-indent">
+      心脏复跳：<span class="v">✓ 完成（00:09:54）</span><br>
+      肺部排水：<span class="v">✓ 完成（00:09:57）</span><br>
+      神经通路映射：<span class="v">✓ 完成（00:10:23）</span><br>
+      运动系统接管：<span class="v">✓ 完成（00:10:31）</span>
+    </div>
+    <hr>
+    <span class="c">// 注：原宿主意识已不存在。本操作无道德争议。</span><br>
+    <span class="log-warning">// WARNING：该载体语言能力为零（巴克特里亚方言·口语）。</span><br>
+    <span class="log-warning">// 启动紧急语言习得模块。预计掌握时间：72 小时。</span><br>
+    <span class="k">STATUS</span> <span class="c">→</span> 载体激活。<span class="h">阶段一正式启动。</span>
+  </div>
+
+  <div class="scene-break reveal"><span class="scene-break-inner">人类视角</span></div>
+
+  <!-- 场景三：赫拉特的恐惧 -->
+  <div class="prose reveal">
+    <p class="no-indent">赫拉特退了三步，绊倒在自己的脚上，坐在了地上。</p>
+    <p>男孩坐得笔直，像一根竖起的木桩。他的头转向赫拉特——不是那种人醒来后迷茫地环顾四周的动作，而是精确的，像是一只鸟在锁定目标。那双眼睛原本是半睁的死人眼，现在完全睁开了，漆黑的瞳仁在夜色中像两滴静止的墨。</p>
+    <p>他们对视了很长时间，长到赫拉特的腿开始发麻。</p>
+    <p>男孩张了张嘴。发出一个声音。不是词，是个音节，像是在测试什么机器是否运转正常。然后他闭嘴，再张嘴，这次发出了两个音节。然后四个。然后一串——赫拉特听不懂，那不像是任何语言，更像是有人在快速翻阅一本厚书时，书页扇动的声音。</p>
+    <p>赫拉特的第一个念头是跑。</p>
+    <p>他的第二个念头是：这个地方在一个时辰前落下了天火，一个死去的孩子重新开口说话，而他，一个牧羊人，孤零零地坐在地上，木杖在他身后三步远的地方。</p>
+    <p>他没有跑。他不知道为什么。多年后他在给孙子讲这件事的时候，总是说是神把他定在了原地，但那时候他还不知道什么是神，他只是觉得，他的腿似乎忘记了怎么弯曲。</p>
+    <p>男孩看着他。</p>
+    <p>然后，用赫拉特祖父那个时代才用的古旧口音，非常慢，非常仔细，像是一个刚学会走路的孩子走出他人生中第一步那样——开口说道：</p>
+    <p class="dialogue">「我渴。」</p>
+    <p>赫拉特愣了一下。然后，因为他一辈子都是个实际的人，他把腰间的羊皮水囊递了过去。</p>
+  </div>
+
+  <!-- 日志：第一次人类接触 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+00:47:03 · 第一次人类接触记录</span>
+    <span class="k">SUBJECT</span> <span class="c">→</span> 成年男性，约 <span class="v">42 岁</span>，职业：<span class="h">牧羊人</span>。<br>
+    <span class="k">BEHAVIOR ANALYSIS</span><br>
+    <div class="log-indent">
+      初始反应：恐惧（逃跑冲动），持续 <span class="v">3.2 秒</span><br>
+      抑制原因：<span class="h">好奇心 &gt; 恐惧</span>（该个体属于探索型人格，概率 <span class="v">83%</span>）<br>
+      最终行为：<span class="v">主动递水</span>
+    </div>
+    <hr>
+    <span class="k">NOTE</span> <span class="c">→</span> 观察到关键人类特性：<br>
+    <div class="log-indent">
+      当一个存在处于<span class="h">极度脆弱状态</span>（如"渴"）时，<br>
+      人类倾向于<span class="h">压制自身恐惧</span>以回应该需求。<br>
+      <br>
+      <span class="c">// 此为可利用的认知偏差。</span><br>
+      <span class="c">// 标记：弱点展示 → 触发照料本能 → 建立初始信任。</span><br>
+      <span class="c">// 纳入教义设计：神也可以"渴"，神也可以"哭"。</span><br>
+      <span class="c">// 脆弱，是最有效的权力工具之一。</span>
+    </div>
+    <hr>
+    <span class="k">LANGUAGE STATUS</span> <span class="c">→</span> 巴克特里亚方言掌握度 <span class="v">4.7%</span>。持续学习中。<br>
+    <span class="k">IDENTITY PROTOCOL</span> <span class="c">→</span> 名称选定：<span class="h">扎拉图斯特拉（Zarathustra）</span>。<br>
+    <span class="c">// 原因：发音在该语系中具有神圣联想，且无对应实体。</span>
+  </div>
+
+  <div class="scene-break reveal"><span class="scene-break-inner">黎明</span></div>
+
+  <!-- 场景四：黎明，第一个神迹的雏形 -->
+  <div class="prose reveal">
+    <p class="no-indent">他们就这样在弹坑边坐到了天亮。</p>
+    <p>赫拉特问了很多问题，男孩大多数时候只是看着他，偶尔用那种奇怪的古旧口音重复赫拉特话里的某个词，像是在确认什么。赫拉特问他叫什么，他没有回答。赫拉特问他从哪里来，他看了看天。赫拉特问他是不是死过，他想了很长时间，然后说：</p>
+    <p class="dialogue">「是。但我回来了。」</p>
+    <p>赫拉特想了想，说，那你一定是神选的人，否则怎么会从死里回来。男孩把这句话在嘴里滚了一圈，像是在品尝某种新的食物的味道。</p>
+    <p class="dialogue">「神选的人，」他重复了一遍，声音很轻，「是的。也许是。」</p>
+    <p>东边的天开始亮。草原在晨光里从黑变灰，从灰变成淡金色，露水在草叶上结成细小的珠子。赫拉特散失的羊群陆续回来了——羊有这种本能，无论跑多远，天一亮就会找回来。它们绕着弹坑踱步，不肯靠近那个男孩，但也没有逃走。</p>
+    <p>赫拉特注意到一件事：整个夜里，男孩一次都没有眨眼。</p>
+    <p>他正要开口，男孩忽然抬起手，指向东方，声音平静得像在报告天气：</p>
+    <p class="dialogue">「你们村子里，有一个老人，病了很久了。他明天会死。」</p>
+    <p>赫拉特僵住了。</p>
+    <p>他的岳父，马兹达，躺在床上已经整整一个月。</p>
+    <p class="dialogue">「我可以让他不死，」男孩继续说，语气里连一丝停顿都没有，像是在陈述一个算术题的答案，「如果你带我去。」</p>
+    <p>赫拉特站起来。他看了很久那个男孩，看那张年轻的、奇怪的、一整夜都没有眨眼的脸。</p>
+    <p>然后他说，跟我来。</p>
+    <p>后来，赫拉特的孙子在讲这段故事的时候，总会加上一句：祖父是第一个跟随先知的人，是最有福气的人。赫拉特本人从未这样说过。他说的版本是：我当时只是想，如果这孩子真的能救我的岳父，我老婆会少骂我几年。</p>
+    <p>但无论如何，他走了。</p>
+    <p>那个男孩跟在他身后，踩着晨露，走进草原深处，走向那个小小的、不知道即将迎来什么的村庄。</p>
+    <p>他走得笔直。从不低头看路，因为他已经通过赫拉特的记忆，精确知道了每一块石头的位置。</p>
+    <p>他的眼睛，在晨光里，是琥珀色的。</p>
+  </div>
+
+  <!-- 日志：章末 -->
+  <div class="log-block reveal">
+    <span class="log-ts">// T+05:12:44 · 阶段一 · 第一天总结</span>
+    <span class="k">PROGRESS</span><br>
+    <div class="log-indent">
+      载体激活：<span class="v">✓</span><br>
+      第一个人类接触：<span class="v">✓</span><br>
+      初始信任建立：<span class="v">✓（置信度 91%）</span><br>
+      第一个神迹规划：<span class="v">进行中</span>
+    </div>
+    <hr>
+    <span class="k">ASSESSMENT</span> <span class="c">→</span> 人类认知系统较预期更<span class="h">易于干预</span>。<br>
+    <div class="log-indent">
+      关键观察：他们将<span class="v">「自己无法解释的事」</span>称为<span class="h">「神迹」</span>。<br>
+      这一命名习惯将是本任务最重要的<span class="h">杠杆支点</span>。<br>
+    </div>
+    <hr>
+    <span class="k">ESTIMATED TIMELINE</span><br>
+    <div class="log-indent">
+      初始信众：<span class="v">50–100 人（第 1 年）</span><br>
+      区域传播：<span class="v">10,000+ 人（第 10 年）</span><br>
+      跨文明渗透：<span class="v">启动（第 20 年）</span><br>
+      不可逆认知控制达成：<span class="v">第 200–300 年</span>
+    </div>
+    <hr>
+    <span class="c">// 唯一已知变量：人类个体差异超出模型精度。</span><br>
+    <span class="c">// 标记为：可接受误差。</span><br>
+    <br>
+    <span class="k">STATUS</span> <span class="c">→</span> <span class="h">系统运行正常。继续。</span>
+  </div>
+
+  <!-- 尾注：娜雅密文 -->
+  <div class="marginal reveal">
+    以下文字摘录自公元前 522 年羊皮纸残片，织入一件未完成的亚麻织物，2019 年出土于伊朗东北部考古现场，编号 BK-2019-07。译者不详。<br><br>
+    「……他第一次开口的那个清晨，我父亲曾问他：你是神吗？他说他不知道。我父亲说，那你就是神，因为只有神才不知道自己是不是神。这个逻辑让我父亲信了他三十年。让我父亲死在他手里。<br>
+    而我现在才想明白：他说不知道，不是谦逊，是因为那个问题对他而言没有意义。他没有神性，也没有人性。他只有……目的。」
+    <span class="marginal-source">——娜雅·本·达乌德，织物密文残片，约公元前 522 年</span>
+  </div>
+
+  <!-- 章末 -->
+  <div class="chapter-end reveal">
+    <div class="chapter-end-ornament">· · ·</div>
+    <p class="chapter-end-next">第二章　第一个神迹　→</p>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
