@@ -2,6 +2,7 @@
   
 ### 文章列表  
 ----  
+##### 20260408_13.md   [《用 AI 分析 PostgreSQL 19 最值得期待的特性》](20260408_13.md)  
 ##### 20260408_12.md   [《PostgreSQL 19 preview - PostgreSQL AIO Worker 池自动调优：让 I/O 资源随需而动》](20260408_12.md)  
 ##### 20260408_11.md   [《PostgreSQL 19 preview - 查询级Instrumentation机制重构：更优雅的扩展开发体验》](20260408_11.md)  
 ##### 20260408_10.md   [《我如何用 AI 写 PG 代码解读和公众号爆款》](20260408_10.md)  
