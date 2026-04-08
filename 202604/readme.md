@@ -2,6 +2,7 @@
   
 ### 文章列表  
 ----  
+##### 20260408_11.md   [《PostgreSQL 19 preview - 查询级Instrumentation机制重构：更优雅的扩展开发体验》](20260408_11.md)  
 ##### 20260408_10.md   [《我如何用 AI 写 PG 代码解读和公众号爆款》](20260408_10.md)  
 ##### 20260408_09.md   [《PostgreSQL 19 preview - PostgreSQL 性能开销优化：ExecProcNodeInstr 内联化详解》](20260408_09.md)  
 ##### 20260408_08.md   [《PostgreSQL 19 preview - 修复 Standby 晋升时 Slot 同步 Worker 阻塞问题》](20260408_08.md)  
