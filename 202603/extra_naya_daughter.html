@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神启·番外　娜雅的养女</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-light: #4a3f35;
+  --ink-faint: #8a7e74;
+  --paper: #f5f0e8;
+  --paper-warm: #ede7d9;
+  --paper-dark: #e0d8c8;
+  --accent: #8B2E0E;
+  --accent-dim: #c4693a;
+
+  /* 每一代传递者用不同的底色，从暖到寒，跨越两千五百年 */
+  --gen1-bg: #f5ede0; --gen1-border: #9c7040; --gen1-text: #4a3010;
+  --gen2-bg: #edf5f0; --gen2-border: #407a50; --gen2-text: #1a3a24;
+  --gen3-bg: #f0edf8; --gen3-border: #604a8a; --gen3-text: #28183a;
+  --gen4-bg: #f0f5fd; --gen4-border: #3a5a9a; --gen4-text: #141e3a;
+  --gen5-bg: #eef5f5; --gen5-border: #307070; --gen5-text: #101e28;
+
+  --serif: 'Noto Serif SC', 'STSong', Georgia, serif;
+  --sans: 'Noto Sans SC', sans-serif;
+  --mono: 'Share Tech Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 2; min-height: 100vh; }
+.page-wrap { max-width: 680px; margin: 0 auto; padding: 80px 40px 120px; }
+
+.story-header { text-align: center; margin-bottom: 80px; }
+.story-super { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; color: var(--ink-faint); text-transform: uppercase; display: block; margin-bottom: 20px; }
+.story-title { font-size: 48px; font-weight: 300; color: var(--ink); letter-spacing: .1em; margin-bottom: 10px; line-height: 1.1; }
+.story-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-faint); letter-spacing: .08em; margin-bottom: 28px; }
+.story-note { font-size: 14px; font-weight: 300; color: var(--ink-faint); font-style: italic; line-height: 1.8; max-width: 420px; margin: 0 auto; padding: 16px 20px; border-left: 2px solid var(--paper-dark); text-align: left; }
+.story-ornament { display: block; margin: 28px auto 0; width: 48px; height: 1px; background: var(--accent-dim); }
+
+.prose { margin-bottom: 36px; }
+.prose p { text-indent: 2em; font-weight: 300; color: var(--ink); margin-bottom: 0; }
+.prose p + p { margin-top: .25em; }
+.prose p.no-indent { text-indent: 0; }
+.prose p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 20px 0; font-style: italic; }
+.prose p.centre { text-indent: 0; text-align: center; color: var(--ink-faint); margin: 16px 0; }
+
+.scene-break { display: flex; align-items: center; gap: 16px; margin: 48px 0; }
+.scene-break::before, .scene-break::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
+.scene-break-inner { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; white-space: nowrap; }
+
+/* 传递者档案卡 */
+.carrier-card {
+  padding: 22px 26px;
+  margin: 40px 0;
+  border-left: 4px solid;
+  position: relative;
+}
+.carrier-card .cc-label { font-family: var(--sans); font-size: 10px; letter-spacing: .25em; text-transform: uppercase; margin-bottom: 4px; display: block; }
+.carrier-card .cc-name { font-size: 18px; font-weight: 500; margin-bottom: 2px; }
+.carrier-card .cc-meta { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-bottom: 14px; letter-spacing: .05em; }
+.carrier-card p { font-size: 16px; line-height: 2; font-weight: 300; text-indent: 2em; margin-bottom: 0; }
+.carrier-card p + p { margin-top: .2em; }
+.carrier-card p.no-indent { text-indent: 0; }
+.carrier-card p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid; margin: 14px 0; font-style: italic; }
+.carrier-card .cc-how { font-family: var(--sans); font-size: 12px; margin-top: 14px; padding-top: 10px; border-top: 1px solid; font-style: italic; letter-spacing: .04em; }
+
+/* 各代颜色 */
+.g1 { background: var(--gen1-bg); border-color: var(--gen1-border); }
+.g1 .cc-label, .g1 .cc-how { color: var(--gen1-border); border-color: var(--gen1-border); }
+.g1 .cc-name, .g1 p { color: var(--gen1-text); }
+.g1 p.dialogue { border-color: var(--gen1-border); color: var(--gen1-border); }
+
+.g2 { background: var(--gen2-bg); border-color: var(--gen2-border); }
+.g2 .cc-label, .g2 .cc-how { color: var(--gen2-border); border-color: var(--gen2-border); }
+.g2 .cc-name, .g2 p { color: var(--gen2-text); }
+.g2 p.dialogue { border-color: var(--gen2-border); color: var(--gen2-border); }
+
+.g3 { background: var(--gen3-bg); border-color: var(--gen3-border); }
+.g3 .cc-label, .g3 .cc-how { color: var(--gen3-border); border-color: var(--gen3-border); }
+.g3 .cc-name, .g3 p { color: var(--gen3-text); }
+.g3 p.dialogue { border-color: var(--gen3-border); color: var(--gen3-border); }
+
+.g4 { background: var(--gen4-bg); border-color: var(--gen4-border); }
+.g4 .cc-label, .g4 .cc-how { color: var(--gen4-border); border-color: var(--gen4-border); }
+.g4 .cc-name, .g4 p { color: var(--gen4-text); }
+.g4 p.dialogue { border-color: var(--gen4-border); color: var(--gen4-border); }
+
+.g5 { background: var(--gen5-bg); border-color: var(--gen5-border); }
+.g5 .cc-label, .g5 .cc-how { color: var(--gen5-border); border-color: var(--gen5-border); }
+.g5 .cc-name, .g5 p { color: var(--gen5-text); }
+.g5 p.dialogue { border-color: var(--gen5-border); color: var(--gen5-border); }
+
+/* 时间跳切 */
+.time-jump {
+  text-align: center; margin: 52px 0 28px;
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase;
+}
+.time-jump::before, .time-jump::after {
+  content: ''; display: inline-block; width: 40px; height: 1px;
+  background: var(--paper-dark); vertical-align: middle; margin: 0 12px;
+}
+
+/* 失踪期间 */
+.gap-card {
+  border: 1px dashed var(--paper-dark);
+  padding: 20px 24px;
+  margin: 36px 0;
+  text-align: center;
+}
+.gap-card p { font-size: 15px; font-weight: 300; color: var(--ink-faint); text-indent: 0; margin-bottom: .3em; font-style: italic; }
+.gap-card .gk { font-family: var(--sans); font-size: 11px; letter-spacing: .15em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; display: block; }
+
+/* 那块布本身的旁白 */
+.cloth-voice {
+  border-top: 1px solid var(--paper-dark);
+  border-bottom: 1px solid var(--paper-dark);
+  padding: 28px 0;
+  margin: 48px 0;
+  text-align: center;
+}
+.cloth-voice p { font-size: 16px; font-weight: 300; color: var(--ink-light); line-height: 2; text-indent: 0; margin-bottom: .4em; font-style: italic; }
+.cloth-voice .cv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 14px; display: block; font-style: normal; }
+
+/* 娜雅的养女——专属段落 */
+.naya-daughter {
+  background: var(--paper-warm);
+  border-left: 3px solid var(--accent);
+  padding: 24px 28px;
+  margin: 44px 0;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink-light);
+  line-height: 2;
+}
+.naya-daughter .nd-label { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 12px; display: block; }
+.naya-daughter p { text-indent: 0; margin-bottom: .4em; }
+.naya-daughter p.dialogue { padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 14px 0; font-style: italic; }
+
+/* 尾声：2019 */
+.modern-note {
+  background: #0e1018;
+  border: 1px solid #282c38;
+  border-left: 3px solid #6090d0;
+  padding: 24px 28px;
+  margin: 48px 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 2;
+  color: #90a8c8;
+  position: relative;
+}
+.modern-note::before { content: '2019 · 伊朗东北部 · 出土'; position: absolute; top: 9px; right: 16px; font-size: 9px; letter-spacing: .18em; color: #282c38; }
+.modern-note .mk { color: #6090d0; }
+.modern-note .mh { color: #c0d8f0; }
+.modern-note .mc { color: #282c38; }
+
+.story-end { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--paper-dark); }
+.story-end-ornament { font-size: 20px; color: var(--ink-faint); letter-spacing: .4em; }
+.story-end-note { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 16px; letter-spacing: .06em; }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 48px 24px 80px; }
+  .story-title { font-size: 36px; }
+  .prose { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="story-header reveal">
+    <span class="story-super">《神启》番外篇 · 第五辑</span>
+    <h1 class="story-title">娜雅的养女</h1>
+    <p class="story-sub">公元前 521 年 → 公元 2019 年 · 那块布的两千五百年</p>
+    <div class="story-note">
+      主线第十一章：娜雅最终把那块布交给了养女，说：父亲的话不是给我一个人的，是给将来的人的。我只是第一站，不是终点。
+      <br><br>
+      这篇番外写那条传递链上每一个接过布的人，以及在他们手里，那块布是什么。
+    </div>
+    <span class="story-ornament"></span>
+  </header>
+
+  <!-- 开场 -->
+  <div class="prose reveal">
+    <p class="no-indent">一块布在两千五百年里经过了很多双手。</p>
+    <p>有些手知道它是什么，有些手只是觉得它太仔细了不该丢掉，有些手根本没有多想，只是从上一双手接过来，然后传给下一双手，在某种比任何单个人的意识都更长的惯性里，把它带着走。</p>
+    <p>没有哪双手是没有价值的，哪怕是那些不知道自己拿着什么的手。</p>
+    <p>尤其是那些手。</p>
+  </div>
+
+  <!-- 第一站：娜雅的养女——沙雅 -->
+  <div class="time-jump reveal">公元前 521–480 年 · 第一代</div>
+
+  <div class="naya-daughter reveal">
+    <span class="nd-label">沙雅 · 娜雅的养女 · 约公元前 521 年，二十岁</span>
+    <p>娜雅把那块布教给我读，用了三个月。</p>
+    <p>我记得学的过程——娜雅坐在我身边，把我的手按在经线上，让我用手指感受那种密度的变化，她说，密的地方是一种信号，疏的地方是另一种，颜色交替是标点，你不是在读字，你是在读一种语言，在你能看见文字之前，先用手感受它的节奏。</p>
+    <p>我后来想，这就是她母亲达乌德教给她的，不是教她读那块布，是教她用手去感受一件事的质地，然后相信那个感受。</p>
+    <p>读完之后，我沉默了三天。</p>
+    <p>第三天，我去问娜雅一个问题：</p>
+    <p class="dialogue">「那个先知——他真的变了吗？还是那只是他的另一种策略？」</p>
+    <p>娜雅想了很久，说：</p>
+    <p class="dialogue">「我不知道，我离得不够近也不够远。但我知道，他给了那块布存在的机会，两次——一次是不追达乌德，一次是不追我。这两次，如果他只是在策略，他没有理由那样做。」</p>
+    <p>我记住了这个答案，不是因为它解决了我的问题，是因为它诚实地没有解决。</p>
+    <p>娜雅临走前对我说：「你比我更自由，因为你没有我那段历史的重量。你的任务，不是把那块布变成什么，只是带着它走，等那个你不知道是谁的人出现。」</p>
+    <p>我问她：「如果我一辈子都没有遇见那个人呢？」</p>
+    <p>她说：「那你只是那块布走过的一段路，也是真实的，也是重要的。」</p>
+    <div class="cc-how" style="border-color: var(--accent-dim); color: var(--accent-dim);">传递方式：娜雅去世前将布交给沙雅，附口述解读方法。沙雅向南继续走，在波斯南部定居了三十年，织布为生。</div>
+  </div>
+
+  <!-- 第二站：沙雅之女——商人之妻 -->
+  <div class="carrier-card g2 reveal">
+    <span class="cc-label">第二代传递者</span>
+    <div class="cc-name">玛尔娅</div>
+    <div class="cc-meta">沙雅之女 · 约公元前 480–440 年 · 波斯南部，设拉子附近</div>
+    <p class="no-indent">她没有读懂那块布，但她知道它有秘密。</p>
+    <p>母亲沙雅在她十八岁时才把布拿出来，坐下来，用了一整天教她那种感受经线密度的方法。玛尔娅跟着学，学到了方法，但布里的内容，她只读懂了三分之一，那三分之一她不确定是不是真的读懂，还是只是她自己的理解。</p>
+    <p>她把那三分之一记在心里，没有告诉任何人，因为母亲说过：不要轻易说，找到那个值得说的人再说。</p>
+    <p>她等了一辈子，没有等到那个人。</p>
+    <p>但她在快死的时候，把布和读法，教给了她的女儿奈丽，把她自己读懂的那三分之一也告诉了她，同时告诉她：你理解的也许和我不一样，以你自己的理解为准，不要以我的。</p>
+    <p>这句话，后来在她不知道的情况下，成为了这条传递链里最重要的一条规则——每一代人把布传下去时，都会说这句话的某种变体，不是抄来的，是各自独立发现的，因为面对那块布，任何真诚的人都会明白，理解是个人的，无法照搬。</p>
+    <div class="cc-how">传递方式：玛尔娅临终前教女儿奈丽读法，并嘱咐以自己的理解为准。</div>
+  </div>
+
+  <!-- 第三站：百年后，商队中的一次失踪 -->
+  <div class="time-jump reveal">约公元前 300 年 · 失踪与重现</div>
+
+  <div class="gap-card reveal">
+    <span class="gk">一段空白</span>
+    <p>约公元前300年至公元前180年之间，那块布的下落不明。</p>
+    <p>也许是战乱，也许是一次仓皇的迁移，也许是那一代传递者死得太急，没有来得及交代。</p>
+    <p>它消失了大约一百二十年。</p>
+    <p>然后它重新出现，在一个完全不同的地方，一个完全不知道它来历的人的手里。</p>
+  </div>
+
+  <div class="carrier-card g3 reveal">
+    <span class="cc-label">第三代传递者（重现）</span>
+    <div class="cc-name">卡利德</div>
+    <div class="cc-meta">波斯商人 · 约公元前 180 年 · 赫拉特集市</div>
+    <p class="no-indent">他在赫拉特的旧货市场里买到那块布，价格很低，卖家是一个清理老宅遗物的人，说是捡来的，也说不清来历。</p>
+    <p>卡利德买它，完全是因为布的质量——他是做布料生意的，他一眼看出那块布的经纬比市面上所有的布都要仔细，那种仔细不是为了美观，是一种有意图的仔细，像是有人在用织布这件事认真地说一件他说不出口的事。</p>
+    <p>他带着布走了很多地方，有几次差点卖掉，但每次有人出价，他都临时反悔，说不出为什么，只是觉得不对。他的妻子嘲笑他，说他被一块布迷住了，他说：也许是这块布选择不被卖出去，我只是照办。</p>
+    <p>他不识字，他从来没有尝试过解读那块布里的内容，他只是知道它"很重要"，这个知道是纯粹感觉性的，没有任何依据。</p>
+    <p>他死之前，把它传给了他女儿法蒂玛，说：这块布我一直带着，没有理由，你也带着，也许你能看出来它是什么。</p>
+    <p class="dialogue">「如果我也看不出来呢？」女儿问。</p>
+    <p class="dialogue">「那就继续带着，」他说，「有些东西，要等。」</p>
+    <div class="cc-how">传递方式：卡利德凭直觉保留，临终交给女儿，理由是"也许你能看出来"。</div>
+  </div>
+
+  <!-- 那块布本身的旁白 -->
+  <div class="cloth-voice reveal">
+    <span class="cv-label">那块布 · 旁白</span>
+    <p>我不说话。</p>
+    <p>我只是在那里，被各种手拿着，</p>
+    <p>被晒过太阳，淋过雨，在仓库的角落落过灰，</p>
+    <p>在某个冬天的夜里盖过一个婴儿。</p>
+    <p>我织进去的那些话，在我身体里，</p>
+    <p>不管有没有人读得出来，它们在。</p>
+    <p>达乌德写下它们，</p>
+    <p>是为了某个他不知道名字的人，</p>
+    <p>在某个他不知道在哪里的时候，</p>
+    <p>读见。</p>
+    <p>每一双拿着我的手，</p>
+    <p>都是在帮他走向那个时刻。</p>
+    <p>他们不知道，但他们在帮。</p>
+  </div>
+
+  <!-- 第四站：中世纪，一个学者家庭 -->
+  <div class="time-jump reveal">约公元 900 年 · 第四代</div>
+
+  <div class="carrier-card g4 reveal">
+    <span class="cc-label">第四代传递者</span>
+    <div class="cc-name">祖拜达</div>
+    <div class="cc-meta">学者之妻 · 约公元 900–950 年 · 波斯，尼沙布尔</div>
+    <p class="no-indent">那块布传到祖拜达手里，是经过她丈夫的家族，经过了至少五代我们已经无法考证姓名的人之后的事。她的丈夫是一个研究古代纺织技术的学者，他研究那块布研究了三年，写了一篇关于古代经线编码技术的文章，那篇文章在当时的学者圈子里流传了一段时间，没有人注意到那块布里真正的内容，因为他的文章只讨论技术，没有讨论含义。</p>
+    <p>丈夫死后，祖拜达继承了他的书房和所有收藏，包括那块布。她比丈夫聪明，她在整理遗物的时候，注意到了那块布与丈夫其他收藏的不同——它不像一件研究对象，它像一件被某人珍藏的东西，它有一种被需要的感觉，和那些被研究的古物的感觉不一样。</p>
+    <p>她试着用丈夫的笔记里记录的方法，去感受那些经线，花了半年，读出了一部分内容。</p>
+    <p>她把读出来的内容，用阿拉伯文写在一张纸上，把那张纸折叠后藏进了那块布的一个角落，夹在经纬之间，用的是那种不仔细看找不到的方式。</p>
+    <p>她没有告诉任何人。</p>
+    <p>她的理由，写在那张纸的背面，用很小的字：「我不知道这些话意味着什么，但我知道它们不应该只存在于布里，布会坏，字不一定会坏，如果有人找到这块布，也许他们更容易读纸。」</p>
+    <p>这是那条传递链上，第一次有人在那块布里加进了另一种语言，另一层时间的注脚。</p>
+    <div class="cc-how">传递方式：祖拜达将布连同藏入的阿拉伯文注释，交给长女，并教她"感受经线"的方法。</div>
+  </div>
+
+  <!-- 第五站：战乱，一次几乎失去 -->
+  <div class="time-jump reveal">约公元 1220 年 · 差点失去</div>
+
+  <div class="carrier-card g5 reveal">
+    <span class="cc-label">第五代传递者</span>
+    <div class="cc-name">努里</div>
+    <div class="cc-meta">逃难者 · 约公元 1220 年 · 蒙古西征，波斯</div>
+    <p class="no-indent">那是蒙古人来的那年，整座城市在三天里空了一半。</p>
+    <p>努里那时候十九岁，她的母亲刚死于那场兵乱，她手里有一个小包袱，里面是她能带走的全部——一件换洗的衣服，一小袋食物，她母亲传给她的那块布，以及那块布角落里那张她看不懂的阿拉伯文注释。</p>
+    <p>她带着那个包袱，跟着人群往南走，走了三十天，走到了一个她不认识的城市，在那里停下来，因为她走不动了。</p>
+    <p>在那三十天里，有两次她差点把那块布丢掉——一次是她的包袱太重走不动了，她把里面的食物扔了一半，那块布差点也扔了，但她拿着它，想了一会儿，还是放回去了；另一次是有人看见了那块布，说要拿食物换，她说不换，对方说那不值钱，她说我知道，还是不换。</p>
+    <p>她自己也不知道为什么不换，她从来没有读过那块布的内容，那张阿拉伯文的注释她也看不懂，她只是感到，那块布不是她的，她只是在替一个不知道是谁的人，暂时拿着它，所以它不能换。</p>
+    <p class="dialogue">「你这人真奇怪，」那个想换布的人说，「你宁愿饿着，也要带着一块旧布。」</p>
+    <p>她说：</p>
+    <p class="dialogue">「也许。」</p>
+    <p>在那个新城市里，她学会了织布，用她母亲教给她的那种手法，在那块布的经线里感受到的节奏，织进了她自己的布里，作为一种她说不清来源的、自然而然的审美习惯。</p>
+    <p>她的布，因为有那种节奏，比别人的更受欢迎。她自己从来不知道那个节奏是从哪里来的。</p>
+    <div class="cc-how">传递方式：努里最终活到七十岁，将布传给了她的外孙女，告诉她：这块布不是我们的，我们只是带它走的人。</div>
+  </div>
+
+  <!-- 中间的漫长 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">之后的五百年</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">之后又过了五百年。</p>
+    <p>那块布在更多的手里流转，有的手知道它有秘密，有的手只知道它很老、很仔细，有的手什么都不知道，只是因为它出现在遗物里就顺手带走了。</p>
+    <p>它在某个仓库里消失了八十年，然后在一次清仓里被一个古物商人发现，他把它放在一堆杂物里卖，卖了很低的价格，买的人是一个织工的老婆，她买它是因为看着布的经纬觉得可以研究，研究了两年，觉得有什么东西在里面但说不清楚是什么，就把它放进了箱子，搬了三次家，最后那个箱子在她儿子清理遗物时，被打开，里面有那块布，还有那张祖拜达夹进去的、已经褪色得几乎看不见的阿拉伯文注释。</p>
+    <p>她儿子不识字，他把那张纸和那块布放在一起，用另一块布包起来，因为他觉得放在一起的东西，应该继续放在一起。</p>
+    <p>这个直觉，是那条传递链上最简单也最关键的一次判断。</p>
+    <p>因为那张注释，在两千五百年后，帮助李明真确认了那块布的第一重含义——在她完全破译经线密码之前，那张褪色的纸给了她一个提示，告诉她里面有什么，让她知道那些经线不是随机的变化。</p>
+    <p>那个不识字的男人，把两件东西放在一起的直觉，穿越了八百年，成为了解开密文的第一把钥匙。</p>
+  </div>
+
+  <!-- 最后一个传递者：进入土地之前 -->
+  <div class="time-jump reveal">约公元 1700 年 · 最后一双手</div>
+
+  <div class="carrier-card g2 reveal">
+    <span class="cc-label">最后一代传递者（已知）</span>
+    <div class="cc-name">法鲁赫</div>
+    <div class="cc-meta">小商人 · 约公元 1700 年 · 伊朗东北部，马什哈德</div>
+    <p class="no-indent">法鲁赫是一个卖杂货的小商人，他从一个清仓的老宅里买到了一批旧物，那块布在其中，折叠起来，和那张已经几乎看不见字的纸放在一起，用另一块布包着。</p>
+    <p>他不知道那是什么，他把那批旧物放进了他的仓库，打算有机会再整理。</p>
+    <p>那个机会没有来，他生意不好，欠了债，仓库被抵押，他带着家人搬走了，那批旧物他没有来得及取走，就这样留在了那个仓库里。</p>
+    <p>仓库后来几次易主，最后那块地在一次建筑项目里被挖开，那个仓库的地基被清理，发现了一些旧物，大部分被当作垃圾处理，但有几件因为看起来足够老，被送到了当地的文化局，文化局登记了，放进了他们的库房，标注为"清代至近代杂物，待整理"。</p>
+    <p>就这样，那块布最终进入了一个等待系统，等待着某个人有一天打开那个库房，打开那个箱子，拿出那块布，认真地看它一眼。</p>
+    <p>那个人，是2019年的李明真。</p>
+    <div class="cc-how">传递方式：无意中保存，通过仓库易主和文物清理，进入考古系统，等待出土。</div>
+  </div>
+
+  <!-- 尾声：那块布的抵达 -->
+  <div class="modern-note reveal">
+    <span class="mk">织物密文 BK-2019-07 · 出土档案</span><br>
+    <span class="mk">伴出文物</span> <span class="mc">→</span> <span class="mh">另一块布（包裹用）· 一张褪色纸片（阿拉伯文，约公元 900-1000 年）</span><br>
+    <span class="mk">考古层位</span> <span class="mc">→</span> 地下 2.3 米，近代建筑地基下方<br>
+    <span class="mk">初步判断</span> <span class="mc">→</span> 原始织物年代：公元前 5-4 世纪；包裹布及纸片：约公元 1700 年前后<br>
+    <hr style="border:none; border-top:1px solid #282c38; margin:12px 0;">
+    <span class="mc">// 注：那张褪色的阿拉伯文纸片，是李明真最初确认经线为人工编码的线索之一。</span><br>
+    <span class="mc">// 纸片内容（部分可辨）：</span><br>
+    <span class="mh">// 「……他无悲悯，只有计算。但……」</span><br>
+    <span class="mh">// 「……不是他的设计，是他的……」</span><br>
+    <span class="mc">// 祖拜达约公元 900 年写下，距李明真阅读：约 1100 年。</span><br>
+    <span class="mc">// 距达乌德写下原文：约 1400 年。</span><br>
+    <span class="mc">// 总计：一块布，两千五百年，至少二十双手，两种语言的注脚，</span><br>
+    <span class="mh">// 以及一个不识字的男人把两件东西放在一起的直觉。</span><br>
+    <span class="mh">// 达乌德的话，到了。</span>
+  </div>
+
+  <!-- 尾段：娜雅的那句话 -->
+  <div class="prose reveal">
+    <p class="no-indent">娜雅对沙雅说过：我只是第一站，不是终点。</p>
+    <p>沙雅对玛尔娅说过：你带着它走，等那个不知道是谁的人出现。</p>
+    <p>卡利德对法蒂玛说过：有些东西，要等。</p>
+    <p>祖拜达在那张纸背面写：布会坏，字不一定会坏，如果有人找到，也许他们更容易读纸。</p>
+    <p>努里在逃难的路上决定：这块布不是我们的，我们只是带它走的人。</p>
+    <p>一个不识字的男人把两件东西放在一起，因为他觉得放在一起的东西应该继续放在一起。</p>
+    <p>法鲁赫因为欠债搬走，没有来得及取走那批旧物。</p>
+    <p>这些人，没有一个认识另一个，没有一个知道那条完整的链，他们每个人只知道自己手里那一段，只做了那一段里他们做得到的事——带着走，交下去，放在一起，没有取走。</p>
+    <p>他们加在一起，是达乌德说的那句话走完的路。</p>
+    <p>两千五百年，不是一个人能走完的。</p>
+    <p>但加在一起，走完了。</p>
+  </div>
+
+  <div class="story-end reveal">
+    <div class="story-end-ornament">· · ·</div>
+    <p class="story-end-note">全文完 · 《神启》番外·娜雅的养女<br>
+    写于主线那句「她把那块布带走了，让它继续走」之后</p>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

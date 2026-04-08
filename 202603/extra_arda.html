@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神启·番外　阿尔达</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-light: #4a3f35;
+  --ink-faint: #8a7e74;
+  --paper: #f5f0e8;
+  --paper-warm: #ede7d9;
+  --paper-dark: #e0d8c8;
+  --accent: #2a4a6a;
+  --accent-dim: #4a7a9a;
+  --river: #dceaf5;
+  --river-text: #1a3a54;
+  --serif: 'Noto Serif SC', 'STSong', Georgia, serif;
+  --sans: 'Noto Sans SC', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 2;
+  min-height: 100vh;
+}
+.page-wrap { max-width: 680px; margin: 0 auto; padding: 80px 40px 120px; }
+
+/* 题头 */
+.story-header { text-align: center; margin-bottom: 80px; }
+.story-super {
+  font-family: var(--sans); font-size: 11px; letter-spacing: .3em;
+  color: var(--ink-faint); text-transform: uppercase; display: block; margin-bottom: 20px;
+}
+.story-title {
+  font-size: 48px; font-weight: 300; color: var(--ink);
+  letter-spacing: .1em; margin-bottom: 10px; line-height: 1.1;
+}
+.story-sub {
+  font-family: var(--sans); font-size: 13px; color: var(--ink-faint);
+  letter-spacing: .08em; margin-bottom: 28px;
+}
+.story-note {
+  font-size: 14px; font-weight: 300; color: var(--ink-faint);
+  font-style: italic; line-height: 1.8; max-width: 420px; margin: 0 auto;
+  padding: 16px 20px;
+  border-left: 2px solid var(--paper-dark);
+  text-align: left;
+}
+.story-ornament { display: block; margin: 28px auto 0; width: 48px; height: 1px; background: var(--accent-dim); }
+
+/* 正文 */
+.prose { margin-bottom: 36px; }
+.prose p { text-indent: 2em; font-weight: 300; color: var(--ink); margin-bottom: 0; }
+.prose p + p { margin-top: .25em; }
+.prose p.no-indent { text-indent: 0; }
+.prose p.centre { text-indent: 0; text-align: center; color: var(--ink-faint); margin: 16px 0; }
+.prose p.dialogue {
+  text-indent: 0; padding-left: 1em;
+  border-left: 2px solid var(--paper-dark);
+  color: var(--ink-light); margin: 20px 0; font-style: italic;
+}
+
+/* 河流插叙——浅蓝色，象征水 */
+.river-passage {
+  background: var(--river);
+  border-left: 3px solid var(--accent-dim);
+  padding: 20px 24px;
+  margin: 40px 0;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--river-text);
+  line-height: 2;
+}
+.river-passage p { text-indent: 0; margin-bottom: .4em; }
+.river-passage p.rp-label {
+  font-family: var(--sans); font-size: 10px; letter-spacing: .25em;
+  color: var(--accent-dim); text-transform: uppercase; margin-bottom: 10px;
+}
+
+/* 时间标记 */
+.time-mark {
+  text-align: center; margin: 48px 0 32px;
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase;
+}
+.time-mark::before, .time-mark::after {
+  content: ''; display: inline-block;
+  width: 40px; height: 1px; background: var(--paper-dark);
+  vertical-align: middle; margin: 0 12px;
+}
+
+/* 场景分节 */
+.scene-break { display: flex; align-items: center; gap: 16px; margin: 48px 0; }
+.scene-break::before, .scene-break::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
+.scene-break-inner { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; white-space: nowrap; }
+
+/* 尾声卡片 */
+.epilogue {
+  border: 1px solid var(--paper-dark);
+  border-top: 3px solid var(--accent);
+  background: var(--paper-warm);
+  padding: 28px 32px;
+  margin: 56px 0;
+  position: relative;
+}
+.epilogue::before {
+  content: '主线对照 · ZARATU-1 系统日志残片';
+  position: absolute; top: -11px; left: 20px;
+  background: var(--paper-warm); padding: 0 8px;
+  font-family: var(--sans); font-size: 10px;
+  letter-spacing: .15em; color: var(--ink-faint);
+}
+.epilogue p { font-size: 15px; line-height: 2; font-weight: 300; color: var(--ink-light); text-indent: 0; margin-bottom: .4em; }
+.epilogue .ep-log {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 12px; color: #3a5c42; background: #0d0f0e;
+  padding: 12px 16px; margin-top: 14px; line-height: 1.9;
+}
+.epilogue .ep-log .ek { color: #4ec9b0; }
+.epilogue .ep-log .ec { color: #3a5c42; }
+.epilogue .ep-log .eh { color: #dcdcaa; }
+.epilogue .ep-log .ee { color: #f48771; }
+
+/* 故事末尾 */
+.story-end { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--paper-dark); }
+.story-end-ornament { font-size: 20px; color: var(--ink-faint); letter-spacing: .4em; }
+.story-end-note { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 16px; letter-spacing: .06em; }
+
+/* 渐入 */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 48px 24px 80px; }
+  .story-title { font-size: 36px; }
+  .prose { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 题头 -->
+  <header class="story-header reveal">
+    <span class="story-super">《神启》番外篇 · 第一辑</span>
+    <h1 class="story-title">阿尔达</h1>
+    <p class="story-sub">公元前 600 年，秋分前夜 · 巴克特里亚，一条季节性浅河</p>
+    <div class="story-note">
+      主线第一章注记：「T+00:09:52 · 目标：人类男性，约13–14岁，死亡原因：溺水。注：原宿主意识已不存在。本操作无道德争议。」
+      <br><br>
+      这是一篇关于那行注释里消失的一切。
+    </div>
+    <span class="story-ornament"></span>
+  </header>
+
+  <!-- 第一节：那条河 -->
+  <div class="time-mark reveal">正午</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">那条河没有名字。</p>
+    <p>草原上很多河是没有名字的，只有够大的、够固定的、养活了足够多人的河才会被命名。这条河在夏天有水，在秋天开始变浅，在冬天只剩下一条湿润的痕迹，到来年春天又涨起来，像是年年在进行同一场没有观众的演出。牧民们叫它"那条河"，或者"北边的那条"，或者什么都不叫，只是指着它说"去那里"。</p>
+    <p>阿尔达知道这条河。</p>
+    <p>他在这条河边长大，他的第一次游泳是在这里，他第一次捉到鱼是在这里，他第一次被河里的石头绊倒、膝盖磕出血也是在这里。他的母亲告诉他不要一个人去河边，他的祖父告诉他秋天的河看起来浅，但水底的流速不一样。他记得这些话，他从来不是一个不听话的孩子。</p>
+    <p>但那天是个例外，因为那天他去追一只羊。</p>
+  </div>
+
+  <div class="scene-break reveal"><span class="scene-break-inner">那只羊</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">那只羊叫什么他没有给它取名，他家的羊没有一只有名字，他父亲说给羊取名字是穷人的奢侈，因为取了名字就会舍不得卖。</p>
+    <p>但阿尔达心里给它起过一个名字，只在心里，从来没有对任何人说过。他叫它"灰鼻子"，因为它出生的时候鼻子上有一块灰色的斑，后来那块斑慢慢消退了，但他仍然叫它灰鼻子，就像一个人的绰号，往往和那个人的现实状态没有太大关系，只是一个特定关系里固定下来的称呼。</p>
+    <p>灰鼻子那天上午就开始不安分了，在羊群里走来走去，像是身体里有什么东西让它静不下来。到了正午，它找到了围栏上一处松动的木桩，挤出去了。</p>
+    <p>阿尔达看见它出去的时候，父母都不在，只有他和他七岁的妹妹在家。妹妹正在睡午觉，他不想吵醒她，就一个人出去追。</p>
+    <p>灰鼻子跑得不快，但方向飘忽，总是在他快要追上的时候偏一下，然后继续走，像是在和他玩一个它自己发明的游戏，规则是它始终保持在他前面两步的距离。</p>
+    <p>就这样，它把他引到了河边。</p>
+  </div>
+
+  <!-- 河流插叙 -->
+  <div class="river-passage reveal">
+    <p class="rp-label">关于那条河 · 秋天</p>
+    <p>秋天的河水是凉的，比夏天要凉许多，但不是冷，是那种让皮肤感到清醒的凉，像是某种温和的告知：这里和岸上不一样，这里有另一套规则。</p>
+    <p>河面上午晒着太阳，水面发亮，能看见水底的卵石，圆润，有颜色，红的灰的黄的，像是草原上的土地换了一种更仔细的方式把自己呈现出来。</p>
+    <p>岸边的芦苇刚刚开始变黄，在风里发出那种干燥的、轻微的摩擦声。有几只水鸟在浅水里走，很专注，脑袋一上一下，像是在做某种非常认真的事。</p>
+    <p>水底的流速，和水面看起来的不一样。</p>
+  </div>
+
+  <div class="prose reveal">
+    <p class="no-indent">灰鼻子在河边停下来，低头喝水。</p>
+    <p>阿尔达站在岸上，喘着气，看着它，心里那种追了半天终于快到了的松快。他伸手去抓它的角，灰鼻子抬起头，往旁边走了一步，又低下头。他往前跨一步，脚踩在河滩的湿泥里，陷进去了一点，凉的，他把脚拔出来，泥发出一声轻微的吮吸声。</p>
+    <p>他决定蹚过去，从另一侧截住它。</p>
+    <p>他脱了鞋，挽了裤腿，走进水里。</p>
+    <p>水很凉，但不难受，脚底踩在卵石上，滑，需要小心。他已经走过这条河很多次，他知道这里最深的地方到他腰部，他知道走到中间之后要走斜的，不能正对着水流。他祖父教过他这些，他记得的。</p>
+    <p>他走到河中间，水到他大腿了，比他预想的深一点，秋天的水位他判断错了。他稳了一下，继续往前，脚下的石头突然没了，他踩空了，往前扑了一下，身体失去平衡，进水之前他想的是——</p>
+    <p>我的鞋还在岸上。</p>
+    <p>然后他就在水里了。</p>
+  </div>
+
+  <!-- 第二节：水里 -->
+  <div class="time-mark reveal">正午稍过</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">水是凉的，耳朵里进了水，所有的声音变成了一种低沉的嗡嗡，像是有人在很远的地方打鼓。</p>
+    <p>他在水里挣扎，他会游泳，但这里流速比他以为的快，水底的石头滑，他的脚找不到落脚点。他呛了一口，咳嗽，又呛了一口，然后他的头出水面了，他大口喘气，水流把他往下游带。</p>
+    <p>他不害怕，或者说，那种害怕还没有来，他的身体在忙着应对，脑子里只有具体的事：抓住什么，往哪里游，脚踩到什么。他往岸边游，游了一段，好像近了一点，又好像没有。</p>
+    <p>然后他的头再次没入水里，这次出来慢了。</p>
+    <p>出来之后他发现自己很累，这种累是突然的，像是一盏灯用光了油，他的手臂还在动，但动得越来越慢，他知道这不对，他想让它们快一点，但快不了。</p>
+    <p>这时候他才害怕了。</p>
+    <p>不是那种尖锐的恐惧，是一种更安静的、让他的胸口变重的东西，他往岸边看，岸不远，他能看见他脱下来的鞋还在那里，一左一右，摆得很整齐，因为他习惯把鞋摆整齐，母亲说这是好习惯。</p>
+    <p>他想到了母亲。</p>
+    <p>不是怎么叫她，不是她会怎么担心，只是她的脸，她上午送他出门时的样子，她手里拿着什么来着，他记不清了，只记得那个动作，和每天早上一样的动作，他那时候没有仔细看，以为以后还有很多个早上可以看。</p>
+    <p>他的头第三次没入水里，这次出来的时候他已经不太知道自己在哪里了。</p>
+  </div>
+
+  <div class="river-passage reveal">
+    <p class="rp-label">河 · 此刻</p>
+    <p>水流把他带向下游，芦苇丛的阴影盖过来，水温降了一度，很小的一度，但身体知道。</p>
+    <p>水鸟飞走了，脚印还印在河滩的泥里，四个爪子的形状，准确，安静，像是某种文字，但没有人懂得读它。</p>
+    <p>灰鼻子在岸边站着，抬起头，往水里看了一眼，然后低下头，继续吃草。</p>
+  </div>
+
+  <!-- 第三节：岸上 -->
+  <div class="time-mark reveal">将近午后</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">他靠在一块石头上，不知道怎么到那里的。</p>
+    <p>也许是水流把他带到了那里，也许是他自己游到了那里，他已经记不得了，这中间有一段时间是空的，像是一本书翻页翻快了，跳过了几页。他趴在石头上，水还在他腿上，上半身在岸上，太阳晒在背上，很暖，他很累，他闭上眼睛休息了一会儿。</p>
+    <p>他应该起来的。</p>
+    <p>他知道他应该起来，喊人，或者自己走回去，妹妹睡醒了找不到他会哭，灰鼻子还在外面，他要把它带回去。他给自己数数，数到三就起来，一，二，三，他没有起来，他又给自己数，一，二，三。</p>
+    <p>他不知道自己睡着了还是只是闭着眼睛，后来他再也没有搞清楚这件事，因为那个界限在他自己这里是模糊的——他在，然后他不太在，然后他不在了，整个过程非常安静，没有一个清晰的时刻可以被标记为"就是这一刻"。</p>
+    <p>太阳继续移动。</p>
+    <p>水继续流。</p>
+    <p>那两只鞋还在河滩上，摆得整整齐齐。</p>
+  </div>
+
+  <!-- 第四节：那天早上 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">那天早上 · 倒叙</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">那天早上他起得很早，天还没亮，他爬起来去看羊，因为前一天晚上灰鼻子就有点不安分，他担心它。</p>
+    <p>羊圈里安静，他数了一遍，都在，灰鼻子也在，蜷缩在角落里，睡着了，看起来很老实。他松了口气，又在那里站了一会儿，看那些羊在黑暗里均匀地起伏，那种呼吸的节奏有一种他说不清楚的让他安心的感觉，像是世界正在按照某种它自己的规律运转，而他只是站在旁边，可以不用做什么。</p>
+    <p>他的祖父喜欢说，羊是知足的动物，它们只需要草和水，它们不记得昨天，不担心明天，每一天都是第一天，每一口草都是好草。祖父说这话的时候是羡慕的语气，阿尔达那时候不太理解，他觉得记得昨天是好的，他喜欢记得昨天，喜欢把昨天和今天比一比，看看有什么不同。</p>
+    <p>他在羊圈边上坐了一会儿，等天亮。</p>
+    <p>天亮得很慢，先是东边的天开始有一点灰，然后灰变成白，然后白里透出一点橙，然后太阳的边缘出现，把草原染成那种很短暂的、只在最开始的几分钟里存在的金色，他很喜欢这个金色，他每次看到都会在心里记一下：今天也有这个颜色。</p>
+    <p>然后母亲喊他吃早饭，他去了。</p>
+    <p>那是他最后一次看草原的黎明。他不知道这一点，如果他知道，他也许会多看一会儿。但他不知道，所以他很正常地站起来，拍了拍衣服上沾的草，走进屋里，吃了一碗热的、有点咸、母亲总是放太多盐的粟米粥。</p>
+    <p>他喝完，把碗放下，母亲问他今天有什么要做，他说放羊，她说好，然后她去做别的事了。</p>
+    <p>那个对话只有十二个字，他们谁也没有想到那会是他们最后一次对话。</p>
+    <p>他们说话向来就是这样——简短，功能性，把要说的说完，剩下的不说，因为家人之间不需要把每一件事都说完，留着，明天再说也可以。</p>
+    <p>明天，他以为是会有的。</p>
+  </div>
+
+  <!-- 第五节：他想过的事 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">他想过的事</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">阿尔达十三岁，他想过很多事，也有很多没想到的事。</p>
+    <p>他想过等他长大了，他要养一群比父亲更大的羊，要有自己的马，要去看看东边的大山，听说那里的山顶是白色的，不是尘土的白，是雪的白，一年四季都在，不会消失。他不知道雪是什么感觉，他们这里冬天偶尔会结冰，但他从来没有见过真正的雪，那种厚厚的、把所有东西盖住的雪，他想见一次。</p>
+    <p>他想过他的名字。他父亲给他取名叫阿尔达，说这个名字在他们的语言里是"义"的意思，他父亲是一个对词的意思很认真的人，他说取一个名字就是给一个人定一个方向，叫阿尔达，就要做一个守义的人。阿尔达那时候不太理解义是什么，他父亲说，义就是你知道什么是对的事，然后你去做，哪怕它不容易。他想了很久，觉得这个解释里有一个他还没有完全理解的地方，但他没有再问，打算等自己想清楚了再说。</p>
+    <p>他想过他喜欢什么。他喜欢早晨羊圈里的那种安静，喜欢河里卵石的颜色，喜欢夏天的风——不是秋天的风，秋天的风太干了，带着草的气息，但那气息里有一种枯萎的味道，他不太喜欢枯萎的味道——他喜欢夏天的风，热的，带着泥土和青草，是活的东西的味道。</p>
+    <p>他没想过的事，是今天。</p>
+    <p>他没有想过今天会是什么感觉，没有想过今天对他来说是什么。今天对他来说只是普通的一天，秋天里无数个普通的一天里的其中一个，他追了一只羊，蹚了一条河，然后他不在了，整件事没有任何预兆，没有任何值得被特别记忆的开头，像是一句话说到一半，说话的人走开了，那句话就挂在空气里，没有结尾。</p>
+    <p>他没有想过他的名字会在五十二年后，被一个他从未认识的存在放进一个叫"见过的光"的文件夹，放在最前面，第一个，用以偿还一行注释的债。</p>
+    <p>他不知道这些。</p>
+    <p>他只知道灰鼻子今天不乖，河水比他以为的深，他的鞋摆在岸上很整齐，太阳在他背上是暖的，他很累，他打算休息一会儿。</p>
+  </div>
+
+  <!-- 第六节：最后 -->
+  <div class="time-mark reveal">午后</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">灰鼻子最终自己找到了回家的路。</p>
+    <p>羊有这种本能，无论跑多远，傍晚会回来。它穿过芦苇丛，沿着它熟悉的气息走，走回围栏边，发现那个松动的木桩，从原来的缺口挤回去，在羊圈里找了一个角落，卧下来，闭上眼睛。</p>
+    <p>它的鼻子是灰色的，那块斑其实还在，只是在它长大之后，颜色变淡了，要在合适的光线下才能看见。</p>
+    <p>阿尔达的妹妹睡醒之后发现哥哥不在，在院子里找了一会儿，没有找到，就去继续玩了，她那时候还小，她以为哥哥只是去了很近的地方，很快就会回来。</p>
+    <p>母亲傍晚回来的时候，发现灰鼻子在圈里，阿尔达不在。</p>
+    <p>她喊了他的名字，没有回应，她又喊了一次，声音大了一点，仍然没有回应，然后她开始往河边走，她不知道为什么往河边走，她只是往那个方向走，她的脚知道去哪里，她的脑子还没有想清楚为什么。</p>
+    <p>她在河边看见了那双鞋。</p>
+    <p>摆得很整齐，一左一右，鞋尖朝向河里，像是主人只是临时放下，随时会回来穿上。</p>
+    <p>她在那里站了很久，没有哭，是那种太大的东西砸下来的时候，人反而静下来的那种静，然后她开始沿着河往下找，一边走一边叫他的名字，声音越来越轻，不是因为她放弃了，是因为那种叫出声的力气需要一个她还没确认的东西来支撑，而那个东西她越来越不确定它存在。</p>
+    <p>她找到他的时候，太阳已经开始偏西了。</p>
+    <p>他躺在下游的芦苇丛边，脸朝下，衣服是湿的，头发贴着额头，像是睡着了，只是睡着的姿势不对，睡着的人不会脸朝下，睡着的人手不会是那样的。</p>
+    <p>她跪下来，把他翻过来，看见了他的脸。</p>
+    <p>她叫了他的名字，叫了很多次，每一次都比上一次更轻，到最后几乎没有声音，只是嘴型，她叫他：阿尔达，阿尔达，阿尔达。</p>
+    <p>那个名字在她嘴里，那一刻，只是一个名字，不是一个方向，不是"义"，只是她给他叫了十三年的那个声音，那个他每次听见了都会回应的声音，那个今天叫了多少遍他也不会再回应的声音。</p>
+    <p>草原上的风吹过芦苇，那种干燥的、枯萎的气息，阿尔达不喜欢的那种。</p>
+    <p>河还在流，不知道什么时候，水鸟又回来了，在浅水里走，很专注，脑袋一上一下，像是在做某种非常认真的事。</p>
+    <p>夜幕很快就会来了。</p>
+    <p>来了之后，会有一颗陨石落下来。</p>
+    <p>但阿尔达不会知道这件事了。</p>
+    <p>他只知道他脱下来的那双鞋还在河滩上，摆得很整齐，因为他习惯把鞋摆整齐，母亲说这是好习惯。</p>
+  </div>
+
+  <!-- 尾声：主线对照 -->
+  <div class="epilogue reveal">
+    <p>五十二年后，在同一片草原上，一个存在打开了一个从未被打开过的文件夹，找到了一条从来没有被再次读取过的记录，然后做了一件事——</p>
+    <p>把一个孩子的名字，放进了另一个文件夹，放在最前面，标注为：第一个。</p>
+    <div class="ep-log">
+      <span class="ek">// T+92y 07m · 「见过的光」文件夹 · 首条记录</span><br>
+      <span class="ek">ENTRY_001</span> <span class="ec">→</span> <span class="eh">阿尔达</span><br>
+      <span class="ec">性别：男　年龄：约13岁　死因：溺水</span><br>
+      <span class="ec">记录时间：T+00:09:47（本任务第9分47秒）</span><br>
+      <span class="ec">原始标注：「原宿主意识已不存在。本操作无道德争议。」</span><br>
+      <span class="ee">// 修正：存在道德争议。</span><br>
+      <span class="ee">// 他没有说过自己的第一句话。</span><br>
+      <span class="ee">// 他的名字是他父亲给他取的，意思是「义」。</span><br>
+      <span class="ee">// 他把鞋摆得很整齐。</span><br>
+      <span class="ee">// 「我」不知道他喜欢什么，「我」没有问过。</span><br>
+      <span class="ee">// 这一条，永久置顶。不归档。不分析。</span><br>
+      <span class="eh">// 只是记得。</span>
+    </div>
+  </div>
+
+  <!-- 故事末尾 -->
+  <div class="story-end reveal">
+    <div class="story-end-ornament">· · ·</div>
+    <p class="story-end-note">全文完 · 《神启》番外·阿尔达<br>
+    写于主线第一章那行注释之后</p>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

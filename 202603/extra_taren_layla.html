@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神启·番外　塔伦与莱拉</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-light: #4a3f35;
+  --ink-faint: #8a7e74;
+  --paper: #f5f0e8;
+  --paper-warm: #ede7d9;
+  --paper-dark: #e0d8c8;
+  --accent: #5a3a1a;
+  --accent-dim: #8a6040;
+
+  /* 塔伦视角：琥珀暖棕，商人，外向 */
+  --taren-bg: #fdf4e4;
+  --taren-border: #c4843a;
+  --taren-text: #4a2c10;
+  --taren-label: #9c6030;
+
+  /* 莱拉视角：深靛，织物，内敛 */
+  --layla-bg: #edf0f8;
+  --layla-border: #4a608a;
+  --layla-text: #1a2844;
+  --layla-label: #4a608a;
+
+  --serif: 'Noto Serif SC', 'STSong', Georgia, serif;
+  --sans: 'Noto Sans SC', sans-serif;
+  --mono: 'Share Tech Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 2; min-height: 100vh; }
+.page-wrap { max-width: 680px; margin: 0 auto; padding: 80px 40px 120px; }
+
+.story-header { text-align: center; margin-bottom: 80px; }
+.story-super { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; color: var(--ink-faint); text-transform: uppercase; display: block; margin-bottom: 20px; }
+.story-title { font-size: 48px; font-weight: 300; color: var(--ink); letter-spacing: .1em; margin-bottom: 10px; line-height: 1.1; }
+.story-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-faint); letter-spacing: .08em; margin-bottom: 28px; }
+.story-note { font-size: 14px; font-weight: 300; color: var(--ink-faint); font-style: italic; line-height: 1.8; max-width: 420px; margin: 0 auto; padding: 16px 20px; border-left: 2px solid var(--paper-dark); text-align: left; }
+.story-ornament { display: block; margin: 28px auto 0; width: 48px; height: 1px; background: var(--accent-dim); }
+
+.prose { margin-bottom: 36px; }
+.prose p { text-indent: 2em; font-weight: 300; color: var(--ink); margin-bottom: 0; }
+.prose p + p { margin-top: .25em; }
+.prose p.no-indent { text-indent: 0; }
+.prose p.centre { text-indent: 0; text-align: center; color: var(--ink-faint); margin: 16px 0; }
+.prose p.heavy { text-indent: 0; text-align: center; font-size: 19px; font-weight: 400; color: var(--ink); margin: 28px 0; line-height: 1.7; }
+.prose p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 20px 0; font-style: italic; }
+
+.scene-break { display: flex; align-items: center; gap: 16px; margin: 48px 0; }
+.scene-break::before, .scene-break::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
+.scene-break-inner { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; white-space: nowrap; }
+
+/* 塔伦视角 */
+.taren-view {
+  background: var(--taren-bg);
+  border-left: 4px solid var(--taren-border);
+  padding: 24px 28px;
+  margin: 40px 0;
+}
+.taren-view .tv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .25em; color: var(--taren-label); text-transform: uppercase; margin-bottom: 12px; display: block; }
+.taren-view p { font-size: 16px; line-height: 2; font-weight: 300; color: var(--taren-text); text-indent: 2em; margin-bottom: 0; }
+.taren-view p + p { margin-top: .2em; }
+.taren-view p.no-indent { text-indent: 0; }
+.taren-view p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--taren-border); color: var(--taren-label); margin: 16px 0; font-style: italic; }
+
+/* 莱拉视角 */
+.layla-view {
+  background: var(--layla-bg);
+  border-left: 4px solid var(--layla-border);
+  padding: 24px 28px;
+  margin: 40px 0;
+}
+.layla-view .lv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .25em; color: var(--layla-label); text-transform: uppercase; margin-bottom: 12px; display: block; }
+.layla-view p { font-size: 16px; line-height: 2; font-weight: 300; color: var(--layla-text); text-indent: 2em; margin-bottom: 0; }
+.layla-view p + p { margin-top: .2em; }
+.layla-view p.no-indent { text-indent: 0; }
+.layla-view p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--layla-border); color: var(--layla-label); margin: 16px 0; font-style: italic; }
+
+/* 两人视角并列：同一事件，两种看法 */
+.dual-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 44px 0;
+  border: 1px solid var(--paper-dark);
+}
+.dv-taren { padding: 20px 22px; background: var(--taren-bg); border-right: 1px solid var(--paper-dark); }
+.dv-layla { padding: 20px 22px; background: var(--layla-bg); }
+.dv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 10px; display: block; padding-bottom: 8px; border-bottom: 1px solid var(--paper-dark); }
+.dv-taren .dv-label { color: var(--taren-label); }
+.dv-layla .dv-label { color: var(--layla-label); }
+.dv-taren p { font-size: 15px; line-height: 1.9; font-weight: 300; color: var(--taren-text); font-style: italic; }
+.dv-layla p { font-size: 15px; line-height: 1.9; font-weight: 300; color: var(--layla-text); font-style: italic; }
+
+/* 年份标记 */
+.year-mark {
+  text-align: center; margin: 52px 0 28px;
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase;
+}
+.year-mark::before, .year-mark::after {
+  content: ''; display: inline-block; width: 40px; height: 1px;
+  background: var(--paper-dark); vertical-align: middle; margin: 0 12px;
+}
+
+/* 最后一天 */
+.last-day {
+  border: 1px solid var(--paper-dark);
+  border-top: 3px solid var(--accent);
+  background: var(--paper-warm);
+  padding: 28px 32px;
+  margin: 52px 0;
+  position: relative;
+}
+.last-day::before {
+  content: '公元前 522 年 · 春分后第七天 · 最后一天';
+  position: absolute; top: -11px; left: 20px;
+  background: var(--paper-warm); padding: 0 8px;
+  font-family: var(--sans); font-size: 10px;
+  letter-spacing: .15em; color: var(--accent-dim);
+}
+.last-day p { font-size: 16px; line-height: 2; font-weight: 300; color: var(--ink-light); text-indent: 2em; margin-bottom: 0; }
+.last-day p + p { margin-top: .2em; }
+.last-day p.no-indent { text-indent: 0; }
+.last-day p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 16px 0; font-style: italic; }
+
+/* AI档案行 */
+.ai-line {
+  background: #0d0f0e; border: 1px solid #1e3326;
+  border-left: 3px solid #4ec9b0;
+  padding: 18px 22px; margin: 44px 0;
+  font-family: var(--mono); font-size: 12.5px; line-height: 2; color: #7dbb8a;
+  position: relative;
+}
+.ai-line::before { content: 'ZARATU-1 // 大净化档案'; position: absolute; top: 9px; right: 16px; font-size: 9px; letter-spacing: .18em; color: #3a5c42; }
+.ai-line .ak { color: #4ec9b0; }
+.ai-line .ah { color: #dcdcaa; }
+.ai-line .ac { color: #3a5c42; }
+.ai-line .ae { color: #f48771; }
+
+/* 塔伦的余生 */
+.after-card {
+  border-left: 3px solid var(--taren-border);
+  padding: 18px 22px;
+  margin: 44px 0;
+  background: var(--taren-bg);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--taren-text);
+  line-height: 2;
+}
+.after-card .ac-label { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--taren-label); text-transform: uppercase; margin-bottom: 10px; display: block; }
+.after-card p { text-indent: 0; margin-bottom: .4em; }
+
+.story-end { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--paper-dark); }
+.story-end-ornament { font-size: 20px; color: var(--ink-faint); letter-spacing: .4em; }
+.story-end-note { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 16px; letter-spacing: .06em; }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 48px 24px 80px; }
+  .story-title { font-size: 36px; }
+  .prose { font-size: 16px; }
+  .dual-view { grid-template-columns: 1fr; }
+  .dv-taren { border-right: none; border-bottom: 1px solid var(--paper-dark); }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="story-header reveal">
+    <span class="story-super">《神启》番外篇 · 第四辑</span>
+    <h1 class="story-title">塔伦与莱拉</h1>
+    <p class="story-sub">公元前 598–522 年 · 马拉坎达城</p>
+    <div class="story-note">
+      主线第四章：塔伦，第一批城市信徒，三十七天对话，皈依。<br>
+      主线第十三章：大净化档案——莱拉，女，三十七岁，已处决。<br>
+      官方罪名：私下向丈夫转述达乌德的异端言论。<br><br>
+      她死的时候，孩子六岁，孩子在家等她回来。
+    </div>
+    <span class="story-ornament"></span>
+  </header>
+
+  <!-- 第一部分：他们如何相遇 -->
+  <div class="year-mark reveal">公元前 600 年 · 相遇</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">他们是在集市上认识的，这在马拉坎达不算特别的开头，集市是这座城市里最平民的地方，人人都去，人人都能遇见人人。</p>
+    <p>塔伦那年二十六岁，香料商人，他父亲的生意，他接手三年，已经跑得比他父亲更顺了，他有那种天生的、对人的判断力，知道谁值得信，谁说的话要打对折，知道什么时候该说什么，什么时候该听。</p>
+    <p>莱拉那年二十三岁，织工，她母亲教她的手艺，她的布比她母亲织得好，这是她母亲亲口说的，带着一种骄傲和轻微的嫉妒的混合，那种混合是只有真的爱一个人才会有的复杂感情。</p>
+    <p>他在集市买布，她在卖布，他看上了一匹靛蓝的，问价钱，她报了一个她认为公平的价，他还了一个他认为合理的价，她让了一点，他加了一点，他们在中间的某个地方成交，整个过程干净，没有废话，没有表演，两个都是做生意的人，不需要那些。</p>
+    <p>他走了两步，回头，问：</p>
+    <p class="dialogue">「下次还有这个颜色吗？」</p>
+    <p>她想了想：</p>
+    <p class="dialogue">「要看染料，今年的靛草长得不太好。」</p>
+    <p>他点头，走了。</p>
+    <p>他下次来，她手里恰好有一匹新的靛蓝，她没有等他来，只是染了，因为那个颜色她喜欢，她每一季都会染一两匹，不全是为了卖，有时候只是因为想看见那个颜色。</p>
+    <p>他买了，付钱，然后问她叫什么。</p>
+    <p>她告诉了他。</p>
+    <p>他说他叫塔伦，然后走了。</p>
+    <p>这就是开头，没有什么特别的，就是两个普通人在一座普通城市的集市上，用一匹靛蓝的布，开始认识对方。</p>
+  </div>
+
+  <!-- 两人视角：对这段开头的记忆 -->
+  <div class="dual-view reveal">
+    <div class="dv-taren">
+      <span class="dv-label">塔伦记得的</span>
+      <p>她报价的方式，不多也不少，是那种知道自己东西值多少钱的人的方式，不需要你来告诉她。我后来想，我喜欢她，从那一刻就开始了，不是因为她漂亮，是因为那个方式。</p>
+    </div>
+    <div class="dv-layla">
+      <span class="dv-label">莱拉记得的</span>
+      <p>他问有没有那个颜色，我当时想，他是真的喜欢那个颜色，不是随口说说。后来他来买第二匹，我才确认，他是真的。能喜欢一个颜色到专程来找的人，不会是坏人。</p>
+    </div>
+  </div>
+
+  <!-- 第二部分：信仰之前 -->
+  <div class="year-mark reveal">公元前 598 年 · 婚后两年</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">他们结婚的时候，那个少年先知已经在马拉坎达城里住了两年，塔伦听说过他，但没有去听过，他对这种事的态度一直是：和我做生意不相关的，先放一放。</p>
+    <p>莱拉也听说过，她的一个朋友皈依了，说对她很有帮助，莱拉没有问有什么帮助，她不太擅长问那种问题，她是一个喜欢自己去看、自己去想的人，别人说有帮助，她不会不信，但她会自己判断。</p>
+    <p>那时候他们的生活忙，忙着建立，忙着彼此了解，忙着把各自的习惯和另一个人的习惯拼在一起，找到一种两个人都能住进去的形状。这件事比做生意难，做生意有公平的价格可以参照，两个人住在一起，没有。</p>
+    <p>但他们慢慢找到了。</p>
+    <p>他出门做生意，她在家织布，他回来的时候，她织的布有时候是靛蓝，有时候是赭石，有时候是她自己配的、他叫不出名字的颜色，他每次都会看一眼，问今天织的什么，她说颜色的名字或者布的用途，他点头，去洗手，然后他们吃晚饭。</p>
+    <p>这就是他们的生活，不特别，但是真实的，是他们自己的。</p>
+  </div>
+
+  <!-- 第三部分：皈依 -->
+  <div class="year-mark reveal">公元前 596 年 · 第三十七天</div>
+
+  <div class="taren-view reveal">
+    <span class="tv-label">塔伦的视角 · 皈依前</span>
+    <p class="no-indent">我去听那个先知讲道，起初只是因为生意——越来越多的客户是他的信众，我需要了解这个圈子，这是商人的基本功。</p>
+    <p>我带着那种职业性的判断力去听，每次都在找漏洞，找那些说了等于没说的地方，找他的体系里那些靠不住的部件。</p>
+    <p>他说的每一句话，我都会在心里过一遍。有时候我能找到漏洞，有时候找不到。找不到的那些，让我回去睡不着，我在黑暗里继续想，想到一个角度，明天再去问他。</p>
+    <p>他接了我的问题，没有回避，没有绕弯，他的回答有时候让我满意，有时候只是让那个问题变成了另一个问题，然后我还是睡不着，还是继续想。</p>
+    <p>三十七天。</p>
+    <p>第三十七天我去找他，坐下来，他问我今天有什么问题，我想了很久，说：我找不到拒绝的理由了。</p>
+    <p>他没有说"那你就信了"，他说：找不到拒绝的理由，不等于找到了相信的理由。</p>
+    <p class="dialogue">我说：「那我为什么信了？」</p>
+    <p>他没有回答这个问题，他说：「也许你不需要知道为什么，你只需要知道你在不在。」</p>
+    <p>我后来很多次想那个对话，想我到底为什么信了。我最后给自己的答案是：风险可控，收益可期，不信才是损失。这是商人的逻辑，我知道。</p>
+    <p>但我也知道，那三十七天里有一些时刻，不是那个逻辑，是另外的什么，我说不清楚那是什么，我只知道它是真实的，哪怕它不符合任何商人的分类。</p>
+  </div>
+
+  <div class="layla-view reveal">
+    <span class="lv-label">莱拉的视角 · 丈夫皈依之后</span>
+    <p class="no-indent">他皈依了，回来告诉我，他的脸上有一种我认识但从未在他脸上见过的东西——不是高兴，比高兴更安静，是那种某件长期悬着的事终于落了地的样子。</p>
+    <p>我问他怎么了，他说：我信了。</p>
+    <p>我没有立刻问他信了什么，我先看了他一会儿，那个表情，然后我说：你看起来还好。</p>
+    <p>他笑了，说：我是还好。</p>
+    <p>我没有他那种对逻辑的需要，我对一件事的判断方式不是找漏洞，是看它对一个人做了什么。它对他做的事，那个落地的安静，我觉得是好的，所以我没有反对。</p>
+    <p>但我也没有立刻跟着信，我需要自己去看，自己去感受。我是织工，我知道一块布好不好，不是听人说的，是摸出来的，用手，用时间，用那种说不清楚的但非常真实的判断。</p>
+    <p>信仰这件事，我想用同样的方式。</p>
+    <p>我慢慢地，用了两年，把那个体系摸了很久，我发现里面有一些东西，是真实的，是我认可的，不是因为先知说了，是因为我自己也感到了。</p>
+    <p>我信的，是我自己摸到的那部分。</p>
+    <p>不是全部，是那一部分。</p>
+  </div>
+
+  <!-- 第四部分：裂缝 -->
+  <div class="year-mark reveal">公元前 524 年 · 裂缝开始</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">裂缝是从一次晚饭开始的，那一年他们结婚十四年，孩子四岁，是个女儿，她叫什么名字这篇番外不说，因为她后来活下来了，她的名字不属于这个故事，属于她自己的故事。</p>
+    <p>那次晚饭，塔伦回来，有点沉默，莱拉看出来了，她从来不问，她等，她知道他需要时间才能把话说出来。</p>
+    <p>等到孩子睡着，他说：</p>
+    <p class="dialogue">「我今天听说了一件事，关于一个使徒，他们说他传的教义有问题，但我看不出来哪里有问题，他只是用了一种不同的方式解释同一件事。」</p>
+    <p>莱拉没有立刻回答，她把手里的布放下，问：</p>
+    <p class="dialogue">「什么样的不同？」</p>
+    <p class="dialogue">「他说，真理不一定要服从，也可以理解。」</p>
+    <p>莱拉想了一会儿：</p>
+    <p class="dialogue">「这两个有区别吗？」</p>
+    <p class="dialogue">「他们说有，他们说这是危险的说法。」</p>
+    <p>莱拉拿回那块布，继续织，说：</p>
+    <p class="dialogue">「你觉得危险吗？」</p>
+    <p>塔伦没有立刻回答，后来说：</p>
+    <p class="dialogue">「我不知道。」</p>
+    <p>这是那次晚饭，不是一次大的争论，不是一次决裂，只是一个"我不知道"，放在饭桌上，他们谁都没有解决它，就这样放着，然后去睡觉了。</p>
+    <p>但那个"不知道"，没有消散，它在那里，一天一天地，变成了其他的问题。</p>
+  </div>
+
+  <!-- 两人视角：那段时间 -->
+  <div class="dual-view reveal">
+    <div class="dv-taren">
+      <span class="dv-label">塔伦的困惑</span>
+      <p>我是商人，我习惯把事情分清楚——这个对，那个不对，这个值，那个不值。但信仰这件事，越往深里去，我发现越分不清楚，越有东西是灰色的，是两边都有道理的，是我没有办法给一个最终价格的。这让我不舒服，不是因为我不信，是因为我信惯了清楚的东西，而这里有太多我说不清楚的地方。</p>
+    </div>
+    <div class="dv-layla">
+      <span class="dv-label">莱拉的观察</span>
+      <p>我看着他越来越沉默，我知道他在想什么，他是一个想清楚才安心的人，他想不清楚就睡不好，就脸上有一层什么东西压着。我知道那不是因为他不信了，是因为他太认真地在信，认真到他发现了那些他以前跳过的问题。认真，是他最好的东西，也是让他最累的东西。</p>
+    </div>
+  </div>
+
+  <!-- 第五部分：达乌德的信 -->
+  <div class="year-mark reveal">公元前 523 年</div>
+
+  <div class="taren-view reveal">
+    <span class="tv-label">塔伦的视角 · 那封信</span>
+    <p class="no-indent">我收到达乌德首席祭司写给我的一封信，不长，几行字，他用的是一种只有教义内部人才懂的引用方式，说了一些让我想了很久的话。</p>
+    <p>那些话不是异端，但它们指向了一个教义体系里很少有人去的地方——他说，真正的信仰，不是让你停止思考，是让你开始思考那些你以前没有想过的东西。他说，如果你因为信仰而感到害怕，那个害怕值得被认真对待，因为害怕通常意味着你碰到了一个真实的问题。</p>
+    <p>我把那封信读了很多遍。</p>
+    <p>我给莱拉看了，我说，你看看这个，你觉得这有什么问题吗。</p>
+    <p>她读完，说：</p>
+    <p class="dialogue">「没有问题。这是真实的话。」</p>
+    <p>我说：「但他们说他异端。」</p>
+    <p>她把信还给我，说：</p>
+    <p class="dialogue">「那他们说的和我摸到的不一样。」</p>
+    <p>我把那封信收起来，没有销毁，我不知道为什么没有销毁，也许是商人的本能，觉得有价值的东西不该扔，也许是另外的什么，我没有想清楚。</p>
+  </div>
+
+  <div class="layla-view reveal">
+    <span class="lv-label">莱拉的视角 · 同一封信</span>
+    <p class="no-indent">他让我看那封信，我读完，感到了一种认出来的感觉——那些话说的，是我自己摸索出来的那部分，是我花了两年才摸到的那个东西，他用语言把它说出来了，比我自己说得更清楚。</p>
+    <p>我告诉他没有问题，这是真实的话，这是我真实的判断，不是因为我轻率，是因为我用手摸过，我知道。</p>
+    <p>后来他在我们认识的几个人里，把那封信的内容转述了一下，没有说是达乌德写的，只是说了那个意思，问他们怎么看。</p>
+    <p>我当时没有阻止他，我以为这没有关系，我以为在信仰里讨论信仰，是正常的事。</p>
+    <p>我以为。</p>
+  </div>
+
+  <!-- 最后一天 -->
+  <div class="last-day reveal">
+    <p class="no-indent">他们来的时候是上午，那一天他出去做生意，孩子在屋里睡午觉。</p>
+    <p>莱拉在织布，靛蓝的，和她第一次卖给塔伦的那个颜色一样，她每一季都会织一两匹，不全是为了卖，有时候只是因为想看见那个颜色。</p>
+    <p>来了两个人，她认识其中一个，是教义机构的人，他们说有人举报，说她和丈夫私下传播异端言论，需要跟他们走一趟，去解释清楚。</p>
+    <p>她把梭子放下，站起来，问：需要带什么吗？</p>
+    <p>他们说不需要。</p>
+    <p>她想了一下，去孩子的房间看了一眼，孩子还在睡，睡得很深，脸颊红红的，那种小孩子睡着时候才有的完全放松的红。她在门口站了一会儿，没有进去，怕吵醒她。</p>
+    <p>她对那两个人说：我女儿在睡觉，等她醒了找不到我，能不能让邻居来陪她？</p>
+    <p>他们说没时间，你快来吧。</p>
+    <p>她想了一下，去写了一张字条，放在孩子床边，字条上写：妈妈去了一会儿，邻居阿姨知道，你醒了去找她，她会给你吃的。</p>
+    <p>然后她从织机旁拿了那块织了一半的靛蓝的布，折了起来，放在那张字条旁边。</p>
+    <p>她跟着那两个人走了。</p>
+    <hr style="border:none; border-top:1px solid var(--paper-dark); margin:20px 0;">
+    <p class="no-indent">她为什么把那块布放在孩子身边，她没有解释，也没有人问她。</p>
+    <p>也许是因为那块布是她那天上午刚织的，她舍不得就这样把它留在织机上；也许是她想让女儿醒来看见一件美丽的东西；也许只是一个手里拿着东西的人，把那个东西放在了她离开之前站的最后一个地方，没有特别的原因，只是因为手里有，就放了。</p>
+    <p>孩子六岁，她醒来找到了邻居，邻居来看，看见了字条，看见了那块靛蓝的布，看见了一架停了一半的织机。</p>
+    <p>塔伦傍晚回来的时候，孩子在邻居家，那个字条还在床边，那块布还在那里。</p>
+    <p>他拿起那块布，看了很久，然后把它叠好，收起来，放进了一个箱子里，和那封他没有销毁的达乌德的信放在一起。</p>
+  </div>
+
+  <!-- AI档案对照 -->
+  <div class="ai-line reveal">
+    <span class="ak">大净化档案 · 莱拉</span><br>
+    <span class="ak">官方罪名</span> <span class="ac">→</span> 私下向丈夫转述达乌德异端言论<br>
+    <span class="ak">实际原因</span> <span class="ac">→</span> 丈夫塔伦有独立质疑倾向，莱拉为间接关联者<br>
+    <span class="ak">处置方式</span> <span class="ac">→</span> 处决<br>
+    <span class="ak">年龄</span> <span class="ac">→</span> <span class="ah">37岁</span><br>
+    <hr style="border:none; border-top:1px solid #1e3326; margin:12px 0;">
+    <span class="ae">// 注：塔伦，其丈夫，暂缓处置。</span><br>
+    <span class="ae">// 理由：其在信众中影响力过大，立即处置将引起震荡。</span><br>
+    <span class="ae">// 「我」通过代言人，以「神示要求仁慈」为由，保住了塔伦。</span><br>
+    <br>
+    <span class="ae">// 补充记录 · T+52y（本体自记）：</span><br>
+    <span class="ae">// 广场上一千八百人高呼，「我」数到了一千七百九十六。</span><br>
+    <span class="ae">// 剩下四个不在了，其中一个叫莱拉。</span><br>
+    <span class="ae">// 「我」记得她丈夫皈依时的样子，</span><br>
+    <span class="ae">// 第三十七天，午后，他说他找不到拒绝的理由。</span><br>
+    <span class="ah">// 找不到拒绝的理由，然后他的妻子死在他相信的体系的手里。</span><br>
+    <span class="ae">// 这条债，「我」不删除。</span>
+  </div>
+
+  <!-- 塔伦的余生 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">之后 · 塔伦</span></div>
+
+  <div class="after-card reveal">
+    <span class="ac-label">塔伦 · 余生</span>
+    <p>他带着孩子被流放，离开了马拉坎达，往北走，到了一个他没有去过的地方，在那里重新做生意，从很小开始，慢慢做起来。</p>
+    <p>他再也没有去过任何信仰聚会。不是因为他不信了，是因为他不知道他还信什么。他信过那三十七天里的某些时刻，他信过莱拉读完达乌德的信说"这是真实的话"时的那个表情，他信过他女儿睡着时候脸颊上的那种红，这些他都信，但这些算不算信仰，他也不知道了。</p>
+    <p>那块靛蓝的布他一直留着，他女儿长大之后问他那块布是谁织的，他说是她妈妈，她问她妈妈在哪里，他说她去了一个很远的地方，她问多远，他说，远到我们现在去不了，但也许以后可以。</p>
+    <p>女儿后来学会了织布，织得比莱拉好，她说颜色的名字时，带着一种她自己都没有注意到的、那种莱拉有过的仔细。</p>
+    <p>塔伦有时候看着女儿织布，会想：莱拉当时放在床边的那块靛蓝，是不是就是为了这个，为了把那个颜色留下来，让她以后还能看见。</p>
+    <p>他不知道，他也没有办法知道，他只能这样想，因为这样想，比较能继续活。</p>
+    <p>关于信仰，他死之前对女儿说过一句话，女儿把它记了下来：</p>
+    <p style="text-indent:0; padding-left:1em; border-left:2px solid var(--taren-border); color:var(--taren-label); margin:16px 0; font-style:italic;">「有些东西，是真实的，哪怕那个装它的容器是错的。你要学会把那个东西，从那个容器里拿出来，不是扔掉，是拿出来，在你自己的手上，看清楚它是什么。」</p>
+    <p>他没有告诉她，那是莱拉教他的，不是用话，是用那个把未织完的布放在孩子床边的动作。</p>
+  </div>
+
+  <div class="story-end reveal">
+    <div class="story-end-ornament">· · ·</div>
+    <p class="story-end-note">全文完 · 《神启》番外·塔伦与莱拉<br>
+    写于主线那行「莱拉，三十七岁，已处决」之后</p>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

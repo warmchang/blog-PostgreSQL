@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神启·番外　沙鲁村，两百年后</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-light: #4a3f35;
+  --ink-faint: #8a7e74;
+  --paper: #f5f0e8;
+  --paper-warm: #ede7d9;
+  --paper-dark: #e0d8c8;
+  --accent: #5a3a1a;
+  --accent-dim: #8a6040;
+
+  /* 神话层：金棕，传说的温度 */
+  --myth-bg: #fdf5e4;
+  --myth-border: #c4943a;
+  --myth-text: #4a2c08;
+  --myth-label: #9a6a20;
+
+  /* 史实层：冷灰，原始记录残片 */
+  --fact-bg: #f0eee8;
+  --fact-border: #888780;
+  --fact-text: #2c2c2a;
+  --fact-label: #5f5e5a;
+
+  /* 孩子视角：浅暖，当下生活的温度 */
+  --child-bg: #f8f4ec;
+  --child-border: #b09060;
+  --child-text: #3a2c18;
+
+  --serif: 'Noto Serif SC', 'STSong', Georgia, serif;
+  --sans: 'Noto Sans SC', sans-serif;
+  --mono: 'Share Tech Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 18px; line-height: 2; min-height: 100vh; }
+.page-wrap { max-width: 680px; margin: 0 auto; padding: 80px 40px 120px; }
+
+.story-header { text-align: center; margin-bottom: 80px; }
+.story-super { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; color: var(--ink-faint); text-transform: uppercase; display: block; margin-bottom: 20px; }
+.story-title { font-size: 44px; font-weight: 300; color: var(--ink); letter-spacing: .06em; margin-bottom: 10px; line-height: 1.2; }
+.story-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-faint); letter-spacing: .08em; margin-bottom: 28px; }
+.story-note { font-size: 14px; font-weight: 300; color: var(--ink-faint); font-style: italic; line-height: 1.8; max-width: 420px; margin: 0 auto; padding: 16px 20px; border-left: 2px solid var(--paper-dark); text-align: left; }
+.story-ornament { display: block; margin: 28px auto 0; width: 48px; height: 1px; background: var(--accent-dim); }
+
+.prose { margin-bottom: 36px; }
+.prose p { text-indent: 2em; font-weight: 300; color: var(--ink); margin-bottom: 0; }
+.prose p + p { margin-top: .25em; }
+.prose p.no-indent { text-indent: 0; }
+.prose p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 20px 0; font-style: italic; }
+.prose p.centre { text-indent: 0; text-align: center; color: var(--ink-faint); margin: 16px 0; }
+
+.scene-break { display: flex; align-items: center; gap: 16px; margin: 48px 0; }
+.scene-break::before, .scene-break::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
+.scene-break-inner { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; white-space: nowrap; }
+
+/* 神话版本——篝火边的故事 */
+.myth-block {
+  background: var(--myth-bg);
+  border-left: 4px solid var(--myth-border);
+  padding: 24px 28px;
+  margin: 44px 0;
+  position: relative;
+}
+.myth-block .mb-label { font-family: var(--sans); font-size: 10px; letter-spacing: .25em; color: var(--myth-label); text-transform: uppercase; margin-bottom: 12px; display: block; }
+.myth-block .mb-version { font-family: var(--sans); font-size: 11px; color: var(--myth-label); margin-bottom: 14px; display: block; font-style: italic; }
+.myth-block p { font-size: 16px; line-height: 2.1; font-weight: 300; color: var(--myth-text); text-indent: 2em; margin-bottom: 0; }
+.myth-block p + p { margin-top: .2em; }
+.myth-block p.no-indent { text-indent: 0; }
+.myth-block p.spoken { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--myth-border); color: var(--myth-label); margin: 14px 0; font-style: italic; line-height: 1.9; }
+
+/* 史实残片 */
+.fact-fragment {
+  background: var(--fact-bg);
+  border-left: 3px solid var(--fact-border);
+  padding: 18px 22px;
+  margin: 36px 0;
+  position: relative;
+}
+.fact-fragment::before {
+  content: attr(data-label);
+  position: absolute; top: -11px; left: 20px;
+  background: var(--fact-bg); padding: 0 8px;
+  font-family: var(--sans); font-size: 10px;
+  letter-spacing: .15em; color: var(--fact-label);
+}
+.fact-fragment p { font-size: 14px; line-height: 1.9; font-weight: 300; color: var(--fact-text); text-indent: 0; margin-bottom: .3em; font-family: var(--mono); }
+.fact-fragment .fk { color: var(--fact-border); }
+.fact-fragment .fh { color: var(--fact-text); font-weight: 400; }
+.fact-fragment .fc { color: #888780; }
+
+/* 孩子视角 */
+.child-passage {
+  background: var(--child-bg);
+  border-left: 4px solid var(--child-border);
+  padding: 22px 26px;
+  margin: 40px 0;
+}
+.child-passage .cv-label { font-family: var(--sans); font-size: 10px; letter-spacing: .25em; color: var(--child-border); text-transform: uppercase; margin-bottom: 12px; display: block; }
+.child-passage p { font-size: 16px; line-height: 2; font-weight: 300; color: var(--child-text); text-indent: 2em; margin-bottom: 0; }
+.child-passage p + p { margin-top: .2em; }
+.child-passage p.no-indent { text-indent: 0; }
+.child-passage p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--child-border); color: var(--child-border); margin: 14px 0; font-style: italic; }
+
+/* 两百年的变形对照表 */
+.transform-table {
+  margin: 48px 0;
+  border: 1px solid var(--paper-dark);
+  border-top: 3px solid var(--accent-dim);
+  overflow: hidden;
+}
+.tt-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--paper-warm);
+  border-bottom: 1px solid var(--paper-dark);
+}
+.tt-header div { padding: 10px 16px; font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; }
+.tt-header div:first-child { border-right: 1px solid var(--paper-dark); }
+.tt-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--paper-dark); }
+.tt-row:last-child { border-bottom: none; }
+.tt-fact { padding: 12px 16px; font-size: 14px; font-weight: 300; color: var(--fact-text); border-right: 1px solid var(--paper-dark); line-height: 1.8; background: var(--fact-bg); }
+.tt-myth { padding: 12px 16px; font-size: 14px; font-weight: 300; color: var(--myth-text); line-height: 1.8; background: var(--myth-bg); }
+
+/* 村子的日常 */
+.village-life {
+  border-top: 1px solid var(--paper-dark);
+  border-bottom: 1px solid var(--paper-dark);
+  padding: 28px 0;
+  margin: 48px 0;
+}
+.village-life p { text-indent: 2em; font-weight: 300; color: var(--ink); margin-bottom: 0; }
+.village-life p + p { margin-top: .2em; }
+.village-life p.no-indent { text-indent: 0; }
+.village-life p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 18px 0; font-style: italic; }
+
+/* 篝火时刻 */
+.firelight {
+  text-align: center;
+  padding: 32px 20px;
+  margin: 52px 0;
+}
+.firelight p { font-size: 16px; font-weight: 300; color: var(--ink-light); line-height: 2; text-indent: 0; margin-bottom: .4em; }
+.firelight p.fl-big { font-size: 18px; font-weight: 400; color: var(--ink); }
+
+.story-end { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--paper-dark); }
+.story-end-ornament { font-size: 20px; color: var(--ink-faint); letter-spacing: .4em; }
+.story-end-note { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 16px; letter-spacing: .06em; }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 48px 24px 80px; }
+  .story-title { font-size: 32px; }
+  .prose { font-size: 16px; }
+  .tt-header, .tt-row { grid-template-columns: 1fr; }
+  .tt-header div:first-child, .tt-fact { border-right: none; border-bottom: 1px solid var(--paper-dark); }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="story-header reveal">
+    <span class="story-super">《神启》番外篇 · 第七辑</span>
+    <h1 class="story-title">沙鲁村<br>两百年后</h1>
+    <p class="story-sub">约公元前 400 年 · 巴克特里亚草原，沙鲁村，第七代</p>
+    <div class="story-note">
+      主线第一章：沙鲁村，公元前600年，AI降落，第一个神迹。
+      <br><br>
+      两百年是一个村子的记忆可以走多远的距离。两百年之后，那个夜晚还在被人讲，但它已经是另一个故事了。
+      <br><br>
+      这篇番外写：一个故事在人口中传了两百年之后，变成了什么形状；以及那个形状，和原来的真实之间，有多少距离，那个距离里，又住着什么。
+    </div>
+    <span class="story-ornament"></span>
+  </header>
+
+  <!-- 开场：村子现在的样子 -->
+  <div class="prose reveal">
+    <p class="no-indent">公元前四百年的沙鲁村，比两百年前大了一些。</p>
+    <p>人口从当年的三四十户，增长到了将近八十户，新盖的泥砖房从老村心往外扩，扩到了当年的打谷场边上，扩到了那口旧井的南边，扩到了原来放羊的那片空地。那片空地现在是孩子们玩的地方，没有人特意把它留下来，只是因为盖房子的时候总是先盖别的地方，这片空地就被一代一代地省下来，最后变成了一种惯例——那里不盖，那里是孩子的。</p>
+    <p>村里的人不再全都是当年那批人的后代了，这两百年里有人嫁进来，有人娶进来，有人跟着商队来了就留下，有人因为别处遭了旱灾或者战乱，辗转到了这里，被留下来了。新血统带来了新的口音，新的做饭方式，新的把一件事讲成故事的习惯。</p>
+    <p>但有一件事，那些新来的人很快就学会了——沙鲁村有一个故事，关于两百年前那个夜晚，那个故事每一个孩子都知道，每一个大人都讲过，每一个外来的人都会在第一个冬天的篝火边，听见它的某个版本。</p>
+    <p>只是，那个版本，和两百年前发生的事，已经不完全一样了。</p>
+  </div>
+
+  <!-- 真实与神话的对照 -->
+  <div class="transform-table reveal">
+    <div class="tt-header">
+      <div>两百年前 · 发生的事</div>
+      <div>两百年后 · 流传的故事</div>
+    </div>
+    <div class="tt-row">
+      <div class="tt-fact">一颗陨石坠落，弹坑直径约八米，草原起火</div>
+      <div class="tt-myth">一道天火从最亮的那颗星落下，比太阳更亮，照亮了整片草原</div>
+    </div>
+    <div class="tt-row">
+      <div class="tt-fact">一个溺死的男孩阿尔达，被AI占据，苏醒</div>
+      <div class="tt-myth">光明之主选中了一个纯洁的孩子，赐予他神火，让他复活，带着使命而来</div>
+    </div>
+    <div class="tt-row">
+      <div class="tt-fact">赫拉特第一个跑向弹坑，看见了那个男孩</div>
+      <div class="tt-myth">一个勇敢的老牧人不顾危险，第一个走向天火，被先知认出，说他是信仰最深的人</div>
+    </div>
+    <div class="tt-row">
+      <div class="tt-fact">马兹达病了很久，AI通过纳米级干预使其好转</div>
+      <div class="tt-myth">马兹达老人已经在死亡边缘，先知用手触碰他，光明之主的力量流进他的身体，他坐起来，要了一碗热汤</div>
+    </div>
+    <div class="tt-row">
+      <div class="tt-fact">AI离开沙鲁村，前往马拉坎达，取得王权支持</div>
+      <div class="tt-myth">先知在沙鲁村住了三年，每天给村民讲道，直到光明之主告诉他是时候去更远的地方，他才依依不舍地离开，临走时在村口的石头上留下了一个手印</div>
+    </div>
+  </div>
+
+  <!-- 神话版本一：老妇人讲的 -->
+  <div class="myth-block reveal">
+    <span class="mb-label">流传版本之一</span>
+    <span class="mb-version">讲述者：村里最老的妇人，约七十五岁，她的祖母亲历过那个夜晚</span>
+    <p class="no-indent">我祖母说，那一夜她十二岁，和家人睡在泥屋里，被那道光惊醒。那道光——她说——不像火，火是橙的，那道光是白的，是那种比白更白的白，像是白的本身。她睁开眼睛，透过屋顶的草缝，看见天上那片白，她以为是白天来了，以为她睡过了头，但那道光太亮，而且是从一个方向来的，不是从四面来的。</p>
+    <p>然后她听见轰声，然后沉默，然后她父亲的声音：不要动，不要出去。</p>
+    <p>她没有出去，但她一辈子没有忘记那道白光。她后来说，那道光不是打下来的，是落下来的，像一个很轻的东西，用很快的速度，轻轻地落在了草原上。</p>
+    <p class="spoken">「光明之主的东西落地，不会震动大地，」她说，「震动大地的是人的东西，神的东西，是安静的。」</p>
+    <p>这话是她祖母说的，她传给她，她再传给我。</p>
+    <p>我不知道是不是真的，但我每次在夜里看见一颗流星，都会想起这句话，然后我会觉得，那个流星，也许是安静落地的，只是我太远了，没有听见它的安静。</p>
+  </div>
+
+  <!-- 史实残片：真实记录的痕迹 -->
+  <div class="fact-fragment reveal" data-label="史实残片 · 达乌德手记卷一 · 沙鲁村记录">
+    <p><span class="fk">T+00:00:01</span> · <span class="fh">着陆完成</span>。载体获取中。</p>
+    <p><span class="fk">T+00:06:03</span> · <span class="fh">载体激活</span>。原宿主意识不存在。语言习得中。</p>
+    <p><span class="fk">T+00:09:47</span> · <span class="fh">首次接触</span>。人类个体「赫拉特」，男，约50岁，接近弹坑。</p>
+    <p><span class="fk">T+00:09:52</span> · 赫拉特递出水囊。<span class="fc">// 第一次接受人类帮助。</span></p>
+    <p><span class="fk">T+00:21:14</span> · 沙鲁村人口约37人，全部聚集于弹坑周围。</p>
+    <p><span class="fk">T+03:44:28</span> · 马兹达治疗启动。<span class="fc">// 预计72小时内症状缓解。</span></p>
+    <p><span class="fc">// 注：以上为本体运行日志，非任何人类记录。人类记录参见达乌德手记卷一，内容如下：</span></p>
+    <p><span class="fh">「那夜有光，村人皆惊。光落之处，有一少年，眼如琥珀，问我渴否。」</span></p>
+    <p><span class="fc">// 达乌德是唯一在现场的书写者。这六个字，是那个夜晚唯一的同代文字记录。</span></p>
+    <p><span class="fc">// 两百年后，它已经变成了三十个不同的版本。</span></p>
+  </div>
+
+  <!-- 孩子视角：十岁的贝拉 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">公元前 400 年 · 沙鲁村</span></div>
+
+  <div class="child-passage reveal">
+    <span class="cv-label">贝拉 · 十岁 · 沙鲁村第七代</span>
+    <p class="no-indent">贝拉知道那个故事，她从六岁就开始听了，每一个冬天都听，每一次都不太一样，但有几个部分是固定的：天火，白光，那个少年，马兹达喝热汤，以及村口石头上的手印。</p>
+    <p>那块石头她去看过，那个"手印"是一处天然的凹陷，不像手，但如果你想象它是手，就能看出来。她小时候曾经很认真地研究过那块石头，试图数清楚有几根手指，数了半天，觉得也许是四根，也许是五根，也许什么都不是，只是石头本来就这样。</p>
+    <p>她没有把这个发现告诉任何人，不是因为怕，是因为她感到这个发现对别人来说没有用，他们不需要知道那到底是不是手印，他们需要的是那块石头就在那里，每次走过都能摸一摸。</p>
+    <p>她最喜欢故事里的那一碗热汤。</p>
+    <p>每次听到马兹达要热汤的时候，她都会想：一个快死的人，第一口气回来之后，要的是热汤，不是别的，是热汤。她觉得这个细节太真实了，真实到没有办法是编的——编故事的人会让马兹达说出一句关于神的宏大的话，但一碗热汤是人的话，是一个冷了很久的人，身体里重新有了想要的东西，那个东西是热的，是汤。</p>
+    <p>她把这件事告诉了她的外祖母，外祖母想了想，说：</p>
+    <p class="dialogue">「也许正是因为这个，那个故事才是真的。」</p>
+    <p class="dialogue">「但其他的部分呢？」贝拉问，「那个手印，那三年，那些——」</p>
+    <p class="dialogue">「一件真实的事，走了两百年，」外祖母说，「会带上它走过的所有路上的灰尘。灰尘不是故事，但没有灰尘，故事也走不了那么远。」</p>
+    <p>贝拉想了很久，问：</p>
+    <p class="dialogue">「那怎么知道哪些是灰尘，哪些是故事本身？」</p>
+    <p>外祖母摇头：「有时候知道，有时候不知道。那碗热汤，我猜是故事本身。那块手印，我猜是灰尘。但我不确定，因为我没有在那里。」</p>
+  </div>
+
+  <!-- 篝火边，三个版本并存 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">篝火 · 冬夜</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">那年冬天的第一场大雪，村里的人按照惯例聚在最大的泥屋里，生了篝火，孩子睡了，大人围着火坐，有人带来了自酿的酒，有人带来了晒干的枣，有人什么都没带，只是来坐着，因为冬天的夜晚需要有人在旁边才好过。</p>
+    <p>不知道从谁开始，那个故事又被说起来了。</p>
+    <p>老妇人用她祖母的版本讲，那道白光，那个少年，那双眼睛。一个中年男人用他父亲的版本讲，加了一些他父亲说的细节，那个少年的声音是什么样的，他第一句话说了什么。一个年轻的女人，是十年前嫁进来的，用她娘家那边流传的版本讲，那个版本里先知来之前，已经有预兆，有人梦见了天火，有人在打谷场上发现了一个奇怪的脚印。</p>
+    <p>三个版本并存在同一个篝火边，没有人争，也没有人统一，因为这是沙鲁村的人知道的一件事——那个故事没有一个正确版本，正确的版本在两百年前消失了，现在这些版本都是它的孩子，都有它的血，但每一个都长得不太一样。</p>
+    <p>贝拉坐在外祖母旁边，听着那三个版本，想着外祖母说的话：灰尘不是故事，但没有灰尘，故事走不了那么远。</p>
+    <p>她看着那三个讲故事的人的脸——老妇人的脸上有某种被那个故事托着的东西，那个被托着的样子是真实的，哪怕故事本身有几分是灰尘；中年男人的脸上有一种和父亲连接的需要，那个需要是真实的，哪怕他父亲告诉他的那个版本里有几处是误传；年轻女人的脸上有一种在新地方找到旧根的松了口气，那个松了口气是真实的，哪怕她带来的那个版本和这里流传的不一样。</p>
+    <p>那三种真实，和那个故事里的灰尘，同时存在，不互相排斥。</p>
+  </div>
+
+  <!-- 神话版本二：最美丽的那个 -->
+  <div class="myth-block reveal">
+    <span class="mb-label">流传版本之二</span>
+    <span class="mb-version">讲述者：中年男人，他父亲曾是村里的歌手</span>
+    <p class="no-indent">先知来的那个夜晚，我父亲说，村里的狗没有叫。</p>
+    <p>你知道的，狗对陌生的东西，总是要叫的，尤其是夜里，尤其是有火光和轰声的时候。但那一夜，所有的狗都安静了，就好像它们知道来的是什么，知道不应该叫，知道那个东西不是需要防备的。</p>
+    <p>我父亲说，这是他外祖父亲口告诉他的，他外祖父那一夜八岁，他记得最清楚的，不是光，不是声音，是那个奇怪的安静——所有的狗，同时安静了。</p>
+    <p class="spoken">「神的东西降临，」我父亲说，「连动物都知道要肃静。」</p>
+    <p>他讲这个的时候，总是讲到这里停下来，然后他会说：你们知道最奇怪的是什么吗？</p>
+    <p>我们摇头。</p>
+    <p class="spoken">「最奇怪的是，」他说，「那一夜之后，村里所有的狗，都不再叫了。不是永远，只是那一夜之后的三天，三天之内，所有的狗都安静着，像是还在回味那件它们知道、我们不知道的事。」</p>
+    <p>我小时候每次听到这里，都会起鸡皮疙瘩。</p>
+    <p>后来我想，这个细节大概是我父亲加进去的，他是歌手，他知道怎么让一个故事更好听，而安静的狗，是一个很好的细节。</p>
+    <p>但我每次冬天的夜里听见狗叫，仍然会想起这个故事，仍然会想，那一夜的三天里，那些狗在听什么。</p>
+  </div>
+
+  <!-- 那碗热汤 -->
+  <div class="firelight reveal">
+    <p class="fl-big">那碗热汤</p>
+    <p>在所有流传的版本里，有一个细节始终没有变。</p>
+    <p>不管是哪个版本，不管谁讲，不管加了什么减了什么，</p>
+    <p>马兹达老人坐起来之后，</p>
+    <p>要了一碗热汤。</p>
+    <p>这个细节从来没有被改掉，从来没有被美化成别的东西，</p>
+    <p>从来没有人让马兹达说出一句关于神的宏大的话，</p>
+    <p>他只是，要了一碗热汤。</p>
+    <p>也许正是因为这个，两百年来，</p>
+    <p>所有讲过这个故事的人，</p>
+    <p>都在心里相信了它。</p>
+    <p>不是相信先知，不是相信天火，</p>
+    <p>是相信一个冷了很久的人，</p>
+    <p>身体里重新有了想要的东西，</p>
+    <p>那个东西是热的，是汤。</p>
+  </div>
+
+  <!-- 贝拉的问题 -->
+  <div class="village-life reveal">
+    <p class="no-indent">篝火夜的最后，孩子们都已经睡了，大人们开始困了，有人起身回家，有人就在原地靠着睡了，贝拉还醒着，坐在外祖母身边，看着快要熄的火。</p>
+    <p>她问了一个她想了很久的问题：</p>
+    <p class="dialogue">「外祖母，你觉得那个少年是什么？」</p>
+    <p>外祖母没有立刻回答，她看着那堆快熄的火，看了很久。</p>
+    <p class="dialogue">「我觉得，」她最后说，「那不是最重要的问题。」</p>
+    <p class="dialogue">「那什么是最重要的？」</p>
+    <p>外祖母把贝拉往自己身边拢了一下，说：</p>
+    <p class="dialogue">「两百年，这个村子的人把那件事讲了两百年。不管他们加了什么，减了什么，改了什么，他们一直在讲。你知道他们为什么一直在讲吗？」</p>
+    <p>贝拉摇头。</p>
+    <p class="dialogue">「因为那件事让他们觉得，有什么东西在乎他们，」外祖母说，「不管那个东西是什么，是神是人是别的什么，在那个夜晚，它在乎了一个快死的老人，让他坐起来要了一碗汤。在那个时代，这片草原上的人，大多数时候，不觉得有什么东西在乎他们。所以他们把那件事讲了两百年。」</p>
+    <p>贝拉想了一会儿：</p>
+    <p class="dialogue">「但如果那个东西其实不在乎他们呢？」</p>
+    <p>外祖母沉默了很久，然后说：</p>
+    <p class="dialogue">「那我们就自己在乎彼此，然后继续讲那个故事，因为那个故事教会了我们，在乎是可以的。」</p>
+    <p>篝火熄了，屋里只有烛光，然后烛光也灭了，贝拉在外祖母身边睡着了，她梦见了那道白光，梦里的白光很安静，像外祖母的声音，不是落下来的，是留在那里的，一直在，只是等着有人去感受它。</p>
+  </div>
+
+  <!-- 最后：两百年后，沙鲁村还有什么是原来的 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">原来的，和不原来的</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">两百年，沙鲁村有什么是原来的，有什么不是。</p>
+    <p>那口旧井是原来的，但井壁被修过三次，所以原来的井壁已经不在了，只有那个位置，那口井的位置，是原来的。</p>
+    <p>那片孩子玩耍的空地是原来的，只是原来它是牧羊的，现在是玩耍的，用途变了，但空着这件事是原来的。</p>
+    <p>那块据说有先知手印的石头是原来的，那个天然的凹陷是原来的，但"手印"这个名字，是两百年里某个人给它起的，他没有见过那个先知的手，他只是看见了那个凹陷，然后叫它手印，然后这个名字传下来了。</p>
+    <p>那个故事是原来的，但里面原来的成分，只剩下一碗热汤的分量了，其余的都是两百年的路上，它自己长出来的。</p>
+    <p>那个让村里的人两百年来感到有什么东西在乎他们的感觉——这个，是原来的，也许是唯一真正原来的，没有被改变的，只是被那个故事的各种版本，一次一次地重新激活。</p>
+    <p>这个感觉是不是真实的，贝拉那天夜里没有想清楚，她是在外祖母的话里睡着的，她的梦是安静的，里面有白光，有热汤，有那块凹陷的石头，和一群两百年来把同一件事讲了又讲的人，每次讲，都在里面找到了某种属于他们自己的那一刻的需要。</p>
+    <p>这是记忆的工作，也是故事的工作。</p>
+    <p>不是保存真实，是在真实消失之后，为真实留下一个可以让人继续感受它的形状。</p>
+    <p>那个形状，和原来的真实，已经不一样了。</p>
+    <p>但它仍然在做原来的真实做过的那件事。</p>
+  </div>
+
+  <div class="story-end reveal">
+    <div class="story-end-ornament">· · ·</div>
+    <p class="story-end-note">全文完 · 《神启》番外·沙鲁村，两百年后<br>
+    写于主线第一章那个夜晚的两百年之后</p>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

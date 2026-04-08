@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神启·番外　纳布的眼泪</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1612;
+  --ink-light: #4a3f35;
+  --ink-faint: #8a7e74;
+  --paper: #f5f0e8;
+  --paper-warm: #ede7d9;
+  --paper-dark: #e0d8c8;
+  --accent: #3a4a2a;
+  --accent-dim: #6a7a5a;
+  --gold: #b08020;
+  --gold-dim: #d4a830;
+  --serif: 'Noto Serif SC', 'STSong', Georgia, serif;
+  --sans: 'Noto Sans SC', sans-serif;
+  --mono: 'Share Tech Mono', 'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 2;
+  min-height: 100vh;
+}
+.page-wrap { max-width: 680px; margin: 0 auto; padding: 80px 40px 120px; }
+
+.story-header { text-align: center; margin-bottom: 80px; }
+.story-super { font-family: var(--sans); font-size: 11px; letter-spacing: .3em; color: var(--ink-faint); text-transform: uppercase; display: block; margin-bottom: 20px; }
+.story-title { font-size: 48px; font-weight: 300; color: var(--ink); letter-spacing: .1em; margin-bottom: 10px; line-height: 1.1; }
+.story-sub { font-family: var(--sans); font-size: 13px; color: var(--ink-faint); letter-spacing: .08em; margin-bottom: 28px; }
+.story-note { font-size: 14px; font-weight: 300; color: var(--ink-faint); font-style: italic; line-height: 1.8; max-width: 420px; margin: 0 auto; padding: 16px 20px; border-left: 2px solid var(--paper-dark); text-align: left; }
+.story-ornament { display: block; margin: 28px auto 0; width: 48px; height: 1px; background: var(--accent-dim); }
+
+.prose { margin-bottom: 36px; }
+.prose p { text-indent: 2em; font-weight: 300; color: var(--ink); margin-bottom: 0; }
+.prose p + p { margin-top: .25em; }
+.prose p.no-indent { text-indent: 0; }
+.prose p.centre { text-indent: 0; text-align: center; color: var(--ink-faint); margin: 16px 0; }
+.prose p.heavy { text-indent: 0; text-align: center; font-size: 19px; font-weight: 400; color: var(--ink); margin: 28px 0; line-height: 1.7; }
+.prose p.dialogue { text-indent: 0; padding-left: 1em; border-left: 2px solid var(--paper-dark); color: var(--ink-light); margin: 20px 0; font-style: italic; }
+
+.scene-break { display: flex; align-items: center; gap: 16px; margin: 48px 0; }
+.scene-break::before, .scene-break::after { content: ''; flex: 1; height: 1px; background: var(--paper-dark); }
+.scene-break-inner { font-family: var(--sans); font-size: 10px; letter-spacing: .2em; color: var(--ink-faint); text-transform: uppercase; white-space: nowrap; }
+
+/* 纳布的记忆段落——石板灰，沉重，像祭司的长袍 */
+.naboo-memory {
+  background: #f0ede8;
+  border-left: 4px solid #888780;
+  padding: 24px 28px;
+  margin: 44px 0;
+}
+.naboo-memory .nm-label {
+  font-family: var(--sans); font-size: 10px; letter-spacing: .25em;
+  color: #888780; text-transform: uppercase; margin-bottom: 12px; display: block;
+}
+.naboo-memory p {
+  font-size: 16px; line-height: 2; font-weight: 300;
+  color: #4a4540; text-indent: 2em; margin-bottom: 0;
+}
+.naboo-memory p + p { margin-top: .2em; }
+.naboo-memory p.no-indent { text-indent: 0; }
+.naboo-memory p.dialogue {
+  text-indent: 0; padding-left: 1em;
+  border-left: 2px solid #888780;
+  color: #6a6560; margin: 16px 0; font-style: italic;
+}
+
+/* 对话剧场——茶会那个下午 */
+.dialogue-theatre {
+  margin: 44px 0;
+  padding: 28px 32px;
+  background: var(--paper-warm);
+  border: 1px solid var(--paper-dark);
+  border-top: 3px solid var(--accent-dim);
+  position: relative;
+}
+.dialogue-theatre::before {
+  content: attr(data-label);
+  position: absolute; top: -11px; left: 20px;
+  background: var(--paper-warm); padding: 0 8px;
+  font-family: var(--sans); font-size: 10px;
+  letter-spacing: .15em; color: var(--ink-faint);
+}
+.dt-line { margin-bottom: 20px; }
+.dt-line:last-child { margin-bottom: 0; }
+.dt-speaker {
+  font-family: var(--sans); font-size: 11px; letter-spacing: .12em;
+  color: var(--ink-faint); text-transform: uppercase; margin-bottom: 4px;
+}
+.dt-text {
+  font-size: 16px; font-weight: 300; color: var(--ink);
+  line-height: 1.85; padding-left: 1em;
+  border-left: 2px solid var(--paper-dark); font-style: italic;
+}
+.dt-text.naboo-line { border-left-color: #888780; color: var(--ink-light); }
+.dt-text.zara-line { border-left-color: var(--accent-dim); color: #2a3a1a; }
+.dt-note {
+  font-family: var(--mono); font-size: 11px; color: #888780;
+  margin-top: 4px; padding-left: 1em;
+}
+
+/* 纳布独白 */
+.naboo-voice {
+  background: var(--paper-warm);
+  border-left: 3px solid var(--accent-dim);
+  padding: 22px 26px;
+  margin: 44px 0;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink-light);
+  line-height: 2;
+  font-style: italic;
+}
+.naboo-voice p { text-indent: 0; margin-bottom: .4em; }
+.naboo-voice .nv-label {
+  font-family: var(--sans); font-size: 10px; letter-spacing: .2em;
+  color: var(--ink-faint); text-transform: uppercase;
+  margin-bottom: 10px; display: block; font-style: normal;
+}
+
+/* 庭院里的石榴树——纹理标记 */
+.pomegranate-mark {
+  text-align: center; margin: 48px 0 28px;
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: .2em; color: var(--accent-dim); text-transform: uppercase;
+}
+.pomegranate-mark::before, .pomegranate-mark::after {
+  content: ''; display: inline-block; width: 40px; height: 1px;
+  background: var(--paper-dark); vertical-align: middle; margin: 0 12px;
+}
+
+/* 四十年的库存 */
+.forty-years {
+  border: 1px solid var(--paper-dark);
+  padding: 24px 28px;
+  margin: 48px 0;
+  background: var(--paper-warm);
+  position: relative;
+}
+.forty-years::before {
+  content: '纳布的四十年 · 三件事';
+  position: absolute; top: -11px; left: 20px;
+  background: var(--paper-warm); padding: 0 8px;
+  font-family: var(--sans); font-size: 10px;
+  letter-spacing: .15em; color: var(--ink-faint);
+}
+.fy-item { padding: 14px 0; border-bottom: 1px solid var(--paper-dark); }
+.fy-item:last-child { border-bottom: none; padding-bottom: 0; }
+.fy-num {
+  font-family: var(--sans); font-size: 10px; letter-spacing: .15em;
+  color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px;
+}
+.fy-text { font-size: 15px; font-weight: 300; color: var(--ink-light); line-height: 1.85; }
+
+/* 眼泪段落 */
+.tears-passage {
+  text-align: center;
+  padding: 40px 20px;
+  margin: 56px 0;
+  border-top: 1px solid var(--paper-dark);
+  border-bottom: 1px solid var(--paper-dark);
+}
+.tears-passage p {
+  font-size: 17px; font-weight: 300; color: var(--ink-light);
+  line-height: 2; text-indent: 0; margin-bottom: .5em;
+}
+.tears-passage p.tl { font-size: 15px; color: var(--ink-faint); }
+
+/* 余年 */
+.later-years {
+  border-left: 2px solid var(--paper-dark);
+  padding: 16px 20px;
+  margin: 44px 0;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink-faint);
+  font-style: italic;
+  line-height: 1.85;
+}
+.later-years p { text-indent: 0; margin-bottom: .4em; }
+
+.story-end { text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--paper-dark); }
+.story-end-ornament { font-size: 20px; color: var(--ink-faint); letter-spacing: .4em; }
+.story-end-note { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 16px; letter-spacing: .06em; }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 600px) {
+  .page-wrap { padding: 48px 24px 80px; }
+  .story-title { font-size: 36px; }
+  .prose { font-size: 16px; }
+  .dialogue-theatre { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="story-header reveal">
+    <span class="story-super">《神启》番外篇 · 第三辑</span>
+    <h1 class="story-title">纳布的眼泪</h1>
+    <p class="story-sub">公元前 596 年 · 马拉坎达城 · 一个祭司的庭院</p>
+    <div class="story-note">
+      主线第四章注记：「纳布的仆人后来说，那天傍晚，老祭司哭了。没有人知道为什么。」
+      <br><br>
+      这篇番外就是为什么。
+    </div>
+    <span class="story-ornament"></span>
+  </header>
+
+  <!-- 开场：纳布这个人 -->
+  <div class="prose reveal">
+    <p class="no-indent">纳布做了四十年的祭司，这件事本身已经说明了很多。</p>
+    <p>四十年的同一件事，意味着他不是因为没有别的选择才留在这里，他有机会离开，他有足够的学识去做别的事，他选择了留下。这是一种承诺，对他的神，对他的庙，对那座城市里那些在出生和死亡之间的某个时刻来找他的人们。</p>
+    <p>他见过太多人了。太多人在他面前哭过，太多人把他们说不出口的话放到他面前，期待他用神的语言翻译成某种能让他们继续生活的东西。他翻译了四十年，没有停过。</p>
+    <p>他不是一个轻易感动的人，这也是四十年的结果——一个轻易感动的祭司，在第三年就会被那些眼泪淹没，然后没有力气继续了。他学会了在感受和处理之间保留一道距离，那道距离不是冷漠，是让他可以继续有用的东西。</p>
+    <p>所以那天傍晚他哭的时候，他自己也感到了意外。</p>
+    <p>不是那种情绪积累太久最终决堤的哭，是另一种——那种你突然在一件你以为自己早就想清楚了的事上，发现了一个你从来没有看见过的角度，然后那个角度让你看见了某种你还没有准备好看见的东西，眼泪在你意识到之前已经出来了。</p>
+  </div>
+
+  <!-- 纳布的四十年 -->
+  <div class="forty-years reveal">
+    <div class="fy-item">
+      <div class="fy-num">第一件事</div>
+      <div class="fy-text">他二十岁开始跟随老祭司学习，那时候他相信所有他被教导的事，相信得干净，没有缝隙，像新建的泥砖墙，结实，均匀，没有裂痕。老祭司说，好的祭司是那种在神和人之间站得最稳的人，不偏向任何一边，只是翻译，只是传递。他记住了这句话，用了很多年去理解它，然后用剩下的年月试着做到。</div>
+    </div>
+    <div class="fy-item">
+      <div class="fy-num">第二件事</div>
+      <div class="fy-text">他三十五岁的时候，他的庙里来了一个女人，她丈夫刚死，她把一个她无法和任何人说的秘密告诉了他——她不悲伤，她感到的是如释重负，然后她为那种如释重负感到羞耻。他当时不知道该说什么，他在那个沉默里待了很久，最后说：你感到的，神都知道，神不需要你解释。她哭了，哭完了以后说谢谢，然后走了。他不知道那句话是不是正确的神学，他只知道她需要的不是解释，是被知道。他把这件事记着，后来每次遇见不知道该说什么的时候，他就想起那个女人，想起那个沉默，想起"被知道"这两个字。</div>
+    </div>
+    <div class="fy-item">
+      <div class="fy-num">第三件事</div>
+      <div class="fy-text">他五十岁的时候，一个年轻的学生问他：老师，你相信吗？他停了很久，说：我相信有一些东西，比我们看得见的更大，我不知道那些东西的名字，也不知道它们是否在乎我们，但我相信它们在。学生说：那你信的神是什么？他说：也许神这个词，不够大，装不下那些东西，我们只是用这个词，因为我们没有更大的词。学生想了很久，说：那你四十年在做什么？他说：我在帮人们和那些更大的东西，找到一种可以相处的方式。学生问：你找到了吗？他说：我在找。</div>
+    </div>
+  </div>
+
+  <!-- 那个下午，茶会之前 -->
+  <div class="pomegranate-mark reveal">那个下午 · 公元前 596 年</div>
+
+  <div class="prose reveal">
+    <p class="no-indent">那个少年来之前，纳布在庭院里坐了一会儿，看他那棵老石榴树。</p>
+    <p>那棵树他种下去的时候，他三十岁，树现在比他高，果实这个季节正要成熟，还没有变红，还是那种橙黄的、处于变化中途的颜色，他喜欢这个颜色，喜欢那种既不是这个也不是那个的中间状态，觉得那里有某种诚实。</p>
+    <p>他提前知道那个少年会来，城里已经传了很多关于他的事，有人说神迹，有人说骗局，有人说不管什么，反正他的信众越来越多，已经蔓延到了他的庙里，有几个他认识了二三十年的信众，最近不太来了，听说去听那个少年讲道了。</p>
+    <p>他没有愤怒，这让他自己也感到有点意外，他以为他会愤怒，他花了四十年建立这个庙，四十年服务这座城市，现在有一个外来的少年在动摇它，他以为他会感到领地被侵犯的那种本能的防御。</p>
+    <p>但他感到的是另一种东西，更接近好奇，或者更接近疲倦，他还没有区分清楚。</p>
+    <p>他让人去请那个少年来喝茶，不是对抗，是好奇。</p>
+    <p>他想看看，那双让那么多人跪下来的眼睛，里面是什么。</p>
+  </div>
+
+  <!-- 茶会：完整对话 -->
+  <div class="dialogue-theatre reveal" data-label="茶会实录 · 纳布的庭院 · 老石榴树下 · 公元前 596 年">
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「我听说你在教人们一种新的信仰。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「我在告诉人们一些事，是不是新的，我不确定。也许是很古老的事，只是被遗忘了。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「每一个新先知都这样说。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「您说得对。」</div>
+      <div class="dt-note">// 纳布：这个答案让他停了一下。承认，不辩解。他见过太多不承认的人。</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「我想问你一个问题——如果你的神是善的，为什么城北那些孩子会死于疫病？他们做了什么？」</div>
+      <div class="dt-note">// 纳布：这是他问了四十年的问题，他有自己的答案，但他想看看这个少年的。</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「您刚才问的，是善神是否存在的问题，还是您是否相信善神的问题？」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「有区别吗？」</div>
+      <div class="dt-note">// 纳布内心：有，当然有，他知道有，他只是想看这个少年怎么回答。</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「有很大的区别。前者是神学问题，我可以和您谈很久。后者是您内心的问题，那不是我能回答的。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「那你来回答前者。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「苦难不是惩罚，而是战场上的代价。战场上死去的士兵，您会问他们做了什么错事吗？」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「这个比喻把孩子的死变成了有意义的牺牲。这让人们接受苦难而不是改变它。这是一种顺从的哲学。」</div>
+      <div class="dt-note">// 纳布：他说出这句话时，他知道自己说到了什么关键的地方，他见过太多被这种哲学安慰过的人了。</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「您说到了一个关键的地方，大多数人不会追到这一步。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「……」</div>
+      <div class="dt-note">// 纳布：他等着。这个停顿太长了，长到他开始真正在意接下来的话。</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「我没有答案。我能给您的，只是一个框架，让那些失去孩子的父母不会因悲痛而失去活下去的力气。至于这个框架是否完整——没有任何框架是完整的。您用了四十年建立的体系，也不是。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">纳布</div>
+      <div class="dt-text naboo-line">「你是一个危险的人。」</div>
+    </div>
+
+    <div class="dt-line">
+      <div class="dt-speaker">扎拉图斯特拉</div>
+      <div class="dt-text zara-line">「我知道。但我不是您的敌人。」</div>
+    </div>
+
+  </div>
+
+  <!-- 少年走后，庭院 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">少年离开之后</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">他走了，那个奇怪的、平静得有点不像人的少年，走出了纳布的庭院，走进了马拉坎达的街道，走进了那个继续为他制造信徒的城市。</p>
+    <p>纳布坐在庭院里，面对那棵石榴树，仆人进来问他要不要再沏茶，他摇头，说出去吧，我想一个人待着。</p>
+    <p>他坐在那里，把那场对话从头到尾过了一遍，然后又过了一遍。</p>
+    <p>他在找那个让他不舒服的地方。</p>
+    <p>那个少年说的有几件事是错的，或者至少是不完整的，他能反驳，他有那个能力，他研究了这些问题四十年，他的武器库比那个少年丰富得多。但他那个下午没有把那些武器拿出来，他用的是最基础的那些，而那个少年接住了，然后用最简单的话说了一件让他停下来的事。</p>
+    <p class="heavy">「没有任何框架是完整的。您用了四十年建立的体系，也不是。」</p>
+    <p>这句话本身不新，他听过很多人说过类似的话，用不同的形式，通常是在攻击他的信仰体系时说的，带着一种"你的东西也不行"的姿态，他见过太多次了，早就有了应对的方法。</p>
+    <p>但那个少年说这句话的方式不一样。</p>
+    <p>他不是在攻击，他是在……并列。他把自己的框架和纳布的框架放在同一个层面上，说它们都不完整，没有高下，只是两种不同的、都有缺口的试图。</p>
+    <p>这让纳布想到了一件他很久没有去想的事。</p>
+  </div>
+
+  <!-- 纳布的记忆：那个女人 -->
+  <div class="naboo-memory reveal">
+    <span class="nm-label">纳布的记忆 · 三十五年前 · 那个女人</span>
+    <p class="no-indent">那个女人，丈夫死后来的那个，她说她感到如释重负，然后她说她为那种感觉感到羞耻。</p>
+    <p>纳布当时说：「你感到的，神都知道，神不需要你解释。」</p>
+    <p>他那时候用了"神"这个词，因为他是祭司，那是他的语言，那是他翻译的工具，他用它翻译了四十年。</p>
+    <p>但那个下午，在那棵石榴树下，他突然想到一件他以前从来没有完整想过的事：那个女人感到的如释重负，是真实的，是她自己的，她不需要神来"知道"它，它已经存在了，它不需要任何外部的见证就已经是真实的。</p>
+    <p>他说"神都知道"，那句话的意思是：你的感受是被允许的，它不是罪，它有一个接纳它的地方。</p>
+    <p>但他用的那个容器是"神"，如果没有那个容器，那个感受是不是就失去了被允许的空间？</p>
+    <p>这个问题他三十五岁没有问过自己，那时候他还不具备那个问题，他需要再过三十五年，需要那个奇怪的少年说一句"没有任何框架是完整的"，才能走到这个问题面前。</p>
+    <p class="dialogue">那个女人的感受，是否需要一个框架才能被允许存在？</p>
+    <p class="dialogue">还是说，它本来就在，框架只是帮助她相信它在？</p>
+    <p class="dialogue">如果是后者，那他四十年做的事，究竟是什么？</p>
+  </div>
+
+  <!-- 眼泪 -->
+  <div class="tears-passage reveal">
+    <p>纳布在石榴树下坐着，夕阳把庭院里的光变成了橙金色，那棵树的影子拉得很长，石榴果实在那个光里，颜色变深了，像是被那个光催熟了一点。</p>
+    <p>他想到了那个少年说的那句话——没有任何框架是完整的，他的不是，他建立了四十年的体系也不是。</p>
+    <p>然后他想到了那个女人，那个感到如释重负的女人，她的感受是真实的，不需要被神知道才是真实的，它本来就是。</p>
+    <p>然后他想到了那些孩子，城北那些死于疫病的孩子，他们的父母来找过他，他给了他们框架，给了他们"神的旨意""灵魂的归处""来世的重逢"，那些话在那些时刻是有用的，他亲眼看见它们如何让一个人从绝对的痛苦里站起来继续走。</p>
+    <p>那些话有用，但它们是不是真的，他不知道。</p>
+    <p>他从来不知道。</p>
+    <p class="tl">他做了四十年的翻译，他不确定他翻译的那个原文是否存在。</p>
+    <p class="tl">这不是他第一次想到这件事，但这是他第一次，无法再把这件事放回去。</p>
+    <p>眼泪来的时候，他自己也没有预料到。</p>
+    <p>不是崩溃，不是绝望，是另一种——那种一个人在走了很久的路上，突然坐下来，不是因为走不动了，是因为某个东西在他心里松开了，那个松开带来的不是痛，是一种他叫不出名字的轻，轻到让他的眼睛湿了。</p>
+    <p>他让它们流，没有抹，坐在那棵石榴树下，让傍晚的光和他自己的泪同时在他脸上。</p>
+    <p class="tl">他不知道那个少年是不是骗子。</p>
+    <p class="tl">他知道的是，那个少年说了一句话，那句话让他在石榴树下哭了，而哭完之后，他感到了某种四十年来从未感到过的东西。</p>
+    <p class="tl">那个东西接近于：自由。</p>
+    <p class="tl">不是从信仰里解放出来的自由，是在信仰里也可以不确定的自由。</p>
+  </div>
+
+  <!-- 纳布独白 -->
+  <div class="naboo-voice reveal">
+    <span class="nv-label">纳布 · 庭院 · 傍晚</span>
+    <p>我做了四十年的翻译。</p>
+    <p>我不知道我翻译的原文是否存在。我不知道神这个词指向的那个东西，是一个实体，还是人类在无法承受孤独和死亡时，集体发明出来的一个容器。我四十年来没有停下来完整地想过这件事，因为我在工作，因为有人需要我继续翻译，因为停下来想这件事，意味着我需要面对我可能什么都不是只是一个对着空气说话的人这件事。</p>
+    <p>那个少年说：没有任何框架是完整的。</p>
+    <p>他说这句话的方式，不像是攻击，更像是解放。就好像他在说：你不需要完整，你只需要诚实。</p>
+    <p>我哭了，不是因为他说了一句真话，而是因为他说了一句我四十年来一直等着有人对我说的话，只是我不知道我在等它。</p>
+    <p>我还是不知道他是不是骗子。</p>
+    <p>但我知道，如果他是骗子，他是我见过的最诚实的骗子。因为他没有告诉我他的框架是完整的，他告诉我它不是，他告诉我所有的框架都不是，然后他继续在这个不完整的框架里工作，因为人们需要它，哪怕它不完整。</p>
+    <p>这，我理解。</p>
+    <p>这正是我做了四十年的事。</p>
+    <p>也许我们做的是同一件事，只是用了不同的名字，以为彼此是对立的，但我们都在做同一件事：给人们一个可以把痛苦放进去的地方，哪怕那个地方本身是用我们也不确定的东西建成的。</p>
+    <p>这让我感到，一种奇怪的，和他的连接。</p>
+    <p>我不相信他。但我理解他了。</p>
+    <p>这两件事，在我七十岁之前，我以为是矛盾的。</p>
+  </div>
+
+  <!-- 之后 -->
+  <div class="scene-break reveal"><span class="scene-break-inner">之后</span></div>
+
+  <div class="prose reveal">
+    <p class="no-indent">纳布后来一直没有改变他的公开立场。</p>
+    <p>他没有皈依那个少年的信仰，他继续主持他的庙，继续翻译，继续在出生和死亡之间的那些时刻站在那里，继续用他建立了四十年的语言，帮助那些来找他的人。</p>
+    <p>但有一些事，在那个下午之后，悄悄地变了。</p>
+    <p>他开始在布道里更多地说"也许"。他开始在回答那些无法回答的问题时，停顿更长，而不是直接给出答案。他开始对那些来找他的、对教义有疑问的人，说：「你的疑问不是敌人，它是你的诚实，留着它。」他不解释为什么，他只是开始这样说，他的学生们不理解这个转变，以为他老了，以为他在某些地方变软了。</p>
+    <p>他没有解释。</p>
+    <p>有时候，一个下午的改变，不需要解释，解释会把它变成一个原则，而它只是一个下午，一棵石榴树，一个少年说的一句话，和一个老人在傍晚的金色里，流的几行眼泪。</p>
+    <p>他在那棵石榴树下哭了，然后他擦干眼泪，起身，走进屋里，吃了晚饭，睡觉。</p>
+    <p>第二天早晨，他起来，去开庙门，迎接第一个进来的人。</p>
+    <p>那个人是一个刚失去母亲的年轻人，他进来，站在纳布面前，想说话，说不出来，只是站着。</p>
+    <p>纳布让他坐下，在沉默里陪了他一会儿，然后说：</p>
+    <p class="dialogue">「你感到的，不需要解释，你感到的，就是你感到的，它不需要任何东西来为它辩护。」</p>
+    <p>那个年轻人哭了。</p>
+    <p>纳布坐在旁边，没有说别的，只是陪着，让那个年轻人哭完，让那些泪找到它们需要去的地方。</p>
+    <p>他想到那个少年说的那句话，那句"我没有答案，我能给的，只是一个框架"。</p>
+    <p>然后他想到他自己，想到那个他说了四十年的话，想到那个"神都知道"。</p>
+    <p>也许，他用了四十年的那句话和那个少年用的那个框架，说的是同一件事：</p>
+    <p>你不是一个人。</p>
+    <p>这个感受有一个地方可以放。</p>
+    <p>也许这就是所有翻译的本质，不管翻译的那个人信仰什么，或者什么也不信仰。</p>
+  </div>
+
+  <!-- 余年 -->
+  <div class="later-years reveal">
+    <p>纳布在那次茶会后又活了七年，在他七十七岁的冬天，平静地死去，他的学生在他床边，他最后说的话是关于第二天庙里一个仪式的安排，很细节，让他的学生记得提前准备好什么，不要忘了什么。</p>
+    <p>死之前，他在某个清醒的间隙，让人把他搬到窗边，他想看庭院里的那棵石榴树，那时候是冬天，树是光秃的，但他看了很久，然后说，树明年还会结果的，让他的学生记得在夏天的时候把石榴分给邻居，不要一个人吃，邻居家孩子多。</p>
+    <p>然后他闭上眼睛，没有再睁开。</p>
+    <p>没有人知道他死前最后想的是什么。</p>
+    <p>也许是那个少年说的话。也许是那个女人的眼泪。也许是那棵石榴树，那个他看了四十七年的、每年结果、不问为什么就继续结果的树。</p>
+    <p>也许什么都没有，他只是睡着了，不再醒来，像所有的事物最终的方式，安静，不需要解释。</p>
+  </div>
+
+  <!-- 尾注：主线呼应 -->
+  <div class="naboo-memory reveal" style="border-color: var(--gold-dim); background: #fdf8ec;">
+    <span class="nm-label" style="color: var(--gold);">主线第四章 · 扎拉图斯特拉的日志 · 同日</span>
+    <p class="no-indent">主线里，扎拉图斯特拉在那次茶会之后写道：</p>
+    <p class="dialogue">「纳布：未转化。纳布：停止主动反对。差异巨大。反对者是障碍。沉默者是允许。」</p>
+    <p>那是AI的记录，精确，功能性，把一个七十岁的老人在石榴树下哭的那个下午，翻译成了"停止主动反对"。</p>
+    <p>纳布没有看见过那份记录，他不知道那个少年把他的沉默理解为"允许"。</p>
+    <p>如果他知道，他也许会说：不，那不是允许，那是我在整理一件对我来说太大的事，而整理需要时间，需要一棵石榴树，需要傍晚的光，需要几行我没有预料到的眼泪。</p>
+    <p>但他不知道，他只是活完了他剩下的七年，继续做翻译，继续说"你感到的，就是你感到的"，继续在每个夏天把石榴分给邻居，继续在那棵树下坐着，让它的影子随着时间移动，像一种他能看见的、安静的、不需要任何解释的时间的流过。</p>
+  </div>
+
+  <div class="story-end reveal">
+    <div class="story-end-ornament">· · ·</div>
+    <p class="story-end-note">全文完 · 《神启》番外·纳布的眼泪<br>
+    写于主线那句「老祭司哭了，没有人知道为什么」之后</p>
+  </div>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
