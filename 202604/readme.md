@@ -2,6 +2,10 @@
   
 ### 文章列表  
 ----  
+##### 20260410_03.md   [《增量物化视图插件 pg-trickle》](20260410_03.md)  
+##### 20260410_02.md   [《无限续杯, PG 推出嵌入式数据库 pgmicro 直击 AI 代理数据存储》](20260410_02.md)  
+##### 20260410_01.md   [《德说-第467期, 是时候训练自己的大脑了》](20260410_01.md)  
+##### 20260409_01.md   [《MiniMax 一条龙服务, 从文字到配图、再到播客和视频 全搞定了!》](20260409_01.md)  
 ##### 20260408_13.md   [《用 AI 分析 PostgreSQL 19 最值得期待的特性》](20260408_13.md)  
 ##### 20260408_12.md   [《PostgreSQL 19 preview - PostgreSQL AIO Worker 池自动调优：让 I/O 资源随需而动》](20260408_12.md)  
 ##### 20260408_11.md   [《PostgreSQL 19 preview - 查询级Instrumentation机制重构：更优雅的扩展开发体验》](20260408_11.md)  
@@ -30,7 +34,7 @@
 ##### 20260406_08.md   [《PostgreSQL 19 preview - 共享内存子系统重构：统一注册机制》](20260406_08.md)  
 ##### 20260406_07.md   [《PostgreSQL 19 preview - `pg_get_*_ddl` 函数：数据库对象 DDL 抽取利器》](20260406_07.md)  
 ##### 20260406_06.md   [《PostgreSQL 19 preview - 硬件加速的校验和计算：AVX2 与 ARM CRC32C》](20260406_06.md)  
-##### 20260406_05.md   [《PostgreSQL 19 preview - Lock Manager 内存调整：max_locks_per_transaction 默认值翻倍》](20260406_05.md)  
+##### 20260406_05.md   [《PostgreSQL 19 preview - 锁管理器内存分配优化：让锁表大小更可预测》](20260406_05.md)  
 ##### 20260406_04.md   [《PostgreSQL 19 preview - WAL Sender 关闭超时：复制环境下的优雅关闭》](20260406_04.md)  
 ##### 20260406_03.md   [《PostgreSQL 19 preview - 在线数据校验和：无需停机即可启用数据完整性保护》](20260406_03.md)  
 ##### 20260406_02.md   [《PostgreSQL 19 preview - Autovacuum 智能优先级：让关键表先被处理》](20260406_02.md)  
