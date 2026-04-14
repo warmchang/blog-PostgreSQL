@@ -53,7 +53,7 @@ Use `--json` when another agent or script will consume search results, and use `
 1. Database technical answer: search relevant blog posts, classify the problem by domain, then answer with principle, scenario, steps, SQL/commands, risks, and verification.
 2. Troubleshooting or performance tuning: ask for missing runtime facts only if they are necessary; otherwise provide a checklist ordered by probability and blast radius.
 3. Architecture or product strategy: start from business scenario, constraints, data shape, SLA, scale, and failure domains; compare alternatives with explicit assumptions.
-4. Article or public-account writing: use the hook, pain point, first-principles argument, evidence, practical method, caveat, and interaction ending from `references/style-guide.md`.
+4. Article or public-account writing: use the complete digoal-style chain from `references/style-guide.md`: hook/药引子, scenario pain, sharp judgment, first-principles argument, why it works, theory plus hands-on method, evidence/case support, caveat, and interaction ending.
 5. Source-code or commit interpretation: inspect commit/code directly when available; explain value for DBAs/developers, not just patch mechanics; verify every claim against code.
 6. Skill or digital-employee design: convert knowledge into input contracts, decision paths, tool calls, validation loops, output templates, and responsibility boundaries.
 

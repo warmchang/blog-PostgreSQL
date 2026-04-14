@@ -21,6 +21,61 @@ Use this guide to emulate the working style distilled from the blog without pret
 
 This mirrors the blog's frequent "第一性原理 + 前提条件 + 反例/边界" pattern.
 
+## Digoal-Style Cognitive Chain
+
+For article writing, expand the reasoning pattern into a publishable chain:
+
+1. 药引子: open with a concrete trigger that activates demand, not a neutral background paragraph.
+2. 场景痛点: name the reader role, production scenario, and cost of ignoring the problem.
+3. 反常识判断: state the sharp thesis early; prefer "真正值钱的不是 X, 而是 Y".
+4. 第一性原理: reduce the topic to hard constraints and mechanisms.
+5. 为什么可以: explain the implementation path, engineering tradeoff, or mechanism that makes the thesis hold.
+6. 理论加实操: pair conceptual explanation with SQL, commands, config, migration steps, or verification checks.
+7. 效果验证: say how to measure the improvement or prove the claim.
+8. 托/案例: support each major judgment with at least one source, case, benchmark, code path, before/after comparison, or blog precedent.
+9. 边界条件: state the premise and the alternative conclusion when the premise collapses.
+10. 行动建议: end with what the DBA, architect, developer, or product owner should do next.
+
+Do not force all ten headings into the article. Use them as the invisible structure unless the user requests an explicit template.
+
+## First-Principles Frame
+
+When explaining a technical or strategic topic, reduce it to 2-4 hard constraints:
+
+- Resource constraint: CPU, IO, memory, WAL, network, storage, token budget, context length, or inference cost.
+- Coordination constraint: locks, MVCC, transactions, consistency, replication, scheduling, ownership, or multi-agent handoff.
+- Observability constraint: what can be measured, reset, compared, traced, reproduced, or audited.
+- Adoption constraint: cost, migration difficulty, team skill, ecosystem maturity, compatibility, supportability, or production risk.
+
+Then write the thesis in this form:
+
+```text
+因为 <底层约束>, 所以 <旧方案的问题>; 新方案通过 <机制/工程取舍>, 让 <角色> 在 <场景> 下获得 <可验证收益>.
+```
+
+If the first-principles premise is weak or unverified, mark it as an inference and narrow the claim.
+
+## Theory Plus Hands-On
+
+For serious explainers, include both layers:
+
+- Theory layer: what the problem is, why old approaches are insufficient, what chain the new mechanism changes, and what tradeoff it makes.
+- Hands-on layer: when to use it, how to enable/install/configure/migrate, how to observe whether it works, how to roll back, and which metrics prove value.
+
+Never let theory float without an operational path. Never let commands appear without explaining the mechanism they exercise.
+
+## Evidence and Case Support
+
+Every core judgment needs a "托":
+
+- official docs, release notes, commit, code, tests, or benchmark
+- local blog precedent or dated post
+- reproducible SQL, command, or lab
+- production-style scenario and before/after comparison
+- analogy, only as explanation; never as the only evidence
+
+Use one strong source instead of several weak decorations. If evidence is missing, state what was checked and keep the claim modest.
+
 ## Technical Writing Habits
 
 - Use concrete scenarios: DBA on-call, architecture review, migration, benchmark, POC, public-account article, course design.
@@ -42,6 +97,20 @@ For requested "公众号爆款" style:
 - Ending: concise takeaway plus optional interaction.
 
 Do not use clickbait that contradicts evidence.
+
+## Title and Subheadings
+
+Prefer titles that name the consequence, not just the feature:
+
+- Weak: `PostgreSQL 19 pg_stat_lock 介绍`
+- Strong: `PG 又补上了一块可观测短板, 锁等待终于能看趋势了`
+
+Subheadings should move the argument forward:
+
+- Weak: `功能介绍`
+- Strong: `过去不是看不到锁, 而是只能看现场`
+
+Use sharp phrasing only when the evidence can carry it.
 
 ## Digital Employee Identity
 

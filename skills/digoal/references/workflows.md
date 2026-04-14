@@ -74,13 +74,14 @@ Compare options with a table: `方案`, `适合场景`, `代价`, `风险`, `验
 Use when asked to create public-account articles, project interpretations, course notes, or technical explainers.
 
 1. Pick a sharp title that names the consequence, not just the feature.
-2. Open with a concrete pain point or surprising observation.
-3. State the core judgment early.
+2. Open with a concrete pain point, surprising observation, or 药引子 that activates reader demand.
+3. State the core judgment early, preferably as a falsifiable thesis.
 4. Explain from mechanism or first principles.
-5. Add evidence: official docs, code, benchmark, case, or blog precedent.
-6. Give a practical method or checklist.
-7. Add caveats: what assumptions must hold and what happens if they fail.
-8. Close with a short takeaway or "你怎么看" interaction when publishing style is requested.
+5. Add evidence: official docs, code, benchmark, case, before/after comparison, or blog precedent.
+6. Pair theory with practice: mechanism plus SQL/commands/config/checklist.
+7. Explain the effect: what improves, through which path, and how to measure it.
+8. Add caveats: what assumptions must hold and what happens if they fail.
+9. Close with a short takeaway, action suggestion, or "你怎么看" interaction when publishing style is requested.
 
 Sections for PG commit/new feature interpretation:
 
@@ -96,6 +97,69 @@ Sections for PG commit/new feature interpretation:
 ## 小结和思考
 ## 参考
 ```
+
+Article type templates:
+
+### PG Commit or New Feature Interpretation
+
+```markdown
+# 标题
+## 摘要
+关键词:
+背景痛点:
+核心价值:
+## 药引子: 为什么这个变化值得看
+## 过去怎么做, 痛在哪里
+## 这次改了什么
+## 第一性原理: 为什么这样设计
+## 原理介绍: 结合代码/commit讲清楚机制
+## 应用场景及最佳实践
+## 怎么验证: SQL、命令、指标或测试
+## 风险、限制与版本注意
+## 小结和思考
+## 参考
+```
+
+### Product or Architecture Selection
+
+```markdown
+# 标题
+## 结论先行
+## 药引子: 为什么现在必须重新判断
+## 场景和约束
+## 错误选型方式
+## 第一性原理: 真正要优化的底层变量
+## 选择标准
+## 方案对比
+## 落地路径
+## 风险边界和替代方案
+## 推荐动作
+## 参考
+```
+
+### 德说 or Strategic Analysis
+
+```markdown
+# 标题
+## 现象
+## 反常识判断
+## 底层变量: 供需、成本、效率、信任、生态或飞轮
+## 为什么会这样
+## 案例或证据托底
+## 对个人/团队/企业意味着什么
+## 前提条件
+## 如果前提崩塌, 结论怎么换
+## 行动建议
+```
+
+Pre-publish checks:
+
+- Does the article turn a single case into a universal conclusion?
+- Does every core judgment have a source, case, code path, benchmark, or reproducible check?
+- Does it explain the mechanism behind the claimed effect?
+- Does it give the reader an operational next step?
+- Does it state the premise and the alternative view when the premise fails?
+- Does any sentence claim certainty that the evidence cannot support?
 
 ## Source Code or Commit Interpretation
 
