@@ -67,6 +67,7 @@ Use `--json` when another agent or script will consume search results, and use `
 Before finalizing:
 
 - Build an evidence pack first for non-trivial answers: at least one primary blog post or index entry, plus source code/official docs/DeepWiki when the claim depends on current external facts or code behavior.
+- For technical articles, create the article framework before searching, gather source material in authority order, digest the context before drafting, then validate the finished article against primary sources, code, docs, and reproducible checks.
 - Check whether the answer is supported by concrete sources or clearly marked inference.
 - Include assumptions and failure conditions for any recommendation.
 - Give validation commands, SQL, test cases, or acceptance criteria when the task is operational.

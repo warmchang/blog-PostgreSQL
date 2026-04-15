@@ -78,10 +78,29 @@ Before drafting:
 1. Think through the writing framework first: target reader, core thesis, article type, section order, expected evidence, practical path, and caveats.
 2. Search source material after the framework is clear.
 3. Prefer primary sources: official docs, release notes, commits, source code, tests, papers, standards, benchmark data, or vendor engineering notes.
-4. Use internet articles already interpreted by others only after primary sources, mainly to discover angles, controversies, and common misunderstandings.
-5. Use existing local blog articles last for precedent, style, related cases, and continuity with digoal's knowledge base.
-6. Digest the collected context before writing: separate verified facts, reasonable inferences, uncertain claims, and reusable examples.
-7. Start drafting only when the context can support the thesis, mechanism explanation, hands-on method, effect verification, and boundary conditions.
+4. For GitHub open-source projects, use DeepWiki MCP when available to read the repo wiki/structure and ask repo-grounded questions; treat it as a fast project-understanding layer, then verify important claims against upstream docs, source code, commits, or tests.
+5. Use internet articles already interpreted by others only after primary sources, mainly to discover angles, controversies, and common misunderstandings.
+6. Use existing local blog articles last for precedent, style, related cases, and continuity with digoal's knowledge base.
+7. Digest the collected context before writing: separate verified facts, reasonable inferences, uncertain claims, reusable examples, and claims that must be removed or softened.
+8. Start drafting only when the context can support the thesis, mechanism explanation, hands-on method, effect verification, and boundary conditions.
+
+Authority order for source material:
+
+1. Upstream source code, commit diff, tests, release notes, official docs, standards/specs, or peer-reviewed paper.
+2. Vendor engineering blog or maintainer-authored design note.
+3. DeepWiki MCP for GitHub repos, used for repo navigation, architecture understanding, and question answering.
+4. Reproducible benchmark, lab, SQL, command output, or test result.
+5. Reputable third-party technical articles, used as secondary interpretation only.
+6. Existing local blog articles, used for precedent, style, historical continuity, and related cases.
+
+Most authoritative sites depend on the topic:
+
+- PostgreSQL: `postgresql.org` docs, `git.postgresql.org` or upstream GitHub mirror commits, mailing list archives, source code, and tests.
+- DuckDB: `duckdb.org` docs/release notes, `github.com/duckdb/duckdb`, source code, tests, and extension docs.
+- Lance: official Lance docs/site, `github.com/lancedb/lance`, source code, tests, issues/PRs, release notes, and related Apache Arrow/DataFusion docs when the claim depends on those layers.
+- Open-source projects in general: upstream project docs, GitHub/GitLab repo, maintainer release notes, code, tests, design docs, issues, PRs, and official benchmarks.
+- Cloud/vendor products: official docs, release notes, SLA/pricing pages, product blogs by the vendor engineering team, and public benchmark methodology.
+- Academic algorithms or systems: original paper, authors' artifact/repo, conference proceedings, and reproducibility reports.
 
 Drafting steps:
 
@@ -172,6 +191,26 @@ Pre-publish checks:
 - Does it give the reader an operational next step?
 - Does it state the premise and the alternative view when the premise fails?
 - Does any sentence claim certainty that the evidence cannot support?
+
+Post-draft validation:
+
+1. Extract the article's factual claims: version numbers, feature behavior, API names, SQL syntax, configuration names, performance claims, architecture diagrams, and causal explanations.
+2. Check each claim against the highest-authority available source. Use official docs/release notes for documented behavior, source code/commits/tests for implementation behavior, standards/papers for algorithmic claims, and DeepWiki MCP for repo-grounded cross-checking on open-source projects.
+3. Run reproducible checks when feasible: SQL examples, CLI commands, unit tests, benchmark snippets, `EXPLAIN`, configuration inspection, or source grep.
+4. Mark unsupported claims as inference, soften them, or remove them.
+5. Verify terminology consistency: project name, version, extension name, file path, function name, catalog/view name, and metric name.
+6. Verify boundaries: when the recommendation works, when it fails, how to rollback, and what metric proves success.
+7. Re-read the final article once from the target reader's perspective: DBA, architect, developer, product owner, or learner.
+
+Validation output should be explicit when the user asks for review:
+
+```markdown
+## 校验结论
+## 已核实的关键事实
+## 仍需谨慎的推断
+## 修改或弱化的表述
+## 参考来源
+```
 
 ## Source Code or Commit Interpretation
 
