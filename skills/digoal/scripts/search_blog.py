@@ -32,12 +32,27 @@ def discover_blog_root() -> Path:
             if looks_like_blog_root(candidate):
                 return candidate
 
+    home = Path.home()
+    common_roots = [
+        home / "blog",
+        home / "digoal" / "blog",
+        home / "workspace" / "blog",
+        home / "work" / "blog",
+        home / "projects" / "blog",
+        home / "src" / "blog",
+    ]
+    for candidate in common_roots:
+        candidate = candidate.expanduser().resolve()
+        if looks_like_blog_root(candidate):
+            return candidate
+
     raise SystemExit(
         "Could not locate a local digoal/blog root. Provide one of:\n"
         "  1. Run this command from the blog checkout.\n"
         "  2. Place the skill under blog/skills/digoal.\n"
-        "  3. Set DIGOAL_BLOG_ROOT=/path/to/blog.\n"
-        "  4. Pass --blog /path/to/blog."
+        "  3. Keep the checkout at ~/blog or set DIGOAL_BLOG_ROOT=/path/to/blog.\n"
+        "  4. Pass --blog /path/to/blog.\n"
+        "If you are an agent using this skill, ask the user for the local blog folder path before continuing."
     )
 
 

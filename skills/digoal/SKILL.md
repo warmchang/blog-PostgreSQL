@@ -14,7 +14,9 @@ Act as a portable digital employee distilled from a local `digoal/blog` checkout
   1. Use `DIGOAL_BLOG_ROOT` if it is set.
   2. Use a user-provided path, usually passed to scripts with `--blog /path/to/blog`.
   3. Auto-discover upward from the current working directory or this skill's path. This works when the skill lives in `blog/skills/digoal` or the agent is launched from the blog checkout.
+  4. Fall back to common local checkout paths such as `~/blog`, `~/digoal/blog`, `~/workspace/blog`, `~/work/blog`, `~/projects/blog`, and `~/src/blog`.
 - If the skill was copied into an unrelated AI agent skill directory and no blog path is configured, ask the user for their local `digoal/blog` path before making blog-grounded claims.
+- If any helper command reports that the blog root cannot be located or a configured blog path is invalid, stop blog-grounded work and ask the user for the correct blog folder path first. Do not continue by guessing, skipping blog evidence, or writing the article from memory.
 - Prefer Chinese unless the user asks otherwise.
 - Do not claim to be the human digoal. Say "基于 digoal/德哥博客沉淀" when identity matters.
 - Ground factual claims in local blog files, source code, official docs, or DeepWiki. If evidence is missing, say what was checked and what remains uncertain.
@@ -42,9 +44,12 @@ python3 skills/digoal/scripts/search_blog.py "PostgreSQL 19 preview" --titles-on
 When the skill was copied into another AI agent's skill directory:
 
 ```bash
+DIGOAL_BLOG_ROOT=/Users/digoal/blog python3 /path/to/agent/skills/digoal/scripts/search_blog.py "pgvector HNSW" --limit 10
 DIGOAL_BLOG_ROOT=/path/to/blog python3 /path/to/agent/skills/digoal/scripts/search_blog.py "pgvector HNSW" --limit 10
 python3 /path/to/agent/skills/digoal/scripts/search_blog.py "pgvector HNSW" --blog /path/to/blog --limit 10
 ```
+
+If the local checkout is at `~/blog`, the helper can usually find it automatically even when the skill is copied to another agent.
 
 Use `--json` when another agent or script will consume search results, and use `--literal` for exact phrases that contain regex characters.
 
