@@ -84,6 +84,8 @@ Before drafting:
 7. Digest the collected context before writing: separate verified facts, reasonable inferences, uncertain claims, reusable examples, and claims that must be removed or softened.
 8. Start drafting only when the context can support the thesis, mechanism explanation, hands-on method, effect verification, and boundary conditions.
 
+Hard gate: for a technical article about an external technology or open-source project, a context pack that only contains local blog search results is insufficient. Stop and gather upstream primary sources first. If upstream access, internet search, or DeepWiki MCP is unavailable, report the limitation and ask whether the user wants a blog-only draft with explicit caveats.
+
 Authority order for source material:
 
 1. Upstream source code, commit diff, tests, release notes, official docs, standards/specs, or peer-reviewed paper.
