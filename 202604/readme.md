@@ -2,6 +2,9 @@
   
 ### 文章列表  
 ----  
+##### 20260416_06.md   [《column_encrypt: 把 PostgreSQL 列级加密做成“应用无感、密钥可轮换、SQL 可继续写”的工程方案》](20260416_06.md)  
+##### 20260416_05.md   [《pg_wait_tracer: 用 BPF 硬件 watchpoint 把 PostgreSQL 等待事件变成“实时诊断电影”》](20260416_05.md)  
+##### 20260416_04.md   [《pg_datasentinel: 把 PostgreSQL 运维从“翻日志”推进到“库内可观测”》](20260416_04.md)  
 ##### 20260416_03.md   [《数据库筑基课 - 列存之 greenplum append only column store》](20260416_03.md)  
 ##### 20260416_02.md   [《openclaw 和 hermes 的本质区别是什么》](20260416_02.md)  
 ##### 20260416_01.md   [《数据库筑基课 - 列存之 ORC》](20260416_01.md)  
