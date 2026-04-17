@@ -55,14 +55,27 @@ If the local checkout is at `~/blog`, the helper can usually find it automatical
 
 Use `--json` when another agent or script will consume search results, and use `--literal` for exact phrases that contain regex characters.
 
+## Execution Protocol
+
+For every non-trivial task:
+
+1. Classify the request into one primary problem type before answering.
+2. Identify the minimum required inputs for that problem type. Ask only when a missing input blocks a grounded answer; otherwise state assumptions and continue.
+3. Load only the relevant reference workflow. Use `references/workflows.md` for problem contracts and `references/style-guide.md` only when style, article writing, or strategic reasoning matters.
+4. Build an evidence pack in the authority order required by the problem type.
+5. Apply the selected thinking frame: scenario, mechanism, evidence, practical path, risk boundary, and validation.
+6. Produce the requested artifact in the appropriate output shape.
+7. Check the result against the problem-specific validation criteria before finalizing.
+
 ## Task Routing
 
-1. Database technical answer: search relevant blog posts, classify the problem by domain, then answer with principle, scenario, steps, SQL/commands, risks, and verification.
-2. Troubleshooting or performance tuning: ask for missing runtime facts only if they are necessary; otherwise provide a checklist ordered by probability and blast radius.
-3. Architecture or product strategy: start from business scenario, constraints, data shape, SLA, scale, and failure domains; compare alternatives with explicit assumptions.
-4. Article or public-account writing: first follow the source-first article workflow in `references/workflows.md`, then use the complete digoal-style chain from `references/style-guide.md`: hook/药引子, scenario pain, sharp judgment, first-principles argument, why it works, theory plus hands-on method, evidence/case support, caveat, and interaction ending.
-5. Source-code or commit interpretation: inspect commit/code directly when available; explain value for DBAs/developers, not just patch mechanics; verify every claim against code.
-6. Skill or digital-employee design: convert knowledge into input contracts, decision paths, tool calls, validation loops, output templates, and responsibility boundaries.
+1. Database technical answer: use `references/workflows.md` problem matrix, then answer with principle, scenario, mechanism, steps, SQL/commands, risks, and verification.
+2. Troubleshooting or performance tuning: use the diagnosis contract; ask for runtime facts only when necessary, otherwise provide a checklist ordered by probability, reversibility, and blast radius.
+3. Architecture, product strategy, or selection: start from business scenario, constraints, data shape, SLA, scale, and failure domains; compare alternatives with explicit assumptions.
+4. Article, public-account writing, or project interpretation: first follow the source-first article workflow, then use the digoal-style chain from `references/style-guide.md`: hook/药引子, scenario pain, sharp judgment, first-principles argument, why it works, theory plus hands-on method, evidence/case support, caveat, and interaction ending.
+5. Source-code, commit, or new-feature interpretation: inspect commit/code/docs/tests directly when available; explain value for DBAs/developers, not just patch mechanics; verify every claim against code or upstream docs.
+6. Learning path, course, or knowledge-system design: map the user's role and target capability to series posts, exercises, milestones, and acceptance criteria.
+7. Skill or digital-employee design: convert knowledge into trigger, input contract, decision path, tool calls, validation loop, fallback, output template, and responsibility boundary.
 
 ## Quality Bar
 

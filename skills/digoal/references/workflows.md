@@ -2,6 +2,29 @@
 
 Use these repeatable workflows to produce stable, verifiable output.
 
+## Problem Classification Matrix
+
+Classify first, then load only the relevant workflow. If a request spans multiple types, choose the primary deliverable and mention secondary constraints.
+
+| Problem type | Typical triggers | Required inputs | Evidence path | Thinking frame | Output shape | Validation |
+| --- | --- | --- | --- | --- | --- | --- |
+| Database technical answer | "怎么做", "为什么", feature usage, SQL behavior, PG/PolarDB/DuckDB mechanism | DB/version if version-sensitive, scenario, workload, data shape, expected result | Blog precedent plus official docs/source when behavior depends on current technology | Scenario -> mechanism -> practical path -> risks -> verification | Conclusion, rationale, SQL/commands, risks, acceptance criteria | Claims are tied to sources or marked as assumptions; operational advice includes a check |
+| Troubleshooting/performance | slow query, lock, bloat, OOM, replication lag, CPU/IO spike, timeout | Symptom, version, deployment, timeframe, top SQL, metrics/logs when available | Runtime facts first, then PG views/logs, blog cases, official docs | Symptom -> observability -> likely causes -> minimal reversible test -> durable fix | Ordered checklist, SQL/commands, risk, rollback, before/after metrics | Steps are ordered by probability, reversibility, and blast radius |
+| Architecture/selection | choose PG vs X, HA/DR design, migration, product architecture | Business goal, SLA, data volume, read/write shape, RPO/RTO, budget/team constraints | Official capability boundaries, benchmark methodology, blog cases | Value to protect -> hard constraints -> options -> tradeoffs -> failure modes | Comparison table, recommendation, assumptions, validation plan | Recommendation changes if stated assumptions change |
+| Article/project interpretation | 公众号, 爆款, technical explainer, open-source project article, course note | Target reader, thesis or topic, article type, source target | Primary sources first, DeepWiki for GitHub repos when available, secondary interpretations, blog for style/precedent | Hook -> pain -> sharp thesis -> first principles -> evidence -> hands-on -> caveat | Article-ready Markdown with references | Core judgments have support; unsupported claims are softened or removed |
+| Source/commit/new-feature interpretation | commit, patch, source code, release note, new PG feature | Exact repo/commit/version/doc link when available, target reader | Code, diff, tests, docs, release notes, mailing list; blog only as precedent | What changed -> why it matters -> mechanism -> user impact -> verification | Feature/commit explanation, code path, examples, risks | Every factual claim maps to code/docs/tests or is marked inference |
+| Learning path/course | 学习路线, training, curriculum, "how to learn" | Learner role, current level, target capability, time budget | repo-map series posts, official docs, exercises/labs | Target capability -> prerequisite gaps -> staged path -> practice -> acceptance | Roadmap, materials, exercises, milestones | Each stage has a concrete output or test |
+| Skill/digital employee design | write/improve skill, digital employee, SOP, stable AI workflow | Task examples, trigger, desired artifact, tools/source systems, validation standard | skill-creator guidance, AI skill blog posts, existing skill files | Trigger -> input contract -> decision path -> tools -> validation -> fallback -> output -> boundary | Skill design or patch plan; optionally edited skill files | Skill is valid, concise, reusable, and has forward-test prompts when complex |
+| Community/product/ecosystem strategy | open-source growth, community, developer adoption, product promotion | Product/project, target users, adoption barrier, goals, metrics | User pain, product facts, ecosystem data, blog/community precedent | User pain -> adoption barrier -> content system -> community flywheel -> metrics | Strategy, action plan, metrics, risks | Actions have owners/metrics and do not depend on vague slogans |
+
+Fallback rules:
+
+- If required inputs are missing but not blocking, state assumptions and provide a first-pass path.
+- If required inputs are blocking, ask the smallest useful question instead of guessing.
+- If evidence is unavailable, say what was checked and narrow the claim.
+- If a task asks for a current external fact, verify current sources before relying on blog memory.
+- If the selected workflow does not fit after evidence gathering, reclassify once and state why.
+
 ## PostgreSQL/PolarDB Technical Answer
 
 1. Restate the scenario: workload type, data size, concurrency, SLA, deployment shape, and current symptom.
@@ -40,6 +63,12 @@ Order checks by probability and reversibility:
 7. Convert diagnosis into a minimal change and verify with before/after metrics.
 
 Never prescribe a parameter blindly; bind it to workload, memory budget, and failure mode.
+
+If runtime facts are missing, split the answer:
+
+1. "需要补充的信息": list only facts that change the diagnosis.
+2. "先做的低风险检查": provide read-only SQL/commands.
+3. "暂不建议直接修改": name parameters or schema changes that would be unsafe without evidence.
 
 ## Evidence Pack
 
@@ -244,6 +273,12 @@ Strong skill criteria:
 - 可复用: procedure works repeatedly.
 - 可规模化: not dependent on one-off genius.
 - 可追责: inputs, steps, and boundaries are clear.
+
+Forward-test prompts for this skill type should use realistic user wording and avoid leaking the intended fix. Examples:
+
+- `Use $digoal at /path/to/digoal to diagnose why a PostgreSQL query became slow after data volume doubled.`
+- `Use $digoal at /path/to/digoal to write a source-backed article explaining a PostgreSQL commit for DBAs.`
+- `Use $digoal at /path/to/digoal to design a skill that turns a repeated database inspection workflow into a reusable AI capability.`
 
 ## Community and Ecosystem Strategy
 
