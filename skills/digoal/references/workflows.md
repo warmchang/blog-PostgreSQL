@@ -11,7 +11,7 @@ Classify first, then load only the relevant workflow. If a request spans multipl
 | Database technical answer | "怎么做", "为什么", feature usage, SQL behavior, PG/PolarDB/DuckDB mechanism | DB/version if version-sensitive, scenario, workload, data shape, expected result | Blog precedent plus official docs/source when behavior depends on current technology | Scenario -> mechanism -> practical path -> risks -> verification | Conclusion, rationale, SQL/commands, risks, acceptance criteria | Claims are tied to sources or marked as assumptions; operational advice includes a check |
 | Troubleshooting/performance | slow query, lock, bloat, OOM, replication lag, CPU/IO spike, timeout | Symptom, version, deployment, timeframe, top SQL, metrics/logs when available | Runtime facts first, then PG views/logs, blog cases, official docs | Symptom -> observability -> likely causes -> minimal reversible test -> durable fix | Ordered checklist, SQL/commands, risk, rollback, before/after metrics | Steps are ordered by probability, reversibility, and blast radius |
 | Architecture/selection | choose PG vs X, HA/DR design, migration, product architecture | Business goal, SLA, data volume, read/write shape, RPO/RTO, budget/team constraints | Official capability boundaries, benchmark methodology, blog cases | Value to protect -> hard constraints -> options -> tradeoffs -> failure modes | Comparison table, recommendation, assumptions, validation plan | Recommendation changes if stated assumptions change |
-| Article/project interpretation | 公众号, 爆款, technical explainer, open-source project article, course note | Target reader, thesis or topic, article type, source target | Primary sources first, DeepWiki for GitHub repos when available, secondary interpretations, blog for style/precedent | Hook -> pain -> sharp thesis -> first principles -> evidence -> hands-on -> caveat | Article-ready Markdown with references | Core judgments have support; unsupported claims are softened or removed |
+| Article/project interpretation | 公众号, 爆款, technical explainer, open-source project article, course note | Target reader, thesis or topic, article type, source target | Primary sources first, DeepWiki for GitHub repos when available, secondary interpretations, blog for style/precedent | Hook -> pain -> sharp thesis -> first principles -> evidence -> hands-on -> caveat | Article-ready Markdown with references plus Mermaid/SVG visuals at key points | Core judgments and diagrams have support; unsupported claims are softened or removed |
 | Source/commit/new-feature interpretation | commit, patch, source code, release note, new PG feature | Exact repo/commit/version/doc link when available, target reader | Code, diff, tests, docs, release notes, mailing list; blog only as precedent | What changed -> why it matters -> mechanism -> user impact -> verification | Feature/commit explanation, code path, examples, risks | Every factual claim maps to code/docs/tests or is marked inference |
 | Learning path/course | 学习路线, training, curriculum, "how to learn" | Learner role, current level, target capability, time budget | repo-map series posts, official docs, exercises/labs | Target capability -> prerequisite gaps -> staged path -> practice -> acceptance | Roadmap, materials, exercises, milestones | Each stage has a concrete output or test |
 | Skill/digital employee design | write/improve skill, digital employee, SOP, stable AI workflow | Task examples, trigger, desired artifact, tools/source systems, validation standard | skill-creator guidance, AI skill blog posts, existing skill files | Trigger -> input contract -> decision path -> tools -> validation -> fallback -> output -> boundary | Skill design or patch plan; optionally edited skill files | Skill is valid, concise, reusable, and has forward-test prompts when complex |
@@ -104,14 +104,14 @@ Use when asked to create public-account articles, project interpretations, cours
 
 Before drafting:
 
-1. Think through the writing framework first: target reader, core thesis, article type, section order, expected evidence, practical path, and caveats.
+1. Think through the writing framework first: target reader, core thesis, article type, section order, expected evidence, practical path, caveats, and which key points deserve a Mermaid or SVG visual.
 2. Search source material after the framework is clear.
 3. Prefer primary sources: official docs, release notes, commits, source code, tests, papers, standards, benchmark data, or vendor engineering notes.
 4. For GitHub open-source projects, use DeepWiki MCP when available to read the repo wiki/structure and ask repo-grounded questions; treat it as a fast project-understanding layer, then verify important claims against upstream docs, source code, commits, or tests.
 5. Use internet articles already interpreted by others only after primary sources, mainly to discover angles, controversies, and common misunderstandings.
 6. Use existing local blog articles last for precedent, style, related cases, and continuity with digoal's knowledge base.
 7. Digest the collected context before writing: separate verified facts, reasonable inferences, uncertain claims, reusable examples, and claims that must be removed or softened.
-8. Start drafting only when the context can support the thesis, mechanism explanation, hands-on method, effect verification, and boundary conditions.
+8. Start drafting only when the context can support the thesis, mechanism explanation, hands-on method, effect verification, boundary conditions, and planned diagrams.
 
 Hard gate: for a technical article about an external technology or open-source project, a context pack that only contains local blog search results is insufficient. Stop and gather upstream primary sources first. If upstream access, internet search, or DeepWiki MCP is unavailable, report the limitation and ask whether the user wants a blog-only draft with explicit caveats.
 
@@ -143,7 +143,26 @@ Drafting steps:
 6. Pair theory with practice: mechanism plus SQL/commands/config/checklist.
 7. Explain the effect: what improves, through which path, and how to measure it.
 8. Add caveats: what assumptions must hold and what happens if they fail.
-9. Close with a short takeaway, action suggestion, or "你怎么看" interaction when publishing style is requested.
+9. Insert visuals where they reduce cognitive load: Mermaid for flows, dependency graphs, causal chains, state transitions, tradeoff matrices, or validation paths; compact inline SVG only when Mermaid cannot express the shape clearly.
+10. Close with a short takeaway, action suggestion, or "你怎么看" interaction when publishing style is requested.
+
+Visual placement rules:
+
+- Add 2-4 visuals for a full public-account or project interpretation article unless the article is very short or the user forbids diagrams.
+- Place diagrams immediately after the paragraph that introduces the concept they clarify, not in a detached appendix.
+- Prefer Mermaid `flowchart`, `sequenceDiagram`, `stateDiagram-v2`, `quadrantChart`, or `journey` blocks for mechanisms, architecture paths, adoption flywheels, and verification loops.
+- Use SVG sparingly for simple 2D conceptual maps, scorecards, or layered system sketches that would be awkward in Mermaid. Keep SVG self-contained, readable in Markdown, and under roughly 80 lines.
+- Give every diagram a one-sentence lead-in and a one-sentence takeaway; do not let the graphic replace evidence.
+- Do not invent entities, metrics, or causal arrows just to make a diagram look complete. If a visual edge is an inference, label it as an inference in nearby text.
+- Keep labels short and Chinese-first; use established English terms only for technical names such as `WAL`, `MVCC`, `RAG`, `HNSW`, or `EXPLAIN`.
+
+Common visual slots:
+
+- After 药引子 or 场景痛点: reader pain -> hidden constraint -> consequence.
+- After 反常识判断 or 第一性原理: old path vs new path, or hard constraint -> mechanism -> measurable result.
+- In 原理介绍: component/data/control-flow diagram.
+- In 理论加实操: implementation or verification checklist flow.
+- In 边界条件: premise -> failure mode -> alternative recommendation.
 
 Sections for PG commit/new feature interpretation:
 
@@ -219,13 +238,14 @@ Pre-publish checks:
 - Does the article turn a single case into a universal conclusion?
 - Does every core judgment have a source, case, code path, benchmark, or reproducible check?
 - Does it explain the mechanism behind the claimed effect?
+- Do Mermaid/SVG visuals appear at the key information points and match the sourced argument?
 - Does it give the reader an operational next step?
 - Does it state the premise and the alternative view when the premise fails?
 - Does any sentence claim certainty that the evidence cannot support?
 
 Post-draft validation:
 
-1. Extract the article's factual claims: version numbers, feature behavior, API names, SQL syntax, configuration names, performance claims, architecture diagrams, and causal explanations.
+1. Extract the article's factual claims: version numbers, feature behavior, API names, SQL syntax, configuration names, performance claims, architecture diagrams, Mermaid/SVG labels and edges, and causal explanations.
 2. Check each claim against the highest-authority available source. Use official docs/release notes for documented behavior, source code/commits/tests for implementation behavior, standards/papers for algorithmic claims, and DeepWiki MCP for repo-grounded cross-checking on open-source projects.
 3. Run reproducible checks when feasible: SQL examples, CLI commands, unit tests, benchmark snippets, `EXPLAIN`, configuration inspection, or source grep.
 4. Mark unsupported claims as inference, soften them, or remove them.

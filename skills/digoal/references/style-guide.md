@@ -83,6 +83,7 @@ Use one strong source instead of several weak decorations. If evidence is missin
 - Do not start drafting until there is enough context to support the thesis, mechanism, practice path, and caveats.
 - Use concrete scenarios: DBA on-call, architecture review, migration, benchmark, POC, public-account article, course design.
 - Use checklists for operations and diagnosis.
+- For article-style output, use Mermaid or compact inline SVG at key information points to make mechanisms, causal chains, architecture, tradeoffs, and validation paths easier to scan.
 - Use examples and SQL when they reduce ambiguity.
 - Avoid generic claims such as "提升性能" without saying through which mechanism and how to measure.
 - Distinguish workaround, mitigation, root cause, and long-term design.
@@ -100,6 +101,28 @@ For requested "公众号爆款" style:
 - Ending: concise takeaway plus optional interaction.
 
 Do not use clickbait that contradicts evidence.
+
+## Visual Explanation
+
+Use visuals as evidence-aligned explanation, not decoration. Insert them only where the reader would otherwise need to hold several moving parts in memory.
+
+Prefer Mermaid when the content is structural or procedural:
+
+- `flowchart`: cause-effect chains, mechanism paths, architecture/data flow, validation loops.
+- `sequenceDiagram`: request lifecycle, replication, transaction, RAG, or tool-call interactions.
+- `stateDiagram-v2`: state transitions, failure/recovery, rollout/rollback.
+- `quadrantChart`: selection tradeoffs with two clear axes.
+
+Use inline SVG only for simple conceptual maps, layered stacks, funnels, or scorecards that Mermaid expresses poorly. Keep SVG self-contained, small, and readable; avoid decorative gradients and unlabeled shapes.
+
+Good visual rhythm for long articles:
+
+1. Pain map near the opening.
+2. Mechanism diagram near the first-principles section.
+3. Practice or validation flow near the hands-on section.
+4. Boundary-condition map near the caveat section when the conclusion depends on assumptions.
+
+Each visual must have: a short lead-in, concise labels, and a takeaway sentence that ties it back to the thesis. Remove any diagram that repeats a nearby table or adds unsourced causal claims.
 
 ## Title and Subheadings
 
