@@ -1,13 +1,13 @@
 ---
 name: postgres-commit-history-article
-description: Analyze PostgreSQL git commit history between two commit ids and, when valuable DBA/application-developer changes exist, write a Chinese Markdown article for WeChat/公众号 readers. Use when the user is inside a PostgreSQL source checkout and provides two commit ids, asks to interpret Postgres commits, summarize a release/development window, identify DBA/application-developer value from commit logs, group related commits, exclude reverted commits, and either output a sourced article under the current project's markdown directory or return a no-article analysis when no valuable commits are present.
+description: Analyze PostgreSQL git commit history between two commit ids and, when valuable DBA/application-developer changes exist, write a Chinese Markdown article for WeChat/公众号 readers with examples checked against SQL tests, docs, or relevant source. Use when the user is inside a PostgreSQL source checkout and provides two commit ids, asks to interpret Postgres commits, summarize a release/development window, identify DBA/application-developer value from commit logs, group related commits, exclude reverted commits, and either output a sourced article under the current project's markdown directory or return a no-article analysis when no valuable commits are present.
 ---
 
 # Postgres Commit History Article
 
 ## Goal
 
-Turn a PostgreSQL commit range into a publishable Chinese Markdown article for DBA and application developers when the range contains valuable user-facing or operator-facing changes. Work from commit logs first, then only deep-read full commit messages for selected valuable groups. Do not analyze code diffs unless needed to understand a mechanism or produce a practical example.
+Turn a PostgreSQL commit range into a publishable Chinese Markdown article for DBA and application developers when the range contains valuable user-facing or operator-facing changes. Work from commit logs first, then only deep-read full commit messages for selected valuable groups. Before writing usage examples, inspect relevant SQL tests, documentation, or source context so examples are rich and correct. Do not analyze code diffs unless needed to understand a mechanism or produce a practical example.
 
 ## Inputs
 
@@ -53,7 +53,17 @@ python3 /path/to/postgres-commit-history-article/scripts/collect_pg_commits.py c
    - Still avoid code diff analysis. Inspect diff only when the full message is insufficient to explain the mechanism, compatibility impact, or example.
    - Capture exact behavior changes, affected users, constraints, GUCs/options/functions/catalogs, and upgrade caveats.
 
-6. Write the article.
+6. Verify example material before writing usage examples.
+   - Before writing each `使用示例`, inspect nearby authoritative material for that feature:
+     - SQL regression tests: `src/test/regress/sql/`, `src/test/isolation/specs/`, `src/test/subscription/t/`, `src/test/recovery/t/`, extension test SQL, or TAP tests.
+     - Documentation: `doc/src/sgml/`, especially pages for SQL commands, functions, catalogs, GUCs, monitoring views, replication, backup/recovery, and release notes.
+     - Source context only when tests/docs do not expose enough syntax or operational detail.
+   - Prefer examples adapted from committed tests or docs, then simplify them for readers.
+   - If a commit introduces SQL syntax, functions, catalog columns, GUCs, views, command options, psql/client behavior, replication/recovery operations, or extension APIs, verify the exact names and valid usage from tests/docs before writing.
+   - Record the evidence used for each example in your working notes and mention key paths when useful in the article.
+   - If tests/docs/source do not provide enough confidence, do not fabricate a runnable SQL example. Use an operational checklist or validation query and state the limitation.
+
+7. Write the article.
    - Only write the article when at least one selected group has clear DBA or application-developer value.
    - Output Markdown to `markdown/` in the current project. Use a filename like:
 
@@ -119,6 +129,8 @@ Use a consistent structure for every selected item or group:
 
 If a SQL example is not appropriate, use a shell, config, monitoring query, operational checklist, or "无需用户侧改动，但建议验证..." example.
 
+Every usage example must be backed by one of: a PostgreSQL SQL regression/isolation/TAP test, SGML documentation, or relevant source context. Prefer citing the path briefly after the example, for example: `示例依据：src/test/regress/sql/xxx.sql, doc/src/sgml/yyy.sgml`.
+
 ## Article Outline
 
 Recommended outline:
@@ -168,6 +180,7 @@ Use inline SVG only if Mermaid cannot express the concept clearly. Keep diagrams
 - Mention breaking/behavioral changes and migration risks explicitly.
 - Avoid dumping all commits. The article should curate the most valuable groups, then include a compact appendix table for the rest.
 - Do not force an article when all commits are low-value for DBAs and application developers. Return the no-article analysis instead.
+- Do not write SQL or command examples from memory alone. Verify them against PostgreSQL tests, docs, or source context first.
 - Do not include full commit descriptions verbatim. Summarize them.
 - Do not include code diffs.
 
