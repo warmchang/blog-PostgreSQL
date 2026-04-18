@@ -10,3 +10,5 @@
 - `github-weekly-trending`: 输入从 `https://github.com/trending?since=weekly&spoken_language_code=` 拷贝的内容, 编写本周热门开源项目文章, 输出到当前项目 markdown 目录中.   
   
 - `open-source-project-article`: 输入开源项目地址, 深度分析该开源项目, 输出到当前项目 markdown 目录中.  
+  
+- `marketing-wechat-operator`: `微信公众号运营`, 编写爆款文章.  
