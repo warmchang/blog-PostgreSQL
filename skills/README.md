@@ -18,6 +18,8 @@
 - `paper-interpretation`: 输入论文 PDF 或论文 URL , 通俗易懂解读论文. 例如用于解读 AI 论文 https://huggingface.co/papers/trending https://arxiv.org/abs/2604.14141 https://arxiv.org/abs/2508.02739 
   
 - `pgfaq`: clone https://github.com/postgres/postgres 源码, 将其作为项目目录. 输入 PostgreSQL 相关的问题, 将回答结果保存到项目目录的 markdown 子目录中. 回答时会参考代码、文档和deepwiki, 并对回答内容正确性进行校验.  
+  
+- `database-foundation-course-writer`: 数据库筑基课 写作 skill, 输入数据库筑基课的文章标题 以及 相关的参考资料(通常是该篇数据库筑基课相关的技术文档、产品手册、开源项目地址、deepwiki地址、论文地址等). 输出最终 markdown 文件并保存到当前项目 markdown 文件夹中. 例如  `“数据库筑基课 - 索引之 rum” , 参考资料 https://github.com/postgrespro/rum https://deepwiki.com/postgrespro/rum`  
 
 ## only for claude web
 `skills_for_claude_web` 目录中的 skill 仅用于 Claude web 版.
