@@ -7,7 +7,7 @@
   
 - `finance-beginner-explainer`: 基于 `finance-explosive-article` 的文案, 面向小白进行更细致的解读, 必要时会用到 `daily-finance` 和 `finance-core-analysis` 增加证据链完整性.  
   
-- `weekly-finance-trading-outlook`: 根据daily-finance , finance-core-analysis的产出, 再综合搜索其他相关的关键且权威的高质量数据. 分析未来一周极大概率看涨以及看空的行业和股票.  
+- `finance-weekly-outlook`: 根据daily-finance , finance-core-analysis , finance-explosive-article的产出, 再综合搜索其他相关的关键且权威的高质量数据. 分析未来一周极大概率看涨以及看空的行业和股票.  
   
 - `buffett`: 巴菲特思想解读股票代码. 来自 https://github.com/agi-now/buffett-skills  
   

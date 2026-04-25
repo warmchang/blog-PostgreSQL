@@ -1,4 +1,0 @@
-interface:
-  display_name: "未来一周行业个股多空研判"
-  short_description: "基于财经日报与核心分析，研判下周行业与个股多空机会"
-  default_prompt: "使用 $weekly-finance-trading-outlook 基于最新 daily-finance 和 finance-core-analysis 产出，搜索权威数据并生成覆盖美股和中国A股的未来一周行业与个股多空研判Markdown。"
