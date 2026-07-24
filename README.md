@@ -113,6 +113,11 @@ digoal's|PostgreSQL|文章|归类
   
 ### 六、所有文档如下  
 ----  
+##### 202607/20260724_09.md   [《爆炸新闻: Anthropic 推出 ant, Claude 往 CS 架构演进》](202607/20260724_09.md)  
+##### 202607/20260724_08.md   [《有人用 pg_turbovec 掀桌子, PG 向量检索省 20 倍内存》](202607/20260724_08.md)  
+##### 202607/20260724_07.md   [《AI论文解读 | 谷歌向量压缩器 TurboQuant 在 Snowflake 的工业落地 TurboVec: A Case Study in Cost-Efficient Private Retrieval for Enterprise RAG via Codebook-Oblivious Quantization》](202607/20260724_07.md)  
+##### 202607/20260724_06.md   [《AI论文解读 | 谷歌向量压缩器 TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate》](202607/20260724_06.md)  
+##### 202607/20260724_05.md   [《从预训练、后训练、后推理到后学习, 模型效率边际收益引发的技术迁移》](202607/20260724_05.md)  
 ##### 202607/20260724_04.md   [《AI论文解读 | 北京大学 K12-KGraph 论文解读 : 知识组织决定了 AI 后学习/推理性能?》](202607/20260724_04.md)  
 ##### 202607/20260724_03.md   [《OPC 一人公司能不能成为主流?》](202607/20260724_03.md)  
 ##### 202607/20260724_02.md   [《Ruflo Agent 编排工具实战手册》](202607/20260724_02.md)  
